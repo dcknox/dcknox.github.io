@@ -8,8 +8,8 @@ including audio recordings, decision sequences, and mobile location data."
 
 # Color settings (hex-codes without the leading hash-tag)
 color:
-  primary-dark: 'a31f34'
-  links: '1e4171'
+  primary-dark: '#464646'
+  links: '#97b4db'
 
 # Footer settings
 footer: Academic Homepage of Dean Knox
