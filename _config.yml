@@ -1,29 +1,25 @@
 # Site settings
-title: Grayscale
-email: your-email@domain.com
-url: https://example.github.io
-description: "Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description."
+title: Academic Homepage of Dean Knox
+email: dcknox@princeton.edu
+url: http://dcknox.com
+description: "Dean Knox is an assistant professor in politics at Princeton. He
+develops quantitative models and methods for new forms of social science data,
+including audio recordings, decision sequences, and mobile location data."
 
 # Color settings (hex-codes without the leading hash-tag)
 color:
-  primary-dark: '#000000'
-  links: '#219ab3'
+  primary-dark: 'a31f34'
+  links: '1e4171'
 
 # Footer settings
-footer: Your Website
+footer: Academic Homepage of Dean Knox
 
 # Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
 social:
-  - title: twitter
-    url: https://twitter.com/SBootstrap
-  - title: facebook
-    url:
-  - title: stack-overflow
-    url: http://stackoverflow.com/questions/tagged/jekyll
-  - title: bitbucket
-    url: http://bitbucket.org/jekyll
   - title: github
-    url: https://github.com/IronSummitMedia/startbootstrap
+    url: https://github.com/dcknox
+  - title: twitter
+    url: https://twitter.com/dean_c_knox
 
 # Build settings
 markdown: kramdown
