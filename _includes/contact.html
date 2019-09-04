@@ -3,16 +3,28 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Contact</h2>
-                <p>Dolor reprehenderit repellendus, optio labore odio at tempore debitis nisi. Quasi debitis tenetur eaque molestias non porro odio sapiente.</p>
                 <p><a href="mailto:{{ site.email }}">{{ site.email }}</a>
                 </p>
+
                 <ul class="list-inline banner-social-buttons">
-                    {% for network in site.social %}
-                    <li>
-                        <a href="{{ network.url }}" class="btn btn-default btn-lg"><i class="fa fa-{{ network.title }} fa-fw"></i> <span class="network-name">{{ network.title }}</span></a>
-                    </li>
-                    {% endfor %}
+                  <li>
+                    <a href="https://github.com/dcknox" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">github</span></a>
+                  </li>
+                  <li>
+                    <a href="https://scholar.google.com/citations?user=KIIh-2YAAAAJ" class="btn btn-default btn-lg"><i class="ai ai-google-scholar fa-fw"></i> <span class="network-name">scholar</span></a>
+                  </li>
+                  <li>
+                    <a href="https://twitter.com/dean_c_knox" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">twitter</span></a>
+                  </li>
                 </ul>
+                
+                <!-- <ul class="list-inline banner-social-buttons"> -->
+                <!--     {% for network in site.social %} -->
+                <!--     <li> -->
+                <!--         <a href="{{ network.url }}" class="btn btn-default btn-lg"><i class="fa fa-{{ network.title }} fa-fw"></i> <span class="network-name">{{ network.title }}</span></a> -->
+                <!--     </li> -->
+                <!--     {% endfor %} -->
+                <!-- </ul> -->
             </div>
         </div>
     </section>
