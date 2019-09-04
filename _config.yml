@@ -1,5 +1,5 @@
 # Site settings
-title: Academic Homepage of Dean Knox
+title: Dean Knox
 email: dcknox@princeton.edu
 url: http://dcknox.com
 description: "Dean Knox is an assistant professor in politics at Princeton. He
@@ -18,6 +18,8 @@ footer: Academic Homepage of Dean Knox
 social:
   - title: github
     url: https://github.com/dcknox
+  - title: Google Scholar
+    url: https://scholar.google.com/citations?user=KIIh-2YAAAAJ
   - title: twitter
     url: https://twitter.com/dean_c_knox
 
