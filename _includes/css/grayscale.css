@@ -134,7 +134,7 @@ a:focus {
     background-color: rgba(255,255,255,.3);
 }
 
-@media(min-width:767px) {
+@media (min-width: 767px) {
     .navbar {
         padding: 20px 0;
         border-bottom: 0;
@@ -162,7 +162,7 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background: linear-gradient(#303030, transparent), linear-gradient(transparent, #303030), url(/img/churchill_fade.jpg) no-repeat;
+    background: linear-gradient(#303030, transparent, transparent), linear-gradient(transparent, transparent, #303030), url(/img/churchill_fade.jpg);
     background-position: 0% 0%;
     background-color: {{ site.color.primary-dark }};
     -webkit-background-size: cover;
@@ -176,19 +176,22 @@ a:focus {
     vertical-align: middle;
 }
 
-/* .intro .intro-body .brand-heading { */
-/*     font-size: 4vmin; */
-/* } */
 
-.brand-heading {
-    top: 10%;
+.intro {
+    height: 100%;
+    padding: 0;
+    padding-top: 25vh;
 }
 
-/* .intro .intro-body .intro-text { */
-/*     font-size: 2vmin; */
-/* } */
+.intro .intro-body .brand-heading {
+    font-size: 50px;
+}
 
-@media(min-width:767px) {
+.intro .intro-body .intro-text {
+    font-size: 20px;
+}
+
+@media (min-height: 767px) and (min-width: 767px) {
     .intro {
         height: 100%;
         padding: 0;
@@ -299,19 +302,38 @@ a:focus {
     background-color: {{ site.color.links }};
 }
 
+/* dkhere */
+
 .btn-circle {
-    width: 70px;
-    height: 70px;
-    margin-top: 30px;
-    padding: 7px 16px;
+    width: 35px;
+    height: 35px;
+    margin-top: 15px;
+    padding: 3.5px 9.5px;
     border: 2px solid #fff;
     border-radius: 35px;
-    font-size: 40px;
+    font-size: 20px;
     color: #fff;
     background: 0 0;
     -webkit-transition: background .3s ease-in-out;
     -moz-transition: background .3s ease-in-out;
     transition: background .3s ease-in-out;
+}
+
+@media (min-width: 767px) and (min-height: 767px) {
+    .btn-circle {
+        width: 70px;
+        height: 70px;
+        margin-top: 30px;
+        padding: 7px 16px;
+        border: 2px solid #fff;
+        border-radius: 35px;
+        font-size: 40px;
+        color: #fff;
+        background: 0 0;
+        -webkit-transition: background .3s ease-in-out;
+        -moz-transition: background .3s ease-in-out;
+        transition: background .3s ease-in-out;
+    }
 }
 
 .btn-circle:hover,

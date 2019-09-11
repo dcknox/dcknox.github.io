@@ -2,9 +2,10 @@
 title: Dean Knox
 email: dcknox@princeton.edu
 url: http://dcknox.com
-description: "Dean Knox is an assistant professor in politics at Princeton. He
-develops quantitative models and methods for new forms of social science data,
-including audio recordings, decision sequences, and mobile location data."
+
+description: "... is an assistant professor in politics at Princeton. He builds
+quantitative models and methods for new forms of social science
+data, including audio recordings, decision sequences, and mobile location records."
 
 # Color settings (hex-codes without the leading hash-tag)
 color:
@@ -29,3 +30,4 @@ permalink: pretty
  
  
  
+
