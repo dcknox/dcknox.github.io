@@ -246,7 +246,7 @@ class: center, middle, inverse
 
 ---
 
-<video class="media" preload="auto" onclick="this.play();" style="position: absolute; left: -20%; top: -2.5%; height: 105%;">
+<video class="media" preload="auto" autoplay onclick="this.play();" style="position: absolute; left: -20%; top: -2.5%; height: 105%;">
   <source src="resources/videos/obama_intro.mp4" type="video/mp4"/>
 Your browser does not support the video tag.
 </video>
@@ -1636,7 +1636,7 @@ Your browser does not support the video tag.
      });
     </script>
 
-    <script>
+    <script delay>
      var videos = document.getElementsByClassName("media");
      function prepareCheckScroll(){
          window.setTimeout("checkScroll()", 1000);
