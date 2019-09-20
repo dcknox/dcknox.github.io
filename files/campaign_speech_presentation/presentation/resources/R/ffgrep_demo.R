@@ -1,0 +1,29 @@
+library(htmlTable)
+
+options(stringsAsFactors = FALSE)
+
+
+
+##########
+## text ##
+##########
+
+d <- read.csv('../../../intermediate_files/transcripts.csv')
+meta <- read.csv('../../../data/speech_meta.csv')
+
+x <- htmlTable(
+  data.frame(
+    Speaker = 'Barack Obama',
+    Date = meta$date[match(d$speech[1:5], meta$id)],
+    Location = c('Washington, DC',
+                 'Lake Buena Vista, FL',
+                 'Tampa, FL',
+                 'Washington, DC',
+                 'Portsmouth, NH'
+                 ),
+    Transcript = substr(d$transcript[1:5], 1, 150)
+  ),
+  rnames = FALSE
+)
+
+##########
