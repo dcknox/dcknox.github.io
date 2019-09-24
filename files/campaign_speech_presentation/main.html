@@ -246,7 +246,7 @@ class: center, middle, inverse
 
 ---
 
-<video class="media" preload="auto" autoplay onclick="this.play();" style="position: absolute; left: -20%; top: -2.5%; height: 105%;">
+<video class="media" preload="auto" onclick="this.play();" style="position: absolute; left: -20%; top: -2.5%; height: 105%;">
   <source src="resources/videos/obama_intro.mp4" type="video/mp4"/>
 Your browser does not support the video tag.
 </video>
@@ -1587,7 +1587,167 @@ Your browser does not support the video tag.
 ---
 <img id="network_zoom4" src="resources/images/unsupervised.png" style="position: absolute; left: 0; top: 15%; width: 100%"/>
 
+---
 
+# Resolving Two Challenges
+
+--
+1. Many phrases are expressed with nearly identical delivery
+
+--
+  - We want to hold text approx. constant but vary the delivery
+
+--
+  - No reason to expect a difference where the expression was indistinguishable
+
+--
+2. Catchphrase occurrences don't necessarily start and stop at logical points
+
+--
+  - Treatments need to be coherent
+
+--
+  - Need to stop and start at similar points in the expression
+
+---
+
+# Manual Clustering/Pairing
+
+--
+- Each phrase occured at least twice in the corpus
+
+--
+  - Median: 3 occurences, Mean: 4.5, Range: [2, 28]
+
+--
+- Humans listen to the audio of these recordings:
+
+--
+  - Discard any matches that aren't catchphrases (rare)
+
+--
+  - Cluster into buckets that are expressed similarly
+
+--
+- A new set of coders go through each phrase:
+
+--
+  - Listen to a phrase per bucket
+
+--
+  - Identify pairs of phrases with a large difference in expression
+
+---
+
+# Experimental Design
+
+- 30 pairs of matched text with varying delivery (22 of Obama, 8 of Romney)
+- For each pair, 350 MTurkers select the recording that is higher on 8 dimensions
+  - Makes you feel anger/afraid/hopeful/proud
+  - Is consistent with a strong/knowledgeable/moral/inspiring leader
+- Randomization: 
+  - For each phrase pair, coders are exposed to either the text, audio, or video 
+
+---
+
+background-image: url(resources/images/experiment_results.png)
+
+---
+
+background-image: url(resources/images/experiment_results_offshore.png)
+
+---
+
+# What Coders Saw
+
+<table class="UserTable">
+  <tbody>
+  <tr>
+    <th>Statement A</th>
+    <th>Statement B</th>
+  </tr>
+  <tr></br></br></br></br></tr>
+  <tr>
+    <th>No company should have to look for workers in China because they couldn't find any with the right skills here in the United States.</th> 
+    <th>No company should have to look for a worker someplace else because they couldn't find the right skills for workers here in the United States.</th> 
+  </tr>
+</tbody></table>
+
+---
+
+<video class="media" preload="auto" onclick="this.play();" style="position: absolute; left: -20%; top: -2.5%; height: 105%;">
+  <source src="resources/videos/treat6_video_low.mp4" type="video/mp4"/>
+Your browser does not support the video tag.
+</video>
+
+---
+
+<video class="media" preload="auto" onclick="this.play();" style="position: absolute; left: -20%; top: -2.5%; height: 105%;">
+  <source src="resources/videos/treat6_video_high.mp4" type="video/mp4"/>
+Your browser does not support the video tag.
+</video>
+
+---
+
+background-image: url(resources/images/experiment_results_opportunity.png)
+
+---
+
+# What Coders Saw
+
+<table class="UserTable">
+  <tbody>
+  <tr>
+    <th>Statement A</th>
+    <th>Statement B</th>
+  </tr>
+  <tr></br></br></br></br></tr>
+  <tr>
+    <th>We grow our economy not from the top down, but from the middle out. We don't believe that anybody's entitled to success in this country, but we do believe in something called opportunity.</th> 
+    <th>Our economy does not grow from the top down, it grows from the middle out. That's how it grows. We don't believe that anybody's entitled to success in this country but we do believe in opportunity.</th> 
+  </tr>
+</tbody></table>
+
+---
+
+<video class="media" preload="auto" onclick="this.play();" style="position: absolute; left: -20%; top: -2.5%; height: 105%;">
+  <source src="resources/videos/treat13_video_low.mp4" type="video/mp4"/>
+Your browser does not support the video tag.
+</video>
+
+---
+
+<video class="media" preload="auto" onclick="this.play();" style="position: absolute; left: -20%; top: -2.5%; height: 105%;">
+  <source src="resources/videos/treat13_video_high.mp4" type="video/mp4"/>
+Your browser does not support the video tag.
+</video>
+
+---
+
+class: inverse
+
+# More Information
+
+<br><br><br><br>
+ <table style="width:100%">
+  <tr>
+    <th align="center"><strong style="font-size: 20px;">Dean Knox</strong></th>
+    <th align="center"><strong style="font-size: 20px;">Christopher Lucas</strong></th> 
+  </tr>  
+  <tr>
+    <td align="center">Princeton</td>
+    <td align="center">Washington University in St. Louis</td>
+  </tr>
+  <tr>
+    <td align="center">dcknox@princeton.edu</td>
+    <td align="center">christopher.lucas@wustl.edu</td>
+  </tr>
+  <tr>
+    <td align="center">dcknox.com</td>
+    <td align="center">www.christopherlucas.org</td>
+  </tr>
+  <tr>
+ </table>
 
 <!-- THE END -->
 
@@ -1619,11 +1779,11 @@ Your browser does not support the video tag.
     
     <script>
      function auth(){
-         var password ;  
-         password = prompt('Enter password', '');
-         if (password != 'tada2019'){
-             document.body.innerHTML = 'Access denied';
-         }
+         /* var password ;  
+          * password = prompt('Enter password', '');
+          * if (password != 'tada2019'){
+          *     document.body.innerHTML = 'Access denied';
+          * } */
      }
     </script>
 
