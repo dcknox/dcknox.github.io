@@ -161,7 +161,7 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background: linear-gradient(#303030, transparent, transparent), linear-gradient(transparent, transparent, #303030), url(/img/churchill_fade.jpg);
+    background: linear-gradient(#303030, transparent, transparent), linear-gradient(transparent, transparent, #303030)/* , url(/img/churchill_fade.jpg) */;
     background-position: 0% 0%;
     background-color: {{ site.color.primary-dark }};
     -webkit-background-size: cover;
