@@ -1,0 +1,1211 @@
+library(data.table)
+library(ggplot2)
+library(ggalluvial)
+library(lubridate)
+library(RColorBrewer)
+
+`%.%` <- paste0
+
+
+
+################################
+## read, clean ia master data ##
+################################
+
+## master <- fread('../data/raw/City of Philadelphia/ppd_complaint_updated/Background/ppd_complaint_master.csv')
+master <- fread('../data/raw/City of Philadelphia/ppd_complaint_updated/ppd_complaint_master_jm.csv')
+
+## drop two corrupted cases in ppd data: 19-0525, 20-0096
+master[investigative_findings == '#VALUE!',]
+master <- master[investigative_findings != '#VALUE!',]
+
+## drop ongoing cases
+master[allegations_investigated == 'Investigation OnGoing', .N]
+master <- master[allegations_investigated != 'Investigation OnGoing',]
+
+## create pbi indicator
+master[, pbi := ifelse(PBI_num != '', 'PBI', 'No PBI')]
+
+## group allegations investigated
+master[,
+       allegation_coarse := c(
+         ## civil rights
+         'Civil Rights Complaint' = 'Civil Rights',
+         ## criminal allegation
+         'Criminal Allegation' = 'Criminal Allegation',
+         ## departmental violation
+         'Departmental Violation' = 'Departmental Violation',
+         'Disciplinary Code Violation' = 'Departmental Violation',
+         'Falsification' = 'Departmental Violation',
+         ## lack of service
+         'Lack of Service' = 'Lack of Service',
+         ## physical abuse
+         'Physical Abuse' = 'Physical/Sexual',
+         'Sexual Crime/Misconduct' = 'Physical/Sexual',
+         ## rude
+         'Verbal Abuse' = 'Verbal/Harass/Unprofessional',
+         'Harassment' = 'Verbal/Harass/Unprofessional',
+         'Unprofessional Conduct' = 'Verbal/Harass/Unprofessional',
+         ## other
+         'Domestic' = 'Other',
+         'Drugs' = 'Other',
+         'Other Misconduct' = 'Other',
+         ## drop
+         'Referred to Other Agency/C.A.P. Investigation' = 'Not Investigated',
+         'No C.A.P. Investigation' = 'Not Investigated'
+       )[allegations_investigated]
+       ]
+master[is.na(allegation_coarse), .N]
+
+## ## group case classification
+## master[,
+##        classification_coarse := c(
+##          ## civil rights
+##          'CIVIL RIGHTS COMPLAINT' = 'Civil Rights',
+##          ## criminal allegation
+##          'CRIMINAL ALLEGATION' = 'Criminal Allegation',
+##          ## departmental violation
+##          'DEPARTMENTAL VIOLATIONS' = 'Departmental Violation',
+##          'FALSIFICATION' = 'Departmental Violation',
+##          ## lack of service
+##          'LACK OF SERVICE' = 'Lack of Service',
+##          ## physical abuse
+##          'PHYSICAL ABUSE' = 'Physical/Sexual',
+##          'SEXUAL CRIME/MISCONDUCT' = 'Physical/Sexual',
+##          ## verbal abuse
+##          'VERBAL ABUSE' = 'Verbal/Harass/Unprofessional',
+##          'HARASSMENT' = 'Verbal/Harass/Unprofessional',
+##          'UNPROFESSIONAL CONDUCT' = 'Verbal/Harass/Unprofessional',
+##          ## other
+##          'DOMESTIC' = 'Other',
+##          'DRUGS' = 'Other',
+##          ## drop
+##          'NON-INVESTIGATORY INCIDENT' = 'Not Investigated',
+##          'USE OF FORCE INTERNAL' = 'Not Investigated' # one case that was referred
+##        )[general_cap_classification]
+##        ]
+## master[is.na(classification_coarse),]
+
+
+
+#################################
+## read, clean, merge pbi data ##
+#################################
+
+pbi <- fread('../data/raw/City of Philadelphia/ppd_complaint_updated/Background/ppd_pbi.csv')
+
+prop.table(table(pbi[!IAD_num %like% '^1[2-4]', disciplinary_result]))
+
+## for cases with multiple ia charges:
+ia.to.pbi <- fread('../data/raw/City of Philadelphia/ppd_complaint_updated/Background/ia_to_pbi_handcode.csv')
+## strip ia charge subindex (position of charge within overall case)
+ia.to.pbi[, ia_charge := gsub('^\\([a-z]\\) ', '', ia_charge)]
+## check that merge rows correspond exactly
+identical(
+  master[PBI_num %in% ia.to.pbi$PBI_num, finding_spec],
+  ia.to.pbi$ia_charge
+)
+
+## majority vote
+ia.to.pbi$majority <- apply(
+  as.matrix(ia.to.pbi[,
+                      .(as.numeric(ia_to_pbi_v1),
+                        as.numeric(ia_to_pbi_v2),
+                        as.numeric(ia_to_pbi_v3)
+                        )
+                      ]
+            ),
+  1,
+  function(x){
+    tab <- sort(table(x, useNA = 'always'), decreasing = TRUE)
+    as.numeric(names(tab)[1])
+  })
+
+## for cases with multiple ia charges: check that all subindices are numeric
+if (any(!is.numeric(ia.to.pbi$majority))){
+  stop('fix merge indices')
+}
+
+## for cases with multiple hand-linked ia charges: merge in index of pbi charge
+master[PBI_num %in% ia.to.pbi$PBI_num,
+       pbi.ind := ia.to.pbi$majority
+       ]
+for (i in which(!is.na(master$pbi.ind))){
+  ## all pbi charges associated with this case
+  pbi.curr <- pbi[PBI_num == master[i, PBI_num],]
+  ## specific linked charge
+  pbi.curr <- pbi.curr[master[i, pbi.ind],]
+  ## merge in columns
+  master[i, pbi_charge_date := pbi.curr$charge_date]
+  master[i, pbi_hearing_date := pbi.curr$PBI_date]
+  master[i, pbi_charge_article := pbi.curr$article_description]
+  master[i, pbi_charge := sprintf('%s: %s, %s',
+                                  pbi.curr$article_section_num,
+                                  pbi.curr$article_description,
+                                  pbi.curr$section_description
+                                  )
+         ]
+  master[i, pbi_disciplinary_result := pbi.curr$disciplinary_result]
+  master[i, pbi_penalty := pbi.curr$penalty]
+}
+
+## for cases with single ia charges that didn't need to be hand-linked:
+##   merge in index of pbi charge
+for (i in master[, which(PBI_num != '' & !PBI_num %in% ia.to.pbi$PBI_num)]){
+  ## all pbi charges associated with this case
+  pbi.curr <- pbi[PBI_num == master[i, PBI_num],]
+  ## if there is >1 pbi charge with this ia charge
+  ## 16-0004, 18-0371, 18-0377, 19-0212
+  if (nrow(pbi.curr) > 1) {
+    ## if all but one charge was withdrawn, take remaining charge
+    if (sum(pbi.curr$disciplinary_result != 'Withdrawn') == 1){
+      pbi.curr <- pbi.curr[disciplinary_result != 'Withdrawn',]
+      pbi.curr$pbi_charge_article <- pbi.curr$article_description
+      pbi.curr$pbi_charge <- sprintf('%s: %s, %s',
+                                     pbi.curr$article_section_num,
+                                     pbi.curr$article_description,
+                                     pbi.curr$section_description
+                                     )
+    } else {
+      ## use latest charge date
+      pbi.curr$charge_date[1] <-
+        pbi.curr$charge_date[which.max(mdy(pbi.curr$charge_date))]
+      ## use latest hearing date
+      pbi.curr$PBI_date[1] <-
+        pbi.curr$PBI_date[which.max(mdy(pbi.curr$charge_date))]
+      ## collapse charges
+      pbi.curr$pbi_charge_article[1] <- paste(pbi.curr$article_description,
+                                              collapse = '; '
+                                              )
+      pbi.curr$pbi_charge[1] <- paste(
+        sprintf('%s: %s, %s',
+                pbi.curr$article_section_num,
+                pbi.curr$article_description,
+                pbi.curr$section_description
+                ),
+        collapse = '\n\n'
+      )
+      ## ensure all charges have same result
+      if (uniqueN(pbi.curr$disciplinary_result) > 1){
+        stop('deciede which disciplinary result to keep')
+      }
+      if (uniqueN(pbi.curr$penalty) > 1){
+        stop('decide which penalty to keep')
+      }
+      ## take first row, which now contains all merged pbi charges
+      pbi.curr <- pbi.curr[1,]
+    }
+  } else {
+    ## there is 1 pbi charge corresponding to this ia charge
+    pbi.curr$pbi_charge <- sprintf('%s: %s, %s',
+                                   pbi.curr$article_section_num,
+                                   pbi.curr$article_description,
+                                   pbi.curr$section_description
+                                   )
+  }
+  ## merge in columns
+  master[i, pbi_charge_date := pbi.curr$charge_date]
+  master[i, pbi_hearing_date := pbi.curr$PBI_date]
+  master[i, pbi_charge := pbi.curr$pbi_charge]
+  master[i, pbi_disciplinary_result := pbi.curr$disciplinary_result]
+  master[i, pbi_penalty := pbi.curr$penalty]
+}
+
+## coarse categories
+master[pbi_penalty %like% 'Reprimand',
+       pbi_penalty_coarse := 'Reprimand'
+       ]
+master[pbi_penalty %like% '^[1-5] Days? Suspension',
+       pbi_penalty_coarse := '1-5 Days Suspension'
+       ]
+master[pbi_penalty %like% 'Days? Suspension' &
+         is.na(pbi_penalty_coarse),
+       pbi_penalty_coarse := '6+ Days Suspension'
+       ]
+master[PBI_num != '' & is.na(pbi_charge), pbi_charge := 'Charge dropped']
+## check that coarsened categories cover all penalties
+master[, .N, by = c('pbi_penalty', 'pbi_penalty_coarse')]
+
+## drop back-filled pbi cases that are too old
+master[IAD_num %like% '^1[2-4]', .N]
+master <- master[!IAD_num %like% '^1[2-4]',]
+
+master[,
+       pbi_penalty_suspension_days := as.numeric(
+         gsub(' Days? Suspension.*', '', pbi_penalty)
+       )
+       ]
+master[, .N, by = c('pbi_penalty', 'pbi_penalty_suspension_days')]
+mean(master$pbi_penalty_suspension_days, na.rm = TRUE)
+
+
+
+## #########################################################
+## ## specific allegations vs overall case classification ##
+## #########################################################
+
+## classification.summary <- master[,
+##                                  .N,
+##                                  by = c('classification_coarse',
+##                                         'allegation_coarse'
+##                                         )
+##                                  ]
+
+## ggplot(classification.summary,
+##        aes(axis1 = classification_coarse,
+##            axis2 = allegation_coarse,
+##            y = N
+##            )
+##        ) +
+##   geom_alluvium(aes(fill = allegation_coarse)) +
+##   geom_stratum() +
+##   geom_label(stat = "stratum", aes(label = after_stat(stratum))) +
+##   scale_x_discrete(limits = c('overall\ncase\nclassification',
+##                               'specific\nallegation\ninvestigated'
+##                               )
+##                    ) +
+##   theme_minimal(base_size = 24) +
+##   theme(panel.grid = element_blank())
+
+
+
+#############
+## process ##
+#############
+
+## ia initiates an investigation
+master[, process.investigated := ifelse(allegation_coarse == 'Not Investigated',
+                                        'Not Investigated',
+                                        'Investigated'
+                                        )
+       ]
+## ia makes a determination
+##   (if investigation is referred, convert "no sustained findings" to NA)
+master[, process.ia.finding := investigative_findings]
+master[allegation_coarse == 'Not Investigated', process.ia.finding := NA]
+## either pbi charging or training/counseling occurs
+##   (if disciplinary_findings is listed as "Pending")
+master[!is.na(pbi_charge_date),
+       process.pbi.tc := 'PBI Charging'
+       ]
+master[disciplinary_findings %in% c('Guilty Finding', 'No Guilty Findings'),
+       process.pbi.tc := 'PBI Charging'
+       ]
+master[disciplinary_findings == 'Training/Counseling',
+       process.pbi.tc := 'Training / Counseling'
+       ]
+master[process.ia.finding == 'Sustained Finding' &
+         is.na(process.pbi.tc) &
+         is.na(off_id),
+       process.pbi.tc := 'Unknown Officer'
+       ]
+## drop charges that are truly pending
+##   (keep those for which pbi charge date found)
+master[, drop := is.na(pbi_charge_date) & disciplinary_findings == 'Pending']
+master <- master[drop == FALSE,]
+## one of guilty plea, guilty finding, not guilty finding, withdrawn
+master[, process.pbi.finding := pbi_disciplinary_result]
+master[process.pbi.finding == 'Withdrawn',
+       process.pbi.finding := 'Charges Dropped'
+       ]
+master[process.pbi.finding == 'Guilty Plea - Hearing Waived',
+       process.pbi.finding := 'Guilty'
+       ]
+master[process.pbi.tc == 'PBI Charging' & is.na(process.pbi.finding) &
+         PBI_num != '',
+       process.pbi.finding := 'Charges Dropped'
+       ]
+master[process.pbi.tc == 'Unknown Officer',
+       process.pbi.finding := NA
+       ]
+## if unable to merge pbi data, use overall ia 'disciplinary_findings' entry
+##   (this includes ia charges for which no specific pbi charge could be found)
+master[is.na(process.pbi.finding) & disciplinary_findings == 'Guilty Finding',
+       process.pbi.finding := 'Guilty'
+       ]
+master[is.na(process.pbi.finding) & disciplinary_findings == 'Guilty Finding',
+       process.pbi.finding := 'Guilty'
+       ]
+master[is.na(process.pbi.finding) & disciplinary_findings == 'No Guilty Findings',
+       process.pbi.finding := 'Not Guilty'
+       ]
+## penalty
+master[, process.penalty := pbi_penalty_coarse]
+master[process.pbi.finding == 'Guilty' & is.na(process.penalty),
+       process.penalty := 'No Record'
+       ]
+
+
+
+## proportion of sustained allegations in which officer is >=suspended
+master[process.ia.finding == 'Sustained Finding',
+       mean(process.penalty %like% 'Suspension')
+       ]  # 3.4%
+## proportion of complaints with sustained allegations in which officer is >=suspended
+master[process.ia.finding == 'Sustained Finding',
+       .(suspension = any(process.penalty %like% 'Suspension')),
+       by = IAD_num
+       ][, mean(suspension)]  # 4.2%
+
+
+
+
+## tabulate
+process.summary.list <- list()
+palette <- c(brewer.pal(6, 'Set1')[c(1, 5, 6, 3, 2, 4)], 'darkgray', NA)
+names(palette) <- c('Criminal Allegation',
+                    'Physical/Sexual',
+                    'Verbal/Harass/Unprofessional',
+                    'Civil Rights',
+                    'Departmental Violation',
+                    'Lack of Service',
+                    'Other',
+                    'Not Investigated'
+                    )
+
+groups <- c(
+  'All' = '.*',
+  'Criminal Allegation' = 'Criminal Allegation',
+  'Physical/Sexual' = 'Physical/Sexual',
+  'Verbal/Harass/Unprofessional' = 'Verbal/Harass/Unprofessional',
+  'Civil Rights' = 'Civil Rights',
+  'Departmental Violation' = 'Departmental Violation',
+  'Lack of Service' = 'Lack of Service',
+  'Sustained' = '^Sustained'
+)
+
+group.types <- c('allegation_coarse',
+                 'allegation_coarse',
+                 'allegation_coarse',
+                 'allegation_coarse',
+                 'allegation_coarse',
+                 'allegation_coarse',
+                 'allegation_coarse',
+                 'process.ia.finding'
+                 )
+
+master[, .N, by = 'process.pbi.tc']
+
+for (j in seq_along(groups)){
+
+  if (group.types[j] == 'allegation_coarse'){
+    process.summary <- master[allegation_coarse %like% groups[j],
+                              .(allegation_coarse,
+                                process.investigated,
+                                process.ia.finding,
+                                process.pbi.tc,
+                                process.pbi.finding,
+                                process.penalty
+                                )
+                              ]
+  } else if (group.types[j] == 'process.ia.finding'){
+    process.summary <- master[process.ia.finding %like% groups[j],
+                              .(allegation_coarse,
+                                process.investigated,
+                                process.ia.finding,
+                                process.pbi.tc,
+                                process.pbi.finding,
+                                process.penalty
+                                )
+                              ]
+  }
+
+  ncharges <- nrow(process.summary)
+  process.summary[is.na(process.ia.finding),
+                  process.ia.finding :=
+                    'stage2.spacer' %.% rep(1:uniqueN(process.summary$process.ia.finding),
+                                            length.out = .N
+                                            )
+                  ]
+  process.summary[is.na(process.pbi.tc),
+                  process.pbi.tc :=
+                    'stage3.spacer' %.% rep(1:uniqueN(process.summary$process.pbi.tc),
+                                            length.out = .N
+                                            )
+                  ]
+  process.summary[is.na(process.pbi.finding),
+                  process.pbi.finding :=
+                    'stage4.spacer' %.% rep(1:uniqueN(process.summary$process.pbi.finding),
+                                            length.out = .N
+                                            )
+                  ]
+  process.summary[is.na(process.penalty),
+                  process.penalty :=
+                    'stage5.spacer' %.% rep(1:uniqueN(process.summary$process.penalty),
+                                            length.out = .N
+                                            )
+                  ]
+  process.summary <- process.summary[,
+                                     .N,
+                                     by = c('allegation_coarse',
+                                            'process.investigated',
+                                            'process.ia.finding',
+                                            'process.pbi.tc',
+                                            'process.pbi.finding',
+                                            'process.penalty'
+                                            )
+                                     ]
+
+  ## convert to long form
+  process.summary[, group := .I]
+  process.summary <- melt(process.summary,
+                          id.vars = c('allegation_coarse', 'group', 'N'),
+                          variable.name = 'stage',
+                          value.name = 'outcome'
+                          )
+
+  process.summary[, stage := factor(stage,
+                                    levels = c('process.investigated',
+                                               'process.ia.finding',
+                                               'process.pbi.tc',
+                                               'process.pbi.finding',
+                                               'process.penalty'
+                                               ),
+                                    labels = c('PPD\nInternal Affairs\nInvestigation',
+                                               'PPD\nInternal Affairs\nFinding',
+                                               'PPD\nDisciplinary\nVenue',
+                                               'PPD\nDisciplinary\nFinding',
+                                               'PPD\nAssigned\nPenalty'
+                                               ),
+                                    ordered = TRUE
+                                    )
+                  ]
+
+  outcome.levels.order <- c('Investigated',
+                            'Not Investigated',
+                            ## ia finding
+                            'Sustained Finding',
+                            'No Sustained Findings',
+                            ## pbi/tc
+                            'PBI Charging',
+                            'Training / Counseling',
+                            'Unknown Officer',
+                            ## pbi finding
+                            'Guilty Plea - Hearing Waived',
+                            'Guilty',
+                            'Command Level Discipline',
+                            'Not Guilty',
+                            'Charges Dropped',
+                            ## penalty
+                            '6+ Days Suspension',
+                            '1-5 Days Suspension',
+                            'Reprimand',
+                            'No Record'
+                            )
+
+
+  outcomes.levels <- c()
+  for (i in seq_along(levels(process.summary$stage))){
+    cat(rep('-', 20), '\n\nstage ', i, '\n\n', sep = '')
+    outcomes.levels.curr <-
+      process.summary[stage == levels(stage)[i], unique(outcome)]
+    outcomes.levels.curr.reorder <- rep(NA, times = length(outcomes.levels.curr))
+    if (any(outcomes.levels.curr %like% 'spacer')){
+      spacer.levels <- outcomes.levels.curr[outcomes.levels.curr %like% 'spacer']
+      spacer.ind <- as.numeric(gsub('.*spacer', '', spacer.levels))
+      spacer.ind <- spacer.ind * 2 - 1
+      outcomes.levels.curr.reorder[spacer.ind] <- spacer.levels
+    }
+    outcomes.levels.curr.reorder[is.na(outcomes.levels.curr.reorder)] <-
+      outcome.levels.order[outcome.levels.order %in% outcomes.levels.curr]
+    cat(matrix(outcomes.levels.curr.reorder), '\n', sep = '\n')
+    outcomes.levels <- c(outcomes.levels, outcomes.levels.curr.reorder)
+  }
+
+  ## prepare to hide spacers
+  process.summary[, text := ifelse(outcome %like% 'spacer',
+                                   'hide.text',
+                                   'show.text'
+                                   )
+                  ]
+  process.summary[, border := ifelse(outcome %like% 'spacer',
+                                     'hide.border',
+                                     'show.border'
+                                     )
+                  ]
+  process.summary[, fill := ifelse(outcome %in% c('Not Investigated',
+                                                  'No Sustained Findings',
+                                                  'Training / Counseling',
+                                                  'Not Guilty',
+                                                  'Withdrawn',
+                                                  'Unknown Officer',
+                                                  'Charges Dropped'
+                                                  ) |
+                                     outcome %like% 'spacer',
+                                   'hide.flow',
+                                   'show.flow'
+                                   )
+                  ]
+
+  process.summary[, allegation_coarse := factor(allegation_coarse,
+                                                levels = names(palette),
+                                                ordered = TRUE
+                                                )
+                  ]
+
+  outcomes.labels <- process.summary[
+   ,
+     .(label = sprintf('%s\n(%0.1f%%)',
+                       c('Investigated' = 'Investigated',
+                         'Not Investigated' = 'Not Investigated',
+                         'No Sustained Findings' = 'No Sustained\nFindings',
+                         'Sustained Finding' = 'Sustained\nFinding',
+                         'Training / Counseling' = 'Training or\nCounseling',
+                         'PBI Charging' = 'Charging at\nBoard of Inquiry',
+                         'Unknown Officer' = 'Unknown\nOfficer',
+                         'Guilty' = 'Guilty',
+                         'Not Guilty' = 'Not Guilty',
+                         'Command Level Discipline' = 'Command\nDiscipline',
+                         'Charges Dropped' = 'Charges\nDropped',
+                         'No Record' = 'No Record',
+                         '1-5 Days Suspension' = '1-5 Days\nSuspension',
+                         'Reprimand' = 'Reprimand',
+                         '6+ Days Suspension' = '6+ Days\nSuspension'
+                         )[outcome[1]],
+                       sum(N) / ncharges * 100
+                       )
+       ),
+       by = 'outcome'
+  ]
+  outcomes.labels[outcome %like% '^stage\\d\\.spacer\\d',
+                  label := outcome
+                  ]
+
+  setkey(outcomes.labels, outcome)
+  process.summary[, outcome := factor(outcome,
+                                      levels = outcomes.levels,
+                                      labels = outcomes.labels[outcomes.levels,
+                                                               label
+                                                               ],
+                                      ordered = TRUE
+                                      )
+                  ]
+
+  process.summary.list[[names(groups)[j]]] <- process.summary
+
+}
+
+
+
+pdf('../output/flow_all_ppd.pdf', 16, 12)
+ggplot(process.summary.list[['All']],
+       aes(x = stage,
+           stratum = outcome,
+           alluvium = group,
+           y = N,
+           label = outcome
+           )
+       ) +
+  scale_x_discrete(expand = c(.1, .1)) +
+  geom_flow(aes(## fill = allegation_coarse,
+                ## color = allegation_coarse,
+                alpha = fill
+                ),
+            color = '#00000000',
+            width = .75
+            ) +
+  geom_stratum(aes(color = border),
+               width = .75,
+               size = .75
+               ) +
+  geom_text(aes(color = text),
+            stat = 'stratum',
+            size = 7,
+            lineheight = .75
+            ) +
+  scale_fill_manual(values = palette,
+                    breaks = names(palette)[!names(palette) %like% 'Not Investigated'],
+                    guide = guide_legend(byrow = TRUE,
+                                         override.aes = list(alpha = 1)
+                                         ),
+                    name = NULL
+                    ) +
+  scale_alpha_manual(values = c(hide.text = 0,
+                                hide.border = 0,
+                                hide.flow = 0,
+                                show.text = 1,
+                                show.border = 1,
+                                show.flow = 1
+                                ),
+                    guide = FALSE
+                    ) +
+  scale_color_manual(values = c(hide.text = '#00000000',
+                                hide.border = '#00000000',
+                                hide.flow = '#00000000',
+                                show.text = 'black',
+                                show.border = 'darkgray',
+                                show.flow = 'blue'
+                                ),
+                     guide = FALSE
+                     ) +
+  theme_minimal(base_size = 24) +
+  theme(panel.grid = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position = 'bottom'
+        ) +
+  xlab('')
+dev.off()
+
+
+
+pdf('../output/flow_all_dirty_ppd.pdf', 16, 8)
+ggplot(process.summary.list[['All']],
+       aes(x = stage,
+           stratum = outcome,
+           alluvium = group,
+           y = N,
+           label = outcome
+           )
+       ) +
+  scale_x_discrete(expand = c(.1, .1)) +
+  geom_flow(aes(fill = fill, color = fill)) +
+  geom_stratum(aes(color = border)) +
+  geom_text(stat = 'stratum', size = 3) +
+  scale_fill_manual(values = c(hide.flow = 'red',
+                               show.flow = 'blue'
+                               ),
+                    guide = FALSE
+                    ) +
+  scale_color_manual(values = c(hide.text = 'red',
+                                hide.border = 'red',
+                                hide.flow = 'red',
+                                show.text = 'black',
+                                show.border = 'darkgray',
+                                show.flow = 'blue'
+                                ),
+                     guide = FALSE
+                     )  +
+  theme_minimal(base_size = 24) +
+  theme(panel.grid = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank()
+        ) +
+  xlab('')
+dev.off()
+
+for (j in 2:7){
+  pdf('../output/flow_' %.%
+        tolower(gsub('[ [:punct:]].*', '', names(process.summary.list)[j])) %.%
+        '_ppd.pdf',
+      16,
+      12
+      )
+
+  p <- ggplot(process.summary.list[[j]],
+              aes(x = stage,
+                  stratum = outcome,
+                  alluvium = group,
+                  y = N,
+                  label = outcome
+                  )
+              ) +
+    scale_x_discrete(expand = c(.1, .1)) +
+    geom_flow(aes(fill = allegation_coarse,
+                  color = allegation_coarse,
+                  alpha = fill
+                  ),
+              color = 'gray',
+              width = .75
+              ) +
+    geom_stratum(aes(color = border),
+                 width = .75,
+                 size = .75
+                 ) +
+    geom_text(aes(color = text),
+              stat = 'stratum',
+              size = 7,
+              lineheight = .75
+              ) +
+    scale_fill_manual(values = palette,
+                      breaks = setdiff(names(palette), 'Not Investigated'),
+                      guide = FALSE,
+                      name = NULL
+                      ) +
+    scale_alpha_manual(values = c(hide.text = 0,
+                                  hide.border = 0,
+                                  hide.flow = 0,
+                                  show.text = 1,
+                                  show.border = 1,
+                                  show.flow = 1
+                                  ),
+                       guide = FALSE
+                       ) +
+    scale_color_manual(values = c(hide.text = '#00000000',
+                                  hide.border = '#00000000',
+                                  hide.flow = '#00000000',
+                                  show.text = 'black',
+                                  show.border = 'darkgray',
+                                  show.flow = 'blue'
+                                  ),
+                       guide = FALSE
+                       ) +
+    theme_minimal(base_size = 24) +
+    theme(panel.grid = element_blank(),
+          axis.title.y = element_blank(),
+          axis.text.y = element_blank(),
+          axis.ticks.y = element_blank(),
+          legend.position = 'bottom',
+          plot.title = element_text(hjust = 0.5)
+          ) +
+    xlab('') +
+    ggtitle(names(process.summary.list)[j])
+  print(p)
+
+  dev.off()
+}
+
+## pdf('../output/flow_sustained.pdf', 16, 8)
+## ggplot(process.summary.list[['Sustained']][stage != 'Internal Affairs\nInvestigation'],
+##        aes(x = stage,
+##            stratum = outcome,
+##            alluvium = group,
+##            y = N,
+##            label = outcome
+##            )
+##        ) +
+##   scale_x_discrete(expand = c(.1, .1)) +
+##   geom_flow(aes(fill = allegation_coarse,
+##                 color = allegation_coarse,
+##                 alpha = fill
+##                 ),
+##             color = '#00000000',
+##             width = .75
+##             ) +
+##   geom_stratum(aes(color = border),
+##                width = .75,
+##                size = .75
+##                ) +
+##   geom_text(aes(color = text),
+##             stat = 'stratum',
+##             size = 5,
+##             lineheight = .75
+##             ) +
+##   scale_fill_manual(values = palette,
+##                     breaks = names(palette)[!names(palette) %like% 'Not Investigated'],
+##                     guide = guide_legend(byrow = TRUE,
+##                                          override.aes = list(alpha = 1)
+##                                          ),
+##                     name = NULL
+##                     ) +
+##   scale_alpha_manual(values = c(hide.text = 0,
+##                                 hide.border = 0,
+##                                 hide.flow = 0,
+##                                 show.text = 1,
+##                                 show.border = 1,
+##                                 show.flow = 1
+##                                 ),
+##                     guide = FALSE
+##                     ) +
+##   scale_color_manual(values = c(hide.text = '#00000000',
+##                                 hide.border = '#00000000',
+##                                 hide.flow = '#00000000',
+##                                 show.text = 'black',
+##                                 show.border = 'darkgray',
+##                                 show.flow = 'blue'
+##                                 ),
+##                      guide = FALSE
+##                      ) +
+##   theme_minimal(base_size = 24) +
+##   theme(panel.grid = element_blank(),
+##         axis.title.y = element_blank(),
+##         axis.text.y = element_blank(),
+##         axis.ticks.y = element_blank(),
+##         legend.position = 'bottom'
+##         ) +
+##   xlab('')
+## dev.off()
+
+
+
+##############################
+## additional summary stats ##
+##############################
+
+## number of allegations
+nrow(master)                      # 9290
+uniqueN(na.omit(master$IAD_num))  # 3542
+
+## among suspensions, % less than a week
+mean(master$pbi_penalty_suspension_days <= 5, na.rm = TRUE)  # .837
+
+## proportion of dvs
+prop.table(table(master$allegations_investigated))  # .348 are dv
+
+
+
+## #################################
+## ## subtypes of dept violations ##
+## #################################
+
+## dv.charges.pbi <- master[PBI_num != '' & finding_spec %like% '^DV',]
+## dv.charges.pbi$dv_cat <- NA
+## ## dv.charges.pbi$dv_cat[grep('^DV_', dv.charges.pbi$finding_spec)] <- 'No Record'
+## dv.charges.pbi$dv_cat[grep('^DV_', dv.charges.pbi$finding_spec)] <- NA
+
+## pbi_charge_section = pbi.charges.short$section[i],
+## pbi_charge_subsection = pbi.charges.short$subsection[i],
+## pbi_charge_long = pbi.charges.short$long[i]
+
+## charges.pbi <- master[PBI_num != '' & !is.na(pbi_charge_article),]
+## charges.pbi[, ia.charge := gsub('_.*', '', finding_spec)]
+## charges.pbi <- charges.pbi[, .N, by = c('ia.charge', 'pbi_charge_article', 'pbi_charge')]
+## setkey(charges.pbi, ia.charge)
+
+## fwrite(charges.pbi[, c(4,1:3)], '../tmp.csv')
+
+
+## #CONSTITUTIONAL
+## #^DV(IAR) = improper arrest
+## #^DV(ISR) = improper search
+## #^DV(IST) = improper stop
+## #^DV(IEN) = improper entry
+## #^DV(DET) = improper detention
+## dv.charges.pbi$dv_cat[grep('^DV\\(IAR\\)', dv.charges.pbi$finding_spec)] <- 'Constitutional'
+## dv.charges.pbi$dv_cat[grep('^DV\\(ISR\\)', dv.charges.pbi$finding_spec)] <- 'Constitutional'
+## dv.charges.pbi$dv_cat[grep('^DV\\(IST\\)', dv.charges.pbi$finding_spec)] <- 'Constitutional'
+## dv.charges.pbi$dv_cat[grep('^DV\\(IEN\\)', dv.charges.pbi$finding_spec)] <- 'Constitutional'
+## dv.charges.pbi$dv_cat[grep('^DV\\(DET\\)', dv.charges.pbi$finding_spec)] <- 'Constitutional'
+## table(dv.charges.pbi$dv_cat, exclude=NULL)
+
+
+## #OMISSION
+## #^DV(FA) = failure to arrest
+## #^DV(FS) = failure to seize
+## #^DV(REP) = failure to report/accurately report
+## #^DV(SUP) = failure to supervise
+## #^DV(NOTIFY) = failure to notify civilian
+## #^DV(SUPREQ) = failed to call for supervisor when requested
+## #^DV(REF) = refusal to provide name/badge
+## #LOS = lack of service
+## #LOS(IMPARTIALITY) = lack of impartiality
+## #LOS(SUPREQ) = supervisor request
+## dv.charges.pbi$dv_cat[grep('^DV\\(FA\\)', dv.charges.pbi$finding_spec)] <-     'Omission'
+## dv.charges.pbi$dv_cat[grep('^DV\\(FS\\)', dv.charges.pbi$finding_spec)] <-     'Omission'
+## dv.charges.pbi$dv_cat[grep('^DV\\(REP\\)', dv.charges.pbi$finding_spec)] <-    'Omission'
+## dv.charges.pbi$dv_cat[grep('^DV\\(SUP\\)', dv.charges.pbi$finding_spec)] <-    'Omission'
+## dv.charges.pbi$dv_cat[grep('^DV\\(NOTIFY\\)', dv.charges.pbi$finding_spec)] <- 'Omission'
+## dv.charges.pbi$dv_cat[grep('^DV\\(SUPREQ\\)', dv.charges.pbi$finding_spec)] <- 'Omission'
+## dv.charges.pbi$dv_cat[grep('^DV\\(REF\\)', dv.charges.pbi$finding_spec)] <-    'Omission'
+
+## table(dv.charges.pbi$dv_cat, exclude=NULL)
+
+
+## #PERSONAL CONDUCT
+## #^DV(ODA) = off-duty actions
+## #^DV(LIC) = driver’s license
+## #^DV(MVC) = motor vehicle code
+## #^DV(FELON) = associating with felons
+## #^DV(ALCOHOL) = alcohol intoxication in duty
+## #^DV(ABSENCE) = absence from official assignment
+## #^DV(BUS) = soliciting business
+## #^DV(EMPL) = outside employment policy
+## #^DV(INJ) = violation of injured-on-duty policy (working outside employment while on IOD status)
+## #DOM = domestic
+## dv.charges.pbi$dv_cat[grep('^DV\\(ODA\\)', dv.charges.pbi$finding_spec)] <- 'Personal Conduct'
+## dv.charges.pbi$dv_cat[grep('^DV\\(LIC\\)', dv.charges.pbi$finding_spec)] <- 'Personal Conduct'
+## dv.charges.pbi$dv_cat[grep('^DV\\(MVC\\)', dv.charges.pbi$finding_spec)] <- 'Personal Conduct'
+## dv.charges.pbi$dv_cat[grep('^DV\\(FELON\\)', dv.charges.pbi$finding_spec)] <- 'Personal Conduct'
+## dv.charges.pbi$dv_cat[grep('^DV\\(ALCOHOL\\)', dv.charges.pbi$finding_spec)] <- 'Personal Conduct'
+## dv.charges.pbi$dv_cat[grep('^DV\\(ABSENCE\\)', dv.charges.pbi$finding_spec)] <- 'Personal Conduct'
+## dv.charges.pbi$dv_cat[grep('^DV\\(BUS\\)', dv.charges.pbi$finding_spec)] <- 'Personal Conduct'
+## dv.charges.pbi$dv_cat[grep('^DV\\(EMPL\\)', dv.charges.pbi$finding_spec)] <- 'Personal Conduct'
+## dv.charges.pbi$dv_cat[grep('^DV\\(INJ\\)', dv.charges.pbi$finding_spec)] <- 'Personal Conduct'
+
+## table(dv.charges.pbi$dv_cat, exclude=NULL)
+
+
+## #INVESTIGATION/EVIDENCE
+## #^DV(SEC) = failure to secure crime scene
+## #^DV(INTERFERE) = interfering with an investigation
+## #^DV(INV) = failure to conduct thorough/complete/proper investigation
+## #^DV(MEV) = mishandling evidence
+## #^DV(IIN) = interviews and interrogations
+## dv.charges.pbi$dv_cat[grep('^DV\\(SEC\\)', dv.charges.pbi$finding_spec)] <- 'Investigation / Evidence'
+## dv.charges.pbi$dv_cat[grep('^DV\\(INTERFERE\\)', dv.charges.pbi$finding_spec)] <- 'Investigation / Evidence'
+## dv.charges.pbi$dv_cat[grep('^DV\\(INV\\)', dv.charges.pbi$finding_spec)] <- 'Investigation / Evidence'
+## dv.charges.pbi$dv_cat[grep('^DV\\(MEV\\)', dv.charges.pbi$finding_spec)] <- 'Investigation / Evidence'
+## dv.charges.pbi$dv_cat[grep('^DV\\(IIN\\)', dv.charges.pbi$finding_spec)] <- 'Investigation / Evidence'
+
+## table(dv.charges.pbi$dv_cat, exclude=NULL)
+
+
+
+## #VIOLENCE
+## #DV(FOR) = improper use of force
+## #DV(FIRE) = violated firearm policy
+## dv.charges.pbi$dv_cat[grep('^DV\\(FOR\\)', dv.charges.pbi$finding_spec)] <- 'Violence'
+## dv.charges.pbi$dv_cat[grep('^DV\\(FIRE\\)', dv.charges.pbi$finding_spec)] <- 'Violence'
+
+## table(dv.charges.pbi$dv_cat, exclude=NULL)
+
+
+## #VERBAL/HARASSMENT
+## #DV(THREAT) = threatening someone
+## #UC = unprofessional conduct
+## #VA = verbal abuse
+## #HAR = harassment
+## dv.charges.pbi$dv_cat[grep('^DV\\(THREAT\\)', dv.charges.pbi$finding_spec)] <- 'Verbal'
+
+## table(dv.charges.pbi$dv_cat, exclude=NULL)
+
+
+
+## #PROPERTY
+## #DV(FORFEIT) = violated forfeiture procedures
+## #DV(DMG) = damage to private property
+## #DV(MIS) = missing property
+## #DV(MEI) = misuse of city equipment/information
+## #DV(PROPCUS) = property taken into custody
+## #DV(THEFT) = theft
+## dv.charges.pbi$dv_cat[grep('^DV\\(FORFEIT\\)', dv.charges.pbi$finding_spec)] <- 'Property'
+## dv.charges.pbi$dv_cat[grep('^DV\\(DMG\\)', dv.charges.pbi$finding_spec)] <- 'Property'
+## dv.charges.pbi$dv_cat[grep('^DV\\(MIS\\)', dv.charges.pbi$finding_spec)] <- 'Property'
+## dv.charges.pbi$dv_cat[grep('^DV\\(MEI\\)', dv.charges.pbi$finding_spec)] <- 'Property'
+## dv.charges.pbi$dv_cat[grep('^DV\\(PROPCUS\\)', dv.charges.pbi$finding_spec)] <- 'Property'
+## dv.charges.pbi$dv_cat[grep('^DV\\(THEFT\\)', dv.charges.pbi$finding_spec)] <- 'Property'
+
+## table(dv.charges.pbi$dv_cat, exclude=NULL)
+
+
+## #REPORTING/FALSIFICATION
+## #DV(BWC) = bodycam policy violation
+## #DV(CAM) = failed to wear and carry his BWC
+## #DIS
+## #DV(LYING) = disciplinary code violation, lying to IA officer (I suspect we have also coded this as DIS)
+## #DV(DEC) = attempting to deceive regarding material fact during the course of Departmental investigation
+## #FLS = falsification
+## dv.charges.pbi$dv_cat[grep('^DV\\(BWC\\)', dv.charges.pbi$finding_spec)] <- 'Property'
+## dv.charges.pbi$dv_cat[grep('^DV\\(CAM\\)', dv.charges.pbi$finding_spec)] <- 'Property'
+## dv.charges.pbi$dv_cat[grep('^DV\\(LYING\\)', dv.charges.pbi$finding_spec)] <- 'Property'
+## dv.charges.pbi$dv_cat[grep('^DV\\(DEC\\)', dv.charges.pbi$finding_spec)] <- 'Property'
+
+## table(dv.charges.pbi$dv_cat, exclude=NULL)
+
+
+
+## #PROCEDURE
+## #DV(IC) = improper citation
+## #DV(HARDBACK) = not providing copy of violation to civ
+## #DV(SIG) = failed to give civ opportunity to sign form
+## #DV(TICK) = improper ticketed vehicle
+## #DV(PROCED) = improper procedure
+## #DV(RADIO) = violated standard operating procedure for receiving calls for service
+## #DV(EVICT) = unlawful eviction
+## #DV(LOCK) = changing locks on Property
+## #DV(TOW) = towing policy
+## #DV(IC/REP) = towing policy
+## dv.charges.pbi$dv_cat[grep('^DV\\(IC\\/REP\\)', dv.charges.pbi$finding_spec)] <- 'Procedure'
+## dv.charges.pbi$dv_cat[grep('^DV\\(IC\\)', dv.charges.pbi$finding_spec)] <- 'Procedure'
+## dv.charges.pbi$dv_cat[grep('^DV\\(HARDBACK\\)', dv.charges.pbi$finding_spec)] <- 'Procedure'
+## dv.charges.pbi$dv_cat[grep('^DV\\(SIG\\)', dv.charges.pbi$finding_spec)] <- 'Procedure'
+## dv.charges.pbi$dv_cat[grep('^DV\\(TICK\\)', dv.charges.pbi$finding_spec)] <- 'Procedure'
+## dv.charges.pbi$dv_cat[grep('^DV\\(PROCED\\)', dv.charges.pbi$finding_spec)] <- 'Procedure'
+## dv.charges.pbi$dv_cat[grep('^DV\\(RADIO\\)', dv.charges.pbi$finding_spec)] <- 'Procedure'
+## dv.charges.pbi$dv_cat[grep('^DV\\(EVICT\\)', dv.charges.pbi$finding_spec)] <- 'Procedure'
+## dv.charges.pbi$dv_cat[grep('^DV\\(LOCK\\)', dv.charges.pbi$finding_spec)] <- 'Procedure'
+## dv.charges.pbi$dv_cat[grep('^DV\\(TOW\\)', dv.charges.pbi$finding_spec)] <- 'Procedure'
+
+
+## table(dv.charges.pbi$dv_cat, exclude=NULL)
+## table(dv.charges.pbi$finding_spec, exclude=NULL)
+
+## #TREATMENT IN CUSTODY
+## #DV(ADULT) = rules for treatment of adult detainees in police custody
+## #DV(JUV) = rules for treatment of juveniles in police custody
+## #DV(SAFE) = detainee safety
+## #DV(FSOLO) = transporting female solo
+## dv.charges.pbi$dv_cat[grep('^DV\\(ADULT\\)', dv.charges.pbi$finding_spec)] <- 'Custody'
+## dv.charges.pbi$dv_cat[grep('^DV\\(JUV\\)', dv.charges.pbi$finding_spec)] <- 'Custody'
+## dv.charges.pbi$dv_cat[grep('^DV\\(SAFE\\)', dv.charges.pbi$finding_spec)] <- 'Custody'
+## dv.charges.pbi$dv_cat[grep('^DV\\(FSOLO\\)', dv.charges.pbi$finding_spec)] <- 'Custody'
+
+## table(dv.charges.pbi$dv_cat, exclude=NULL)
+
+## #CONFIDENTIALITY
+## #DV(CONF) = confidentiality violation
+## #DV(SM) = social media and networking
+## #DV(SM/CONF)
+## dv.charges.pbi$dv_cat[grep('^DV\\(CONF\\)', dv.charges.pbi$finding_spec)] <- 'Confidentiality'
+## dv.charges.pbi$dv_cat[grep('^DV\\(SM\\)', dv.charges.pbi$finding_spec)] <- 'Confidentiality'
+## dv.charges.pbi$dv_cat[grep('^DV\\(SM\\/CONF\\)', dv.charges.pbi$finding_spec)] <- 'Confidentiality'
+
+## table(dv.charges.pbi$dv_cat, exclude=NULL)
+
+
+## #ABUSE OF AUTHORITY
+## #DV(AB) = abuse of authority
+## #OT=other misconduct
+## dv.charges.pbi$dv_cat[grep('^DV\\(AB\\)', dv.charges.pbi$finding_spec)] <- 'Abuse'
+
+
+
+## ## merge in short names
+## pbi.charges.short <- data.table(
+##   regex = c(
+##     '6-007-10.*',
+##     '8-004-10.*',
+##     '6-008-10.*',
+##     '8-003-10.*',
+##     '3-002-10.*',
+##     '8-001-10.*1-011-10.*',
+##     '8-001-10.*',
+##     '3-003-10.*',
+##     '6-006-10.*',
+##     '4-001-10.*',
+##     '8-002-10.*',
+##     '5-012-10.*',
+##     '1-001-10.*',
+##     'Charge dropped',
+##     '1-010-10.*',
+##     '6-010-10.*',
+##     '6-009-10.*',
+##     '1-011-10.*',
+##     '5-006-10.*',
+##     '5-011-10.*'
+##   ),
+##   section = c(
+##     'Disobedience',
+##     'Failure to Supervise',
+##     'Disobedience',
+##     'Failure to Supervise',
+##     'Requirements for Duty',
+##     'Conduct Unbecoming',
+##     'Failure to Supervise',
+##     'Requirements for Duty',
+##     'Neglect of Duty',
+##     'Insubordination',
+##     'Failure to Supervise',
+##     'Neglect of Duty',
+##     'Conduct Unbecoming',
+##     'Charge Dropped',
+##     'Conduct Unbecoming',
+##     'Disobedience',
+##     'Disobedience',
+##     'Conduct Unbecoming',
+##     'Neglect of Duty',
+##     'Neglect of Duty'
+##   ),
+##   subsection = c(
+##     'Failure to Follow Procedure',
+##     '',
+##     'Firearm',
+##     '',
+##     'General',
+##     'Abuse of authority',
+##     '',
+##     'Information',
+##     'Property',
+##     '',
+##     '',
+##     '',
+##     '',
+##     '',
+##     'Falsification',
+##     'Information',
+##     'Property',
+##     'Abuse of authority',
+##     'Failure to Investigate',
+##     'Failure to Comply with Orders'
+##   ),
+##   long = c(
+##     'Disobedience: Failure to Follow Procedure',
+##     'Failure to Supervise',
+##     'Disobedience: Firearm',
+##     'Failure to Supervise',
+##     'Requirements for Duty: General',
+##     'Conduct Unbecoming: Abuse of authority',
+##     'Failure to Supervise',
+##     'Requirements for Duty: Information',
+##     'Neglect of Duty: Property',
+##     'Insubordination',
+##     'Failure to Supervise',
+##     'Neglect of Duty',
+##     'Conduct Unbecoming',
+##     'Charge Dropped',
+##     'Conduct Unbecoming: Falsification',
+##     'Disobedience: Information',
+##     'Disobedience: Property',
+##     'Conduct Unbecoming: Abuse of authority',
+##     'Neglect of Duty: Failure to Investigate',
+##     'Neglect of Duty: Failure to Comply with Orders'
+##   )
+## )
+## for (i in 1:nrow(pbi.charges.short)){
+##   dv.charges.pbi[grep(pbi.charges.short$regex[i], pbi_charge),
+##                  `:=`(
+##                    pbi_charge_section = pbi.charges.short$section[i],
+##                    pbi_charge_subsection = pbi.charges.short$subsection[i],
+##                    pbi_charge_long = pbi.charges.short$long[i]
+##                  )
+##                  ]
+## }
+
+
+
+## dv.charges.pbi.summary <- dv.charges.pbi[,
+##                                          .N,
+##                                          by = c('dv_cat',
+##                                                 'pbi_charge_section'
+##                                                 )
+##                                          ]
+## dv.charges.pbi.summary <- na.omit(dv.charges.pbi.summary)
+
+## ## convert to long form
+## dv.charges.pbi.summary[, group := .I]
+## dv.charges.pbi.summary <- melt(dv.charges.pbi.summary,
+##                                id.vars = c('group', 'N'),
+##                                variable.name = 'stage',
+##                                value.name = 'category'
+##                                )
+
+## dv.charges.pbi.summary[
+##  ,
+##    category := factor(category,
+##                       levels = c(
+##                         'Abuse',
+##                         'Personal Conduct',#dk
+##                         'Procedure',
+##                         'Constitutional',
+##                         'Custody',
+##                         'Omission',
+##                         'Property',
+##                         'Investigation / Evidence',
+##                         'Confidentiality',
+##                         'Requirements for Duty',
+##                         'Conduct Unbecoming',
+##                         'Neglect of Duty',
+##                         'Failure to Supervise',
+##                         'Disobedience',
+##                         'Charge Dropped'
+##                       )
+##                       )
+## ]
+
+## ggplot(dv.charges.pbi.summary,
+##        aes(x = stage,
+##            stratum = category,
+##            alluvium = group,
+##            y = N,
+##            label = category
+##            )
+##        ) +
+##   scale_x_discrete(expand = c(.1, .1)) +
+##   geom_flow(## aes(fill = allegation_coarse,
+##             ##     color = allegation_coarse,
+##             ##     alpha = fill
+##             ##     ),
+##             ## color = '#00000000',
+##             width = .75
+##             ) +
+##   geom_stratum(## aes(color = border),
+##                width = .75,
+##                size = .75
+##                ) +
+##   geom_text(## aes(color = text),
+##             stat = 'stratum',
+##             size = 5,
+##             lineheight = .75
+##   )

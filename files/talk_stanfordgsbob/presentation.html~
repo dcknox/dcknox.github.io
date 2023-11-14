@@ -1,0 +1,2408 @@
+<!--
+intro:
+- 7 min
+- 8 min
+- 7.5 min (full run)
+dag:
+- 3 min
+- 3.5 min
+- 3.5 min (full run)
+johnson et al:
+- 5 min
+- 5.5 min
+- 6.5 min (full run)
+science: 
+- 2 min
+- 2.5 min (full run)
+fryer & klm: 
+- 6 min
+- 6.5 min
+- 7 min (full run)
+autobounds:
+- 8 min
+- 9 min
+- 8.5 min (full run)
+ongoing work:
+- 4 min
+- 4.5 min (full run)
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Police Oversight & Reform</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+
+      /* latin */
+      @font-face {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 100;
+      src: url(./resources/fonts/Roboto/Roboto-Thin.ttf) format('truetype');
+      }
+      /* latin */
+      @font-face {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 300;
+      src: url(./resources/fonts/Roboto/Roboto-Light.ttf) format('truetype');
+      }
+      /* latin */
+      @font-face {
+      font-family: 'Roboto';
+      font-style: bold;
+      font-weight: 700;
+      src: url(./resources/fonts/Roboto/Roboto-Bold.ttf) format('truetype');
+      }
+
+      /* latin */
+      @font-face {
+      font-family: 'Raleway', 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      src: url(./resources/fonts/Raleway/Raleway-Regular.ttf) format('truetype');
+      }
+      /* latin */
+      @font-face {
+      font-family: 'Raleway', 'Roboto';
+      font-style: bold;
+      font-weight: 700;
+      src: url(./resources/fonts/Raleway/Raleway-SemiBold.ttf) format('truetype');
+      }
+
+      /* latin */
+      @font-face {
+      font-family: 'Great Vibes';
+      font-style: normal;
+      font-weight: 300;
+      src: url(./resources/fonts/Great_Vibes/GreatVibes-Regular.ttf) format('truetype');
+      }
+
+
+      h1 {
+      font-family: 'Raleway', 'Roboto';
+      font-weight: 600;
+      color: #A51C30;
+      }
+
+      h2 {
+      font-family: 'Raleway', 'Roboto';
+      font-weight: 400;
+      color: #A51C30;
+      }
+
+      p {
+      font-family: 'Roboto';
+      font-weight: 300;
+      sans-serif;
+      }
+
+      body {
+      font-family: 'Roboto';
+      font-weight: 300;
+      sans-serif;
+      }
+
+      .footnote {
+      position: absolute;
+      bottom: 1.5%;
+      left: 10%;
+      text-align: left;
+      width: 50;
+	  font-size: 20px;
+      z-index: 3;
+      }
+
+      b, strong {
+      font-family: 'Roboto';
+      font-weight: 700;
+      sans-serif;
+      }
+
+      table, th, tr, td {
+      border-style:none;
+      <!-- font-size: 100%; -->
+      }
+
+      tr.underline td{
+      border-bottom: 1px solid black;
+      }
+      
+      tr.start td{
+      border-top: double black;
+      }
+
+      tr.end td{
+      border-bottom: double;
+      }
+
+      td {
+      padding-bottom: 1ex;
+      vertical-align: top;
+      }
+
+      .footnote td {
+      padding-bottom: 0ex;
+      vertical-align: top;
+      }
+
+      .functiondef td {
+      vertical-align: middle;
+      padding-bottom: 0ex;
+      line-height: 1
+      }
+
+      sup {
+      vertical-align: top; 
+      font-size: 0.5em;
+      top: -.5ex;
+      }
+
+      ul, ol {
+      padding-top: 0ex;
+      }
+
+      li {
+      padding-bottom: 1ex;
+      }
+
+      .remark-slide-content {
+      height: 100%;
+      background-size: cover;
+      }
+
+      .newspaper {
+      background: #D0D0D0;
+      }
+
+      .black {
+      background: black;
+      }
+
+      .inverse {
+      background: #A51C30;
+      color: #FFFFFF;
+      }
+
+      .remark-slide-content h1 {
+      font-size: 275%;
+      }
+
+      .remark-slide-content h2 {
+      font-size: 200%;
+      }
+
+      .remark-slide-content p {
+      font-size: 30px;
+      }
+
+      .remark-slide-content li {
+      font-size: 30px;
+      padding-bottom: 1.5ex;
+      }
+
+      .remark-slide-content li li {
+      font-size: 25px;
+      padding-bottom: 0ex;
+      }
+      
+      .remark-slide-content li:last-child{
+      padding-bottom: 0ex;
+      }
+
+      .inverse h1, .inverse h2 {
+      color: #f3f3f3;
+      line-height: 0.8em;
+      }
+
+      .small {
+      font-size: 90%;
+      }
+
+      .tiny {
+      font-size: 60%;
+      }
+      
+      .large {
+      font-size: 120%;
+      }
+
+      .highlight {
+      color: #A51C30;
+      }
+
+      .highlight_alt {
+      color: #4E84C4;
+      }
+
+      a {
+      color: #4E84C4;
+      }
+
+      .lightgray {
+      color: lightgray;
+      }
+
+      .gray {
+      color: #A1A1A1;
+      }
+
+      .darkgray {
+      color: dimgray;
+      }
+
+      .code p {
+          font-family: 'Roboto Mono', monospace;
+          font-size: 110%;
+		  margin-left: 50px;
+      }
+
+      .stroke {
+	  /* -webkit-text-stroke: 2px white; /\* Width and color of the stroke *\/ */
+	  text-shadow:
+	      -2px -2px 0 white, /* Top left shadow, adjust values for position and color */
+	      2px -2px 0 white, /* Top right shadow */
+	      -2px  2px 0 white, /* Bottom left shadow */
+	      2px  2px 0 white; /* Bottom right shadow */
+      }
+
+      table.center td {
+      text-align: center;
+      }
+            
+      .overlay {
+      background-color: white;
+      background-color: rgba(255,255,255,0.75);
+      font-size: 150%;
+      width: auto;
+      position: absolute;
+      padding: .25em;
+      border-radius: .25em;
+      }
+
+      .overlay-container {
+	  position: relative;
+      }
+      .overlay-container::before {
+	  content: "";
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background-color: white;
+	  background-color: rgba(255,255,255,0.75);
+	  pointer-events: none; /* Allows clicks to pass through the overlay to the content below */
+      }
+      .overlay-text {
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	  color: black; /* Text color */
+	  font-size: 24px; /* Text size */
+	  font-weight: bold; /* Text weight */
+      }
+
+      .summary {
+      background-color: white;
+      background-color: rgba(255, 255, 255, 0.6);
+      font-size: 35px;
+      display: table;
+      text-align: center;
+      vertical-align: middle;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      }
+
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      @keyframes slideup {
+        0% {
+        }
+        100% {
+          transform: translate3d(0px, -118.5px, 0px);
+        }
+      }
+      img#slideup {
+      animation: slideup 1s forwards;
+      }
+
+      @keyframes slideleft {
+        0% {
+        }
+        100% {
+          transform: translate3d(-100px, 0px, 0px);
+        }
+      }
+      img#slideleft {
+      animation: slideleft 1s forwards;
+      }
+
+      img#slidleft {
+	    transform: translate3d(-100px, 0px, 0px);
+	  }
+
+      @keyframes slidedownright {
+        0% {
+        }
+        100% {
+          transform: translate3d(100px, 25px, 0px);
+        }
+      }
+      img#slidedownright {
+      animation: slidedownright 1s forwards;
+      }
+
+      @keyframes slidedownzoom {
+        0% {
+        }
+        100% {
+          transform: translate(0%, -50%) scale(1.2);
+        }
+      }
+      img#slidedownzoom {
+      animation: slidedownzoom 1s forwards;
+      }
+
+      @keyframes slidedownshrink {
+        0% {
+        }
+        100% {
+          transform: translate(-2%, 25%) scale(.9);
+        }
+      }
+      img#slidedownshrink {
+      animation: slidedownshrink 1s forwards;
+      }
+	  
+	  img#sliddownshrunk {
+	    transform: translate(-2%, 25%) scale(.9);
+	  }
+
+      .stretch {
+      transform: scale(1, 2.25)
+      }
+
+      
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+<h1 style="font-size: 250%; text-align: left; margin-bottom: 20px">Computational Methods for Police Oversight and Reform Under Incomplete Data</h1>
+<img src="./resources/images/intro_dag_full.png" style="position: absolute; left: 15%; top: 37%; width: 80%; opacity: .4; filter: blur(1px)"/>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<span class="today large" style="margin-bottom: 20px"></span><br>
+.large[Dean Knox] &nbsp; .small.highlight[**Wharton**]
+
+???
+- Thanks, xxx. Glad to be here.
+- I'm going to be talking about the oversight and reform of police agencies
+- and more specifically, the challenges of measuring discrimination with police
+  data
+- I'll talk about how police administrative records are, by their very nature, a
+  heavily selected and problematic data source
+- that they show us only a tiny sliver of police-civilian interactions
+- and given how much we **can't** see, we need to exercise caution
+- and how some new computational techniques that 
+
+---
+
+# Police oversight: a review
+
+???
+- You probably don't need me to tell you why this is important
+- But I do want to make two broad points to put things in context
+- First
+  - Police agencies are one of the most common public organizations around
+  - I'd guess that almost everyone here has interacted with an officer at some point
+- And second, police agencies suffer from a lack of perceived legitimacy
+  - This isn't new, but it's worse than ever, at least in the 30 years Gallup's been tracking
+  - and more specifically, two-thirds of Americans see police as discriminatory,
+    trigger-happy, and unaccountable for their actions
+
+--
+- Among the most ubiquitous public organizations
+  - Over 18k local law-enforcement agencies across US
+  - Police contact >20% of Americans each year .tiny[(BJS, '22)]
+
+--
+- Confidence in police at a historic low: 43% .tiny[(Gallup, '23)]
+  
+--
+  - Treating racial and ethnic groups equally: 65% negative .tiny[(Pew, '20)]
+  - Using the right amount of force: 64% negative .tiny[(Pew, '20)]
+
+--
+- Police misconduct remains disturbingly frequent
+
+???
+- And this isn't just an LAPD issue
+- In the last few years alone, we've seen the killing of Breonna Taylor, the murders of George Floyd and Tyre Nichols, and too many others
+
+---
+
+class: newspaper
+<img src="./resources/images/headlines/nyt_doj_louisville_alpha.png" style="position: absolute; left: 10%; top: 15%; width: 80%; z-index: ;"/>
+
+---
+
+class: newspaper
+<img src="./resources/images/headlines/nyt_doj_minneapolis_alpha.png" style="position: absolute; left: 10%; top: 15%; width: 80%; z-index: ;"/>
+
+---
+
+class: newspaper
+<img src="./resources/images/headlines/nyt_doj_memphis_alpha.png" style="position: absolute; left: 10%; top: 15%; width: 80%; z-index: ;"/>
+
+---
+
+# Police oversight: a review
+
+- Among the most ubiquitous public organizations
+  - Over 18k local law-enforcement agencies across US
+  - Police contact >20% of Americans each year .tiny[(BJS, '22)]
+- Confidence in police at a historic low: 43% .tiny[(Gallup, '23)]
+  - Treating racial and ethnic groups equally: 65% negative .tiny[(Pew, '20)]
+  - Using the right amount of force: 64% negative .tiny[(Pew, '20)]
+- Police misconduct remains disturbingly frequent
+  - Breonna Taylor killing, George Floyd & Tyre Nichols murders
+
+???
+- I should say that these aren't just sensationalist examples
+- every case, every agency I'll discuss today is one that I'm involved with in some capacity
+  - I won't go into detail on DOJ investigations
+  - but these are all cases where we're implementing concepts that I'll 
+    describe
+- Now, police agencies have strong incentives to address these issues themselves
+  - It's well known that when people see the police as legitimate
+  - They're more willing to report crimes and provide evidence
+- But for a variety of reasons, historically, reform just hasn't come from within
+  - these include the strength of unions and the "thin blue line" culture
+- instead, reform tends to come from external sources, especially lawsuits and
+  federal investigations
+  - and that means it's crucial to statistically estimate misconduct and
+    understand where it's coming from
+  - because you can't reform what you can't see
+
+--
+- Undermines org. performance .tiny[(Obama Task Force on Policing, '15)]
+  - Public trust & legitimacy &rightarrow; obey law, help investigations
+
+--
+- Cultural & institutional barriers to internal reform
+  - Reform comes from courts, fed. investigations, legislation
+
+--
+  - This means quantifying misconduct is prerequisite to reform
+
+
+
+---
+
+# The central challenge
+
+- Classic principal-agent problem:
+  - Democratically elected principals seek to uphold civil rights
+  - Agents seek to preserve discretion, resist civilian oversight
+
+???
+- At this point, you're probably thinking this sounds like a classic
+  principal-agent problem, and you'd be right
+  - The general public, through democratically elected leaders,
+    delegate the power to legally use force to police agents so they can enforce
+    the law
+  - And the goal of civilian oversight is to ensure that agents do that while
+    upholding civil rights
+- This is one of the hardest principal-agent problems imaginable
+  - and even apart from the public-policy issues, these least-likely case are
+    worth studying
+  - because there are all kinds of interesting challenges, and resolving them
+    leads to some very interesting new theory
+- Here's the central problem:
+  - Almost all the data that we use for oversight is self-reported, through
+    organizational processes designed by police, for police purposes
+- and the core point I want to make, the one thing I hope you take away from
+  this talk
+- Is that for this reason, the agent monitoring problem is fundamentally
+  different from your standard data analysis
+  - When the agent itself influences what the principal can see, we need to
+    account for the organizational processes through which data is collected
+  - And I'll show you, again and again, how we get the wrong answer when we
+    neglect to do that
+  - Instead, we're going to need to think about the blind spots of our data
+  - Not just what we can see but also what we can't see
+
+--
+- Monitoring relies heavily on agent self-reporting
+  - Data has inaccuracies, selective reporting, omitted variables
+.footnote[
+<table style="left: 5%; width: 95%; font-size: 20px">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Dean Knox. 2021. "Revealing racial bias: Causal inference can make
+sense of imperfect policing data." <i>Science</i>.</td>
+  </tr>
+</table>
+]
+
+--
+- Incomplete data undermines oversight & monitoring
+  - Must account for org. processes by which data are collected
+
+--
+  - Off-the-shelf statistical methods &rightarrow; unsupportable claims
+
+--
+- Many claims can be consistent with incomplete data
+  - High-stakes settings require maximally cautious inferences
+  - Adversarial oversight &rightarrow; best- & worst-case reasoning
+---
+
+# Overview
+
+1. Fundamental limits of policing data & analyses
+  - What we can & cannot see about agent behavior
+
+???
+- In the rest of this talk, I'm first going to clarify exactly what I mean when
+  I say "police data is incomplete"
+  - I'll show how some very prominent work has gotten the wrong answer by
+    treating agent-reported data as if it were gold-standard data
+  - I'll show how it just doesn't make sense to think about "the answer" when
+    our data is this incomplete: there are many possible answers, all of which
+    are consistent with the available information
+- then, I'll show you how similar issues with incomplete data arise all the time
+  in social science, with examples from other discrimination cases, from causal
+  research, and even in descriptive research
+- that's going to bring us to the focus of today's talk, which is the following
+  very general question: suppose you have some social process you want to study,
+  and some incomplete data about it. what can you learn?
+  - this is going to have the flavor of formal logic: here are the theoretical
+    premises, here are the assumptions and evidence from our particular
+    case. given that, here are the logical deductions that can be made, the
+    scientific conclusions that can be supported
+  - but what I'm going to propose is that scientists (you and me) should focus
+    on just the first two pieces. we should think about the theory and the case,
+  - and we should let computers handle the tedious and error-prone deduction
+- this is methodological work that's motivated by the challenges of policing
+  data, so to close out, I'll show how this approach helps us do better work on
+  high-stakes policing questions
+
+
+--
+  - Desire for "the answer" &rightarrow; unsupported conclusions
+
+--
+2. Close resemblance to other settings that require careful reasoning from
+   theory & incomplete data
+
+--
+  - Other discrimination litigation, e.g. *Wal-Mart v. Dukes*
+
+--
+  - Causal inference with missingness, selection, confounding...
+
+--
+  - Conversation analysis w/ proxies, surveys w/ nonresponse
+
+--
+3. Methodology for algorithm-assisted deduction
+  - Given explicit theoretical premises & incomplete data,<br>
+    what is the range of conclusions that can be drawn?
+--
+4. Application to racial discrimination in policing
+
+---
+
+class: center, middle, inverse
+
+# Data limitations
+# in police oversight
+
+???
+- so, let's dive right in
+- I'll start by showing you what the data looks like
+---
+
+<img src="./resources/images/intro_dag_01.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- one of the most important tasks in oversight is assessing racial bias in use of force
+- here, our unit of analysis is the police-civilian encounter
+- in this diagram, that means estimating whether force (the outcome) is used at
+  different rates if, hypothetically, we could swap out a minority civilian for
+  a white civilian in every encounter
+
+---
+<img src="./resources/images/intro_dag_02.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- for this to be a useful exercise, we'll need to account for civilian behavior (for the sake of argument, let's say we swap in a white actor who is behaving the same way)
+---
+<img src="./resources/images/intro_dag_03.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- we'll also need to consider context like the time of day, perhaps the officer's assigned job (like traffic enforcement or bike patrol)
+- and after accounting for all this, we'll ask whether there's discriminatory violence
+---
+<img src="./resources/images/intro_dag_04.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- it's important to note that officers rarely jump directly to force
+- what usually happens is they detain a civilian, perhaps interrogate them,
+  before escalating to violence
+---
+<img src="./resources/images/intro_dag_05.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- and during the course of that stop, other events can be informative
+- for example, if officers are looking for weapons, we can ask: how often were
+  they found? if that differs by race, it can indicate there's discrimination in
+  who officers are stopping
+---
+<img src="./resources/images/intro_dag_06.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- OK, so one of the questions we'll look at today is diversity reforms in hiring
+- this is a big proposal from the literature on bureaucracies (descriptive
+  representation, to hire officers that look like they people they serve)
+- and the question is whether those officers actually do their jobs differently,
+  or if "blue is blue" and it doesn't matter
+---
+<img src="./resources/images/intro_dag_07.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- the thing is, there are all kinds of other factors that influence an officer's decisions
+- someone who's more suspicious, or even just feeling cranky that day, they may
+  be more willing to initiate a stop and use force
+---
+<img src="./resources/images/intro_dag_08.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- but that kind of information on an officer's mental state will never appear in
+  administrative records
+---
+<img src="./resources/images/intro_dag_09.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- and that's not the only problem
+- in most cases, we don't get to see the actual behavior of the civilian
+---
+<img src="./resources/images/intro_dag_10.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- we only get the description reported by the officer
+---
+<img src="./resources/images/intro_dag_11.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- and what's more, we only see any of this if a stop is made, and officers fill out the stop form
+---
+<img src="./resources/images/intro_dag_12.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- if they choose not to initiate that stop, then the encounter just vanishes
+  without a trace in the data
+---
+
+class: center, middle, inverse
+
+# Drawing inferences from
+# incomplete police data:
+# two motivating examples
+
+???
+- as you can see, things get complicated very fast
+- so with that context, let's now consider how these issues affect the recent
+  literature on policing
+
+---
+
+# Johnson et al. ('19),&ensp;.small[*PNAS*]
+<img id="slidedownshrink" src="./resources/images/intro_dag_full.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- johnson et al. was a PNAS study that had a major impact on the public discourse
+- it was cited in congressional testimony and wall st journal op-eds
+- at a high level, it made two claims
+---
+# Johnson et al. ('19),&ensp;.small[*PNAS*]
+<img src="./resources/images/intro_dag_full.png" id="sliddownshrunk" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+<!-- <img src="./resources/images/intro_dag_full.png" style="position: absolute; left: 2.5%; top: 40%; width: 100%; z-index: ;"/> -->
+<div class="overlay-container">
+  <div class="overlay-text"><h1 class="stroke" style="font-size: 200%">Claim #1</h1></div>
+<p style="text-align: center; color: #A51C30;">"We did not find evidence for anti-Black or<br>anti-Hispanic disparity in police use of force...<br>and, if anything, found anti-White disparities"</p>
+</div>
+
+---
+
+# Johnson et al. ('19),&ensp;.small[*PNAS*]
+<p style="text-align: center; color: #A51C30;">"We did not find evidence for anti-Black or<br>anti-Hispanic disparity in police use of force...<br>and, if anything, found anti-White disparities"</p>
+
+<img src="./resources/images/intro_dag_full.png" id="sliddownshrunk" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- first, in terms of fatal shootings, police are "if anything" biased against
+  white people
+- which may be surprising, if you follow American history
+- but for a certain set, this was an extremely popular finding
+
+---
+
+# Johnson et al. ('19),&ensp;.small[*PNAS*]
+<p style="text-align: center; color: #A51C30;">"We did not find evidence for anti-Black or<br>anti-Hispanic disparity in police use of force...<br>and, if anything, found anti-White disparities"</p>
+
+<img src="./resources/images/johnsonetal_f1.png" id="sliddownshrunk" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- let's unpack the evidence behind that claim
+- actually, the data environment that johnson et al were working with was even more challenging
+- they only had data on fatal shootings
+---
+
+# Johnson et al. ('19),&ensp;.small[*PNAS*]
+<p style="text-align: center; color: #A51C30;">"We did not find evidence for anti-Black or<br>anti-Hispanic disparity in police use of force...<br>and, if anything, found anti-White disparities"</p>
+
+<img src="./resources/images/johnsonetal_f0.png" id="sliddownshrunk" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- if the civilian wasn't shot, or was shot and survived, the encounter wasn't documented
+- we'll come back to the challenge this presents in a second
+---
+
+# Johnson et al. ('19),&ensp;.small[*PNAS*]
+<div class="overlay-container">
+  <div class="overlay-text"><h1 class="stroke" style="font-size: 200%">Claim #2</h1></div>
+<p style="text-align: center; color: #A51C30;">"White officers are not more likely to shoot minority civilians than non-White officers... increasing diversity... is unlikely to reduce racial disparity in police shootings"</p>
+</div>
+<img src="./resources/images/johnsonetal_f0.png" id="sliddownshrunk" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+
+
+
+---
+
+# Johnson et al. ('19),&ensp;.small[*PNAS*]
+<p style="text-align: center; color: #A51C30;">"White officers are not more likely to shoot minority civilians than non-White officers... increasing diversity... is unlikely to reduce racial disparity in police shootings"</p>
+
+<img src="./resources/images/johnsonetal_f0.png" id="sliddownshrunk" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- the second claim was that diversifying police forces won't work
+
+
+---
+
+# How was the data analyzed?
+
+???
+- these are big claims that we'd hope are based on strong reasoning
+  - because this stuff really matters
+  - you may recall a headline from 2020, when a high-ranking major in the Tulsa
+    PD reviewed the literature and said in an interview "all of their research
+    says we're shooting African Americans... less than we probably ought to be"
+  - He was referring to this paper and another one, by Roland Fryer, that I'll
+    discuss in a second
+- here's what I would've liked to see
+  - define the monitoring question: when black and white civilians behave in the
+    same way, are officers more likely to shoot one group than another?
+
+--
+- An ideal approach:
+
+--
+  - Clearly articulate the research question
+
+---
+
+<img src="./resources/images/asr_cover.png" style="position: absolute; left: 0%; top: -5%; width: 100%; z-index: ;"/>
+
+???
+- it might seem like an obvious starting point
+---
+<img src="./resources/images/asr_cover.png" id="slidedownzoom" style="position: absolute; left: 0%; top: -5%; width: 100%; z-index: ;"/>
+???
+- but about five years ago, Brandon Stewart and his students reviewed every
+  quantitative ASR article from 2018
+- and they found that it was harder than you might think (only 16% clearly
+  stated the estimand)
+- most descriptive work clearly stated the research question (5/7 papers)
+- but in a lot of work making causal claims, it wasn't actually clear what the
+  claim was (0/18 observational, 7/7 experimental)
+---
+
+# How was the data analyzed?
+
+- An ideal approach:
+  - Clearly articulate the research question
+  - Assemble data, theorize about the organizational processes that generated it,    and reason about limitations of that data
+
+???
+- then say, ok, here's the data I have, here's what I can see, here's what I
+  can't see
+- here's what I can assume about the organizational processes that generated
+  the data
+- given all that, what's the best-case scenario? is it possible that officers
+  are unbiased? what's the worst case?
+
+
+
+--
+  - **Deduce** range of possible answers, best- to worst-case
+
+---
+
+# How was the data analyzed?
+
+- An ideal approach:
+  - Clearly articulate the research question
+  - Assemble data, theorize about the organizational processes that generated it, and reason about limitations of that data
+  - **Deduce** range of possible answers, best- to worst-case
+- Prevalent approach in academic/policy policing work:
+
+???
+- this paper is interesting because it doesn't do that
+- instead, it exemplifies the standard approach to research in this domain
+- which is, find some data that's easy to collect
+- pick some model that's easy to use
+  - plug the data into the model, get an some stars in your regression, and spin
+    a story about police reform
+- what this gives you is ONE possible answer to the question that the model is
+  asking (which often differs from the question the researcher had in mind),
+  under the implicit assumption that you have gold-standard, randomly sampled
+  data (assumptions that would be untenable if we actually had to say them out
+  loud and really grapple with them)
+- I should say that this contrast between abduction & deduction is something
+  that comes from Jesper, actually, in the context of the Walmart v Dukes case
+  that I'll return to shortly
+- what we proved the data and design in this study were fundamentally
+  uninformative about the claims that were made
+  - if you think critically about this system, there's so much that we can't see
+  - the agent could be anti-white, race-neutral, anti-minority
+  - anything could be possible: in other words, there's nothing to back up those
+    claims
+
+--
+  - Assemble data that is reasonably convenient to collect
+
+--
+  - Pick an off-the-shelf statistical/ML/AI model to analyze it
+
+--
+  - Informally discuss some implications for policing reform
+
+--
+  - **Abduce** <u>an</u> answer
+--
+ to unstated question
+--
+ under implicit asms.
+
+--
+- Bounds show many answers are consistent with data
+.footnote[
+<table style="left: 5%; width: 95%">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Dean Knox and Jonathan Mummolo. 2020. "Making inferences about racial disparities in police violence." <i>PNAS</i>.</td>
+  </tr>
+  <!-- <tr> -->
+  <!--   <td align="center"><strong style="">[2]</strong></td> -->
+  <!--   <td>Bocar Ba, Dean Knox, Jonathan Mummolo, and Roman Rivera. 2021. "The Role of Officer Race and Gender in Police-Civilian Interactions in Chicago." <i>Science</i>.</td> -->
+  <!-- </tr> -->
+</table>
+]
+
+---
+
+<img src="./resources/videos/minority_50_a.png" style="position: absolute; left: 25%; top: 0%; width: 50%; z-index: ;"/>
+
+---
+
+<img src="./resources/videos/minority_50_b.png" style="position: absolute; left: 25%; top: 0%; width: 50%; z-index: ;"/>
+
+---
+
+<img src="./resources/videos/minority_50_c.png" style="position: absolute; left: 25%; top: 0%; width: 50%; z-index: ;"/>
+
+---
+
+<video class="media" style="position: absolute; left: 25%; top: 0%; width: 50%; z-index: ;" preload="auto" onclick="this.play();">
+  <source src="./resources/videos/minority_50_to_80.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+---
+
+<video class="media" style="position: absolute; left: 25%; top: 0%; width: 50%; z-index: ;" preload="auto" onclick="this.play();">
+  <source src="./resources/videos/minority_80_to_05.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+---
+
+<img src="./resources/images/JohnsonEtAl2019.png" style="position: absolute; left: 0%; top: 3%; width: 105%; z-index: ;"/>
+
+???
+- this really contaminated the debate on policing
+- my team fought a yearlong war against the editorial board of the pnas before
+  the paper was retracted
+  - for a point that should be pretty obvious to anyone who's thought about the
+    agent monitoring problem
+<!-- - it took almost 900 scholars from across 20 fields (including dean eckles, -->
+<!--   actually) weighing in to say, this makes no sense, you can't analyze data like -->
+<!--   this -->
+
+--
+<img src="./resources/images/retracted_alpha.png" style="position: absolute; left: 20%; top: 30%; width: 60%; z-index: ;"/>
+
+---
+
+# How can we do better?
+
+???
+- how would you tackle this in earnest?
+  - i'll come back to claim #1 (racial bias) in a second
+  - and for now focus on claim #2 (diversifying police)
+- it took my team three years of foia requests to get enough data to do a
+  careful, causally identified analysis of police diversification
+- who officers were, what actions they took, when and where they showed up to
+  work every day
+- those shift records are key, because they let us see when different kinds
+  officers get assigned to do the same tasks and face the same kinds of
+  civilian behavior
+  - that lets us ask, why is it one officer can do their job without resorting
+    to violence, while another seems to use force a lot?
+- what we found was that actually, having a diverse police force matters a lot
+  - officers who are minority or female tend to engage in less enforcement
+  - but it's not that they're just pulling back: there's almost no difference in
+    how they handle violent crime
+  - instead, it's that these officers make fewer minor drug arrests, and
+    stopping people for questionable things like "loitering" or "suspicious
+    behavior" less
+  - and it turns out that means fewer black residents get caught up in this
+    low-level discretionary enforcement
+
+--
+- Three years of open-records requests
+  - Chicago Police Dept. & Dept. of Human Resources
+  - Denials overturned by Illinois Attorney General on appeal
+
+.footnote[
+<table style="left: 5%; width: 95%">
+<col style="width: 5%">
+<col style="width: 90%">
+  <!-- <tr> -->
+  <!--   <td align="center"><strong style="">[1]</strong></td> -->
+  <!--   <td>Dean Knox and Jonathan Mummolo. 2020. "Making inferences about racial disparities in police violence." <i>PNAS</i>.</td> -->
+  <!-- </tr> -->
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Bocar Ba, Dean Knox, Jonathan Mummolo, and Roman Rivera. 2021. "The role of officer race and gender in police-civilian interactions in Chicago." <i>Science</i>.</td>
+  </tr>
+</table>
+]
+
+--
+- Data covering ~7,000 officers; 
+--
+~1.6 million stops, arrests, uses of force; 
+--
+~2.9 million shift assignments
+
+--
+- Use of shift records is crucial:
+  - Identifies officers assigned to face common circumstances
+  - Accounts for days when officers choose to take no action
+
+--
+- When facing the same pool of civ. behavior:
+  - Minority & female officers enforce less severely
+  - Effects largest for minority civs. and minor offenses
+
+
+<!-- --- -->
+
+<!-- <img src="./resources/images/science_cover.png" style="position: absolute; left: 15%; top: -10%; width: 70%; z-index: ;"/> -->
+
+<!-- --- -->
+
+<!-- # How can we do better? -->
+
+<!-- - Three years of open-records requests -->
+<!--   - Chicago Police Dept. & Dept. of Human Resources -->
+<!--   - Denials overturned by Illinois Attorney General on appeal -->
+<!-- - Data covering ~7,000 officers; ~1.6 million stops, arrests, uses of force; -->
+<!--   ~2.9 million shift assignments -->
+<!-- - Use of shift records is crucial: -->
+<!--   - Identifies officers assigned to face common circumstances -->
+<!--   - Accounts for days when officers choose to take no action -->
+<!-- - When facing the same pool of civ. behavior: -->
+<!--   - Minority & female officers enforce less severely -->
+<!--   - Effects largest for minority civs. and minor offenses -->
+
+---
+
+class: newspaper
+<img src="./resources/images/headlines/mcso_1_alpha.png" style="position: absolute; left: 18%; top: 0%; width: 66%; z-index: ;"/>
+<div class="summary">
+<br><br><br><br>
+<h1 style="font-size: 200%; color: black">Ongoing application<br>to early intervention<br>for outlier officers</h1>
+</div>
+---
+
+class: newspaper
+<img src="./resources/images/headlines/mcso_1_alpha.png" style="position: absolute; left: 18%; top: 0%; width: 66%; z-index: ;"/>
+
+???
+- and now we're taking those ideas to the field
+- those of you who have heard of sheriff joe arpaio may know that his former
+  agency, the maricopa county sheriff's office, is under a consent decree for
+  treatment of latino residents
+- and the doj is now implementing an early warning system to detect outlying
+  officers (bad apples) using this same kind of shift-based analysis
+
+---
+class: newspaper
+<img src="./resources/images/headlines/mcso_2_alpha.png" style="position: absolute; left: 18%; top: 0%; width: 66%; z-index: ;"/>
+???
+- and now we're taking those ideas to the field
+- those of you who have heard of sheriff joe arpaio may know that his former
+  agency, the maricopa county sheriff's office, is under a consent decree for
+  treatment of latino residents
+- and the doj is now implementing an early warning system to detect outlying
+  officers (bad apples) using this same kind of shift-based analysis
+
+---
+
+# Fryer ('19),&ensp;.small[*JPE*]
+
+<img src="./resources/images/intro_dag_full.png" style="position: absolute; left: 5%; top: 40%; width: 90%; z-index: ;"/>
+
+???
+- but let's come back to racial bias now
+- and we'll look at it through the lens of another quite prominent paper
+- by roland fryer in the journal of political economy, a top-5 outlet in econ
+
+---
+
+# Fryer ('19),&ensp;.small[*JPE*]
+
+<img src="./resources/images/klm_s0_01.png" style="position: absolute; left: 5%; top: 40%; width: 90%; z-index: ;"/>
+
+???
+- we'll be using police stop data, and again, the problem is that those don't
+  exist when officers let someone go
+
+<!-- --- -->
+
+<!-- # Fryer ('19),&ensp;.small[*JPE*] -->
+<!-- <p style="text-align: center; color: #A51C30;">"... compelling case that there is no -->
+<!-- discrimination<br>in officer-involved shootings" and reports<br>surprisingly little -->
+<!-- discrimination in nonlethal force</p> -->
+
+<!-- <img src="./resources/images/klm_s0_02.png" style="position: absolute; left: 5%; top: 40%; width: 90%; z-index: ;"/> -->
+
+---
+
+# Fryer ('19),&ensp;.small[*JPE*]
+
+<img src="./resources/images/klm_base_01.png" style="position: absolute; left: 5%; top: 40%; width: 90%; z-index: ;"/>
+
+???
+- to keep things simple, we'll abstract away a lot of the problem and focus on
+  that issue of selective documentation
+
+---
+
+# Fryer ('19),&ensp;.small[*JPE*]
+<div class="overlay-container">
+  <div class="overlay-text"><h1 class="stroke" style="font-size: 200%">Claim</h1></div>
+<p style="text-align: center; color: #A51C30;">"... compelling case that there is no
+discrimination<br>in officer-involved shootings" and reports<br>surprisingly little
+discrimination in nonlethal force</p>
+</div>
+
+<img src="./resources/images/klm_base_02.png" id="slideleft" style="position: absolute; left: 5%; top: 40%; width: 90%; z-index: ;"/>
+
+???
+- so again, we have the claim: officer's don't discriminate in use of force, or at
+  least, they don't discriminate very much
+
+---
+
+# Fryer ('19),&ensp;.small[*JPE*]
+<p style="text-align: center; color: #A51C30;">"... compelling case that there is no
+discrimination<br>in officer-involved shootings" and reports<br>surprisingly little
+discrimination in nonlethal force</p>
+
+<img src="./resources/images/klm_base_02.png" id="slidleft" style="position: absolute; left: 5%; top: 40%; width: 90%; z-index: ;"/>
+
+???
+- and this is going to be our main case study for today's talk
+- whether this is a justifiable claim, given the data available
+
+<!-- --- -->
+
+<!-- # Fryer ('19),&ensp;.small[*JPE*] -->
+<!-- <p style="text-align: center; color: #A51C30;">"... compelling case that there is no -->
+<!-- discrimination<br>in officer-involved shootings" and reports<br>surprisingly little -->
+<!-- discrimination in nonlethal force</p> -->
+<!-- <img src="./resources/images/klm_base_03.png" id="slidleft" style="position: absolute; left: 5%; top: 40%; width: 90%; z-index: ;"/> -->
+
+<!-- ??? -->
+<!-- - in other words, this arrow here is not very strong -->
+
+<!-- --- -->
+
+<!-- # Fryer ('19),&ensp;.small[*JPE*] -->
+<!-- <p style="text-align: center; color: #A51C30;">"... <s>compelling</s> case that there is no -->
+<!-- discrimination<br>in officer-involved shootings" and reports<br>surprisingly little -->
+<!-- discrimination in nonlethal force</p> -->
+<!-- <img src="./resources/images/klm_base_04.png" id="slidleft" style="position: absolute; left: 5%; top: 40%; width: 90%; z-index: ;"/> -->
+
+<!-- ??? -->
+<!-- - but those of you who are versed in causal diagrams will immediately see a -->
+<!--   problem: there is a selection problem, because the agent controls what you can -->
+<!--   observe -->
+
+---
+
+class: center, middle, inverse
+
+# Reasoning from 
+# incomplete data is
+# ubiquitous in social science
+
+???
+- It turns out that there's nothing unique to the study of police discrimination
+  - Scholars have grappled with similar issues for at least 100 years
+  - The use of bounds to deal with incomplete data that I've been able to
+    identify was in the context of measurement error, by Corrado Gini, the
+    sociologist-statistician who also came up with the Gini coefficient
+  - So, these issues are ubiquitous
+- I'll talk through three kinds of research where they occur
+- first, I'll show how similar challenges arise in other legal disputes over
+  discrimination
+- it's worth noting that discrimination claims are just a special case of causal
+  claims more broadly: that a minority individual would have been treated
+  differently, counterfactually, from a similarly situated white individual
+- so, second, I'll talk about how researchers have dealt with related issues in
+  causal inference
+- and finally, I'll show that you still need to worry this stuff even if you
+  don't do causal work
+- we often want to make descriptive claims about social processes that we lack
+  complete data on, and we encounter the same issues there
+
+---
+
+# Discrimination litigation
+
+- Social-science research in *Wal-Mart v. Dukes*
+
+???
+- I'll start off by recapping a prominent debate over another discrimination
+  case, against Walmart, where you'll see a lot of the same issues appear
+- social science research appeared in a few ways
+- a statistician, Richard Droghin, testified about disparate *outcomes*
+  for women: they were overrepresented in hourly jobs, but underrepresented in
+  management
+- then a sociologist, William Bielby, testified that Walmart had policies that,
+  *in other settings*, had been shown to disadvantage women
+  - these are things like discretion in promotions, requiring managers to move
+    for promotion, etc.
+  - so far, these are just some incomplete facts
+- the issue was that Bielby then made a causal claim that Walmart itself engaged
+  in discrimination
+- even though he could not trace a direct connection between the policies and
+  the disparate outcomes in Walmart specifically
+- Note to self: "Discretionary and subjective elements of Wal-Mart's personnel
+  system and inadequate oversight and ineffective anti-discrimination efforts
+  contribute to disparities between men and women in their compensation and
+  career trajectories at the company" (Bielby '03)
+  
+--
+- Descriptive stats. on Wal-Mart employees .tiny[(Drogin, '03)]
+  - Shows that there are disparate <u>outcomes</u> by gender
+
+--
+  - E.g. women hold 2&frasl;3 of hourly jobs, 1&frasl;3 of mgmt. jobs
+
+--
+- Wal-Mart has certain policies/practices .tiny[(Bielby, '03)] 
+  - E.g. managers have discretion in compensation & promotion
+
+--
+  - Past work shows these cause discrimination in *other* cases
+
+--
+- Ergo, Wal-Mart engages in disparate <u>treatment</u> .tiny[(Bielby, '03)] 
+
+--
+- **The issue:** no evidence linking policies/practices<br>to outcomes in the case
+  of Wal-Mart specifically
+
+---
+
+# Debate over Bielby ('03)
+
+- **Critiques:**
+
+???
+**Critiques:**
+- One critique, by Chris Winship, was that this is just unscientific
+  - And the argument was very similar to the policing case
+  - We need to think about what he called the "data biases," in other words, how
+    the things we can see might differ systematically from the things we can't
+    see
+- Yesper Soerensen and Amanda Sharkey said, well wait, it is scientific 
+  - in the sense that abductive reasoning (or theory generation) is part of the
+    scientific process.
+  - but abduction is just the start; it establishes *one* possible explanation,
+    it doesn't show that it's the *only* explanation
+  - to finish the job, we need hypothetico-deductive reasoning, which this is not
+- and finally, some legal scholars argued that if we're going to use sociology
+  in court, then it needs to be based on hypothetico-deductive reasoning
+  - we can't just present the best-case explanation. normatively, we have a
+    responsibility to honestly disclose all the possible explanations (claims
+    that are consistent with the evidence)
+
+**That's a lot of work.** But a nice shortcut, which I'll return to shortly, is
+to just think about the best- and worst-case explanations from the perspective
+of the claim you'd like to make. The ones in between don't really matter.
+
+--
+  - Science must consider data biases, alt. hypotheses .tiny[(Winship, '11)]
+
+--
+  - Abductive, not hypothetico-deductive .tiny[(Sørensen & Sharkey, '11)]<br>
+
+--
+  .gray["proposed explanation may be consistent with an observed set of facts,
+    [but] other explanations cannot be ruled out"]
+
+--
+  - Expert testimony should candidly assess inferences that may be drawn in light of data and method constraints .tiny[(Mitchell et al. '11)]
+
+--
+- **A practical solution:** best- and worst-case reasoning
+
+---
+
+# Debate over Bielby ('03)
+
+- **Critiques:**
+  - Science must consider data biases, alt. hypotheses .tiny[(Winship, '11)]
+  - Abductive, not hypothetico-deductive .tiny[(Sørensen & Sharkey, '11)]<br>
+  .gray["proposed explanation may be consistent with an observed set of facts,
+    [but] other explanations cannot be ruled out"]
+  - Expert testimony should candidly assess inferences that may be drawn in light of data and method constraints .tiny[(Mitchell et al. '11)]
+- **A practical solution:** best- and worst-case reasoning
+- **Counterarguments:**
+
+???
+**Counterarguments:**
+- On the other hand, folks like Don Tomaskovic-Devey weighed in and said, whoa,
+  whoa.
+  - It's not my job to do the other side's work for them
+  - Maybe in science we need to think about alternative explanations, but law is
+    different. If I'm testifying in support of a discrimination claim, all I
+    need to do is present the best-case scenario
+- And other folks went even further, to say no, actually, even in science (and
+  sociology specifically) it's totally ok to just present the best-case scenario
+  and ignore alternative explanations, people do it all the time
+
+--
+  - Law is adversarial, unlike science .tiny[(Tomaskovic-Devey, '11)]
+
+--
+  .gray["If the defense has a plausible alternative explanation for disparities,
+  I see it as their job to provide it"]
+
+--
+  - One-sided presentation of conclusions is scientifically acceptable and standard in sociology .tiny[(Myrick '11)]
+
+---
+
+# Causal claims more broadly
+
+- Concerns about incomplete or imperfect data are widespread in research aiming
+  to make causal claims
+  - Confounding, noncompliance, selection, missingness
+
+???
+- as I mentioned earlier, a discrimination claim is one particular kind of
+  causal claim
+- and if we look out at the causal inference literature more broadly, there's
+  more recognition of the problems that incomplete data can pose
+- people are quite worried about confounding, selection, missingness, and so on
+- but in practice, the way that people researchers address these issues is very
+  different from the kind of deductive reasoning that was proposed in Walmart v
+  Dukes
+- what we often see is researchers making assumptions that would justify the
+  claim they want to make. Can't have unobserved confounding? OK, then let's
+  just assume that the controls I have are sufficient.
+- or we see people changing the question to something easier to answer
+  - say we want to know how much incarceration hurts your future job prospects,
+    but obviously incarceration isn't random
+  - so let's change the question: how much does getting assigned to a strict
+    judge versus a lenient judge affect job prospects, AMONG the subset of
+    defendents where the judge has discretion?
+  - that's all well and good, but let's be honest: it wasn't what we originally
+    wanted to know
+- perhaps the most principled response is to say, look, if I can't do this study
+  well, then I'm not going to do it at all
+- but that has its own problems: it's what critics of the so-called "causal
+  revolution" call a narrowing of science to focus on easier questions
+- what I'll show in a moment is a way that we can honestly acknowledge the
+  complexities of real-world research, ask the questions that we really want to
+  ask, and let the chips fall where they may in terms of best- and worst-case
+  answers
+
+--
+- **Typical responses:**
+  1. <u>Ignore the problem</u> assume the complications away
+
+--
+  1. <u>Change the question</u>: e.g., switch to LATE instead of ATE
+
+--
+  1. <u>Terminate the study</u>: work on something else instead
+
+--
+- Widespread concern that "causal revolution" has led researchers to gloss over
+  real-world intricacies, <br>focus more narrowly on easier-to-answer problems
+
+--
+- **A practical solution:** best- and worst-case reasoning
+
+---
+
+# Descriptive claims as well
+
+???
+- but before doing that, I want to clarify that this isn't just about causal inference
+- it's not like once we start making descriptive claims, all of a sudden we have
+  perfect data
+---
+# Descriptive claims as well
+<img src="./resources/images/proxy_1.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+
+???
+- in my own work, I do a lot of descriptive analysis of speech style, with audio
+  and video recordings
+- you can imagine asking, do groups that engage in deliberation communicate
+  differently from those who do other tasks?
+---
+# Descriptive claims as well
+<img src="./resources/images/proxy_2.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- is there a correlation between the way they communicate and the rules of the
+  meeting, like unanimous decision versus majority rule?
+---
+# Descriptive claims as well
+<img src="./resources/images/proxy_3.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- how does group diversity relate to communication style?
+- obviously, when we're working with observational data, these aren't causal
+  questions
+- though they may suggest causal questions to explore later
+- individuals can choose to opt out of different kinds of groups, say by
+  quitting their job
+- and often in this research, we're not worried about that
+
+---
+# Descriptive claims as well
+<img src="./resources/images/proxy_4.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+.footnote[
+<table style="left: 5%; width: 95%">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Dean Knox and Christopher Lucas. 2021. "A dynamic model of speech for the social sciences." <i>American Political Science Review</i>.</td>
+  </tr>
+  <tr>
+    <td align="center"><strong style="">[2]</strong></td>
+    <td>Dean Knox, Christopher Lucas, and Wendy K. Tam Cho. 2022. "Testing causal theories with learned proxies." <i>Annual Review of Political Science</i>.</td>
+  </tr>
+</table>
+]
+
+???
+- but here's the thing
+- it's rare that we can really, truly measure something like vocal tone or
+  facial expressions
+- sure, you could imagine an observer sitting there and hand-coding these things
+- but that's expensive, and so increasingly, we only do that for a small sample
+  of observations
+- then, often, we train a machine-learning algorithm to do that task cheaply for
+  the rest of the dataset
+
+---
+# Descriptive claims as well
+<img src="./resources/images/proxy_5.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+.footnote[
+<table style="left: 5%; width: 95%">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Dean Knox and Christopher Lucas. 2021. "A dynamic model of speech for the social sciences." <i>American Political Science Review</i>.</td>
+  </tr>
+  <tr>
+    <td align="center"><strong style="">[2]</strong></td>
+    <td>Dean Knox, Christopher Lucas, and Wendy K. Tam Cho. 2022. "Testing causal theories with learned proxies." <i>Annual Review of Political Science</i>.</td>
+  </tr>
+</table>
+]
+
+???
+- but if all we have is this machine-learning proxy of communication style
+- say the original question is whether there's more conflict in diverse groups
+- and our machine-learning algorithm is mostly just picking up on how loud the
+  audio is
+- does that really let us answer the question we originally cared about?
+- sure, we could change the question and say, "oh, I only want to know how
+  diverse or homogeneous groups vary on this proxy, loudness"
+- but then we're just doing the same thing that the causal folks are accused of:
+  answering the less-interesting easy question
+- if we're being honest, loudness isn't intrinsically interesting. what if the
+  group gets in a big fight and half the team leaves the room? then it's quiet,
+  but that doesn't mean it's nonconflictual
+
+---
+# Descriptive claims as well
+<img src="./resources/images/proxy_6.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+.footnote[
+<table style="left: 5%; width: 95%">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Dean Knox and Christopher Lucas. 2021. "A dynamic model of speech for the social sciences." <i>American Political Science Review</i>.</td>
+  </tr>
+  <tr>
+    <td align="center"><strong style="">[2]</strong></td>
+    <td>Dean Knox, Christopher Lucas, and Wendy K. Tam Cho. 2022. "Testing causal theories with learned proxies." <i>Annual Review of Political Science</i>.</td>
+  </tr>
+</table>
+]
+???
+- and it can get much worse
+- for example, we know that vocal tone is measured with greater error for people
+  with accents
+- which means the measurement error is contaminated by one of the quantities of
+  interest
+- and if that's going on, we need to be very careful about which descriptive
+  claims can and can't be supported
+---
+# Descriptive claims as well
+<img src="./resources/images/missingness.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+???
+- interestingly, it's easier to recognize the problem in some areas than others
+- here's a problem that's almost isomorphic
+- except now the labels are in a survey research context
+- say our survey says that 60% of responding democrats support a policy, but
+  only 40% of responding republicans support it
+- but if response rates differ by group: say, you got answers from every
+  democrat, but NAs for half of republicans
+- in a survey setting, we'd be deeply uncomfortable with saying that the groups'
+  opinions differ
+- because for all we know, the missing republicans could be people who like the
+  policy and are too embarrassed to say it
+
+---
+
+class: center, middle, inverse
+
+# Formally reasoning about
+# incomplete data by 
+# bounding the unobserved
+
+---
+# Bounding the unobserved
+
+- Carefully reason about agent self-reported data
+  - Key limitation: principals can't observe stops that aren't made
+
+???
+- let's think about what the principal does and doesn't get to see
+- we'll articulate some plausible assumptions about the processes
+  that generated the data
+- as a starting point, let's suppose that officers accurately report when they
+  use force
+  - this is really a stylized assumption
+  - for things like tasers and guns, many agencies log every discharge, so we
+    have substantive reasons to justify the assumption
+  - for something like grabbing a civilian, we might 
+
+--
+<img src="./resources/images/klm_base_02.png" style="position: absolute; left: -10%; top: 40%; width: 100%; z-index: ;"/>
+
+--
+- **Assumption 1 (all force is reported):** <br>
+  &emsp;Force(race, no stop) = 0 for race .small[&in;] {white, min.}
+
+
+---
+<img src="resources/images/diagrams_wide-6.png" style="position: absolute; top: 20%; left: 25%; width: 50%; z-index: 0;"/>
+???
+- next, we'll break down police-civilian encounters into four ideal types
+  - there's a kind of scenario, like a violent crime in progress, where officers
+    basically have no discretion. the civilian's race doesn't matter, officers
+    have to make the stop
+  - there's another scenario with no discretion, like if someone walks up and
+    asks for directions. again, race doesn't matter: no officer would initiate a
+    formal stop.
+  - but now let's think about potential sources of discretion. we have good
+    reason to suspect that minority civilians may be stopped in innocuous
+    situations where white civilians would pass unremarked, like for jaywalking.
+  - and conversely, in theory, there could be scenarios where officers make
+    discriminatory stops of white people, but it's hard to imagine what those
+    might be
+--
+<img src="resources/images/diagrams_wide-7.png" style="position: absolute; top: 20%; left: 25%; width: 50%; z-index: 0;"/>
+--
+<img src="resources/images/diagrams_wide-8.png" style="position: absolute; top: 20%; left: 25%; width: 50%; z-index: 0;"/>
+--
+<img src="resources/images/diagrams_wide-9.png" style="position: absolute; top: 20%; left: 25%; width: 50%; z-index: 0;"/>
+--
+<img src="resources/images/diagrams_wide-10.png" style="position: absolute; top: 20%; left: 25%; width: 50%; z-index: 0;"/>
+---
+<img src="resources/images/diagrams_wide-11.png" style="position: absolute; top: 20%; left: 25%; width: 50%; z-index: 0;"/>
+
+???
+- so now, when we think about who shows up in the stop data:
+- the white data consists of violent crime and this weird type that probably
+  doesn't exist. 
+
+---
+# Bounding the unobserved
+
+- Carefully reason about agent self-reported data
+  - Key limitation: principals can't observe stops that aren't made
+- **Assumption 1 (all force is reported):** <br>
+  &emsp;Force(race, no stop) = 0 for race .small[&in;] {white, min.}
+- **Assumption 2 (no anti-white stops):** <br>
+  &emsp;Stop(minority) &ge;   Stop(white)
+---
+<img src="resources/images/diagrams_wide-11.png" style="position: absolute; top: 20%; left: 25%; width: 50%; z-index: 0;"/>
+---
+<img src="resources/images/diagrams_wide-12.png" style="position: absolute; top: 20%; left: 25%; width: 50%; z-index: 0;"/>
+
+???
+- so, mostly just violent crime
+---
+<img src="resources/images/diagrams_wide-13.png" style="position: absolute; top: 20%; left: 25%; width: 50%; z-index: 0;"/>
+
+???
+- and the minority data consists of this unknown mix of violent crime and
+  jaywalking
+
+---
+
+<img src="resources/images/diagrams_wide-12.png" style="position: absolute; top: 25%; left: 5%; width: 40%; z-index: 0;"/>
+<img src="resources/images/diagrams_wide-13.png" style="position: absolute; top: 25%; left: 55%; width: 40%; z-index: 0;"/>
+
+---
+# Bounding the unobserved
+
+- Carefully reason about agent self-reported data
+  - Key limitation: principals can't observe stops that aren't made
+- **Assumption 1 (all force is reported):** <br>
+  &emsp;Force(race, no stop) = 0 for race .small[&in;] {white, min.}
+- **Assumption 2 (no anti-white stops):** <br>
+  &emsp;Stop(minority) &ge;   Stop(white)
+- **Assumption 3 (racial stops are less severe):** <br>
+  &emsp;On average, Force(race, decision) is higher<br>
+  &emsp;in always-stops than anti-minority stops, for<br>
+  &emsp;race .small[&in;] {white, min.} and decision .small[&in;] {stop, no stop}
+
+.footnote[
+<table style="left: 5%; width: 95%; font-size: 20px">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Dean Knox, Will Lowe, and Jonathan Mummolo. 2020. "Administrative records mask racially biased policing." <i>APSR</i>.</td>
+  </tr>
+  <!-- <tr> -->
+  <!--   <td align="center"><strong style="">[2]</strong></td> -->
+  <!--   <td>Steven Durlauf and James Heckman. 2020. "An empirical analysis of racial differences in police use of force: A comment." <i>JPE</i>.</td> -->
+  <!-- </tr> -->
+</table>
+]
+
+---
+
+<img src="resources/images/diagrams_wide-12.png" style="position: absolute; top: 25%; left: 5%; width: 40%; z-index: 0;"/>
+<img src="resources/images/diagrams_wide-13.png" style="position: absolute; top: 25%; left: 55%; width: 40%; z-index: 0;"/>
+
+???
+- DKHERE DILUTE
+- then we can ask, given that theory, and given the data we have, what could the
+	agent be doing? specifically, we'll reason about best- & worst-case scenarios
+  for agent deviation from principal's race-neutral objective
+
+---
+
+<img src="./resources/images/klm_proofs/klm_proofs_00.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_01.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_02.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_03.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_04.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_05.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_06.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_07.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_08.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_09.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_10.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_11.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_12.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_13.png" style="width: 19%; z-index: 1;"/>
+<img src="./resources/images/klm_proofs/klm_proofs_14.png" style="width: 19%; z-index: 1;"/>
+
+???
+- it turns out to be quite annoying 
+- but you can formally deduce the best- and worst-case scenarios from these
+  first principles
+
+--
+
+<div class="summary">
+<br><br><br><br><br>
+<h1 style="font-size: 200%; color: black">After 10 weeks of <br>tedious derivations...</h1>
+</div>
+
+---
+
+<img src="resources/images/bounds_hands_correct_1.png" style="position: absolute; top: 0%; left: 0%; width: 100%"/>
+
+???
+- and this is what you get
+- on the left we have Fryer's original estimate, which says about 6% of
+  encounters involved discriminatory force, or about 200,000 over a decade of
+  NYPD stop-and-frisks
+- and what we show is that the only way that could possibly be true is if there
+  is zero discrimination in who officers choose to stop
+  - in other words, we show that this extremely common form of analysis
+    implicitly assumes that there are absolutely no jaywalking-type encounters
+  - but it is a bit odd to assume away discrimination in stopping, in a study
+    that is trying to estimate how police officers discriminate in use of force
+- and depending on how bad that initial stop discrimination is (which we can't
+  directly see in this data), the range of possibilities could be much, much worse
+- here's that same result with confidence intervals
+- it turns out that other studies have looked at stop discrimination in other
+  ways, like that "hit rate" analysis I mentioned earlier, and they consistently
+  find that at least one third of minority stops are discriminatory
+- which implies we're over here: there were at least 400,000 discriminatory uses
+  of force, and it could be much worse
+--
+<img src="resources/images/bounds_hands_correct_2.png" style="position: absolute; top: 0%; left: 0%; width: 100%"/>
+--
+<img src="resources/images/bounds_hands_correct_3.png" style="position: absolute; top: 0%; left: 0%; width: 100%"/>
+--
+<img src="resources/images/bounds_hands_correct_4.png" style="position: absolute; top: 0%; left: 0%; width: 100%"/>
+--
+<img src="resources/images/bounds_hands_correct_5.png" style="position: absolute; top: 0%; left: 0%; width: 100%"/>
+
+---
+
+<img src="resources/images/bounds_other_correct.png" style="position: absolute; top: 0%; left: 0%; width: 100%"/>
+
+???
+- that was for officers laying hands on a civilian, but we can repeat this
+  exercise for other levels of force, like putting someone on the ground or
+  striking them with a baton
+- and across the board, the takeaway is the same
+- in many cases, the standard approach would seem to show no discrimination
+- but that's because it's naively taking the police data at face value, rather
+  than thinking about blind spots in agent self-reports
+- when you actually account for the fact that the minority data is diluted by a
+  huge number of jaywalking-type encounters, you immediately see that the true
+  severity of the problem is far larger than it originally appeared
+- now, I've worked quite closely with the ACLU legal analytics team, and they
+  tell me that the methods we developed in this paper are now standard practice
+  in their discrimination cases
+
+<!-- -- -->
+
+<!-- <img src="resources/images/bounds_gfk_correct.png" style="position: absolute; top: 0%; left: 0%; width: 100%"/> -->
+
+
+---
+
+class: center, middle, inverse
+
+# How can we extend this
+# approach to other agencies
+# and data environments?
+
+???
+- what we've talked about so far are two specific monitoring tasks
+  - when you have data on officer-involved shootings or stops, respectively
+- but there are 18,000 law enforcement agencies in america
+  - each of them potentially recording different combinations of data
+  - and if we have to sit down to derive bounds on terms of agent behavior for
+    each one, that's just not feasible
+- so now I'm going to talk about how we built an algorithm to automate this
+  best-/worst-case reasoning
+  
+
+
+---
+
+<img src="./resources/images/intro_dag_full.png" style="position: absolute; left: 2.5%; top: 12.5%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/mbs_context.png" id="slidedownright" style="position: absolute; left: 2.5%; top: 12.5%; width: 100%; z-index: ;"/>
+???
+- I'll introduce these ideas through the lens of a recent court victory on
+  traffic discrimination
+- where we helped the aclu show that the kansas highway patrol was
+  discriminating in traffic enforcement 
+  - they were stopping one group more, compared to another group driving the
+    same speed in the same times and places
+  
+---
+
+class: newspaper
+
+<img src="./resources/images/headlines/khp_alpha.png" style="position: absolute; left: 10%; top: 15%; width: 80%; z-index: ;"/>
+
+???
+- the court case wasn't against minority drivers, it was out-of-state drivers,
+  but the ideas are the same
+
+---
+<img src="./resources/images/ms_base.png" style="position: absolute; left: 2.5%; top: 12.5%; width: 100%; z-index: ;"/>
+???
+- i'll keep referring to minority and white civilians just keep consistent
+---
+<!-- <img src="./resources/images/ms_m.png" style="position: absolute; left: 2.5%; top: 12.5%; width: 100%; z-index: ;"/> -->
+<!-- --- -->
+<img src="./resources/images/ms_s1.png" style="position: absolute; left: 2.5%; top: 12.5%; width: 100%; z-index: ;"/>
+???
+- as before, if a stop is made, we get to see the identity of the driver
+---
+<img src="./resources/images/ms_s0.png" style="position: absolute; left: 2.5%; top: 12.5%; width: 100%; z-index: ;"/>
+???
+- and if no stop is made, we don't
+---
+<img src="./resources/images/ms_s.png" style="position: absolute; left: 2.5%; top: 12.5%; width: 100%; z-index: ;"/>
+???
+- but there's a new twist: the dept of transportation has magnetic sensors
+  embedded in the road that tell us how many cars go by
+  - so we don't just know that 250 stops were made
+  - we also know that there were 1000 vehicles in total, so 25% were stopped
+- they record how fast the car is going, too
+  - but we'll set that aside for now to keep things simple
+
+---
+
+# Ideal encounter types
+
+- "Principal stratification" of each variable
+
+--
+- Two driver types:
+
+--
+  - Minority drivers
+  - White drivers
+
+--
+- Four stops types (or officer types):
+
+--
+  - Always stop
+  - Anti-minority stop
+  - Anti-white stop
+  - Never stop
+  
+---
+
+# Ideal encounter types
+
+- "Principal stratification" of each variable
+- Two driver types:
+  - Minority drivers
+  - White drivers
+- Four stops types (or officer types):
+  - Always stop
+  - Anti-minority stop
+  - <s>Anti-white stop</s>
+  - Never stop
+
+---
+# Hypothetical states of world
+<img src="./resources/images/3d_base.png" style="position: absolute; left: -5%; top: 20%; height: 80%; z-index: ;"/>
+???
+- now we can geometrically represent the possible states of the world
+- each point in this cube is one possible world
+  - or one way that drivers are behaving and agents are reacting
+- the height of that point is the proportion of minority drivers
+  - so if, hypothetically we were up at the top, that means every driver on the
+    road is a minority
+  - and the proportion of white drivers is just 1 minus that
+---
+<p style="position: absolute; left: 9%; top: 3%; width: 40%; z-index: 2;">
+  <b>Assumption:</b>
+</p>
+<p style="position: absolute; left: 45%; top: 5.5%; width: 40%; z-index: 2; font-size: 100%">
+  Pr( anti-white stop ) = 0
+</p>
+<p style="position: absolute; left: 9%; top: 8%; width: 40%; z-index: 2;">
+  <b>Laws of probability:</b>
+</p>
+<p style="position: absolute; left: 45%; top: 10.25%; width: 50%; z-index: 2; font-size: 100%">
+  Pr(always) + Pr(anti-minority) + Pr(never) = 1
+</p>
+<img src="./resources/images/3d_lawprob.png" style="position: absolute; left: -5%; top: 20%; height: 80%; z-index: ;"/>
+???
+- now, we can take stock of what we know
+- we know that if you think about the officer types
+  - those also have to add up to 1
+  - here I'm just showing always stops and discriminatory stops on the bottom
+    axes, because whatever is left over must be the number of never stops
+- and we know that you can't have, for example, 90% always stops and 90%
+  discriminatory stops
+  - because that'd add up to more than 100%, which doesn't make sense
+  - so already we know that we have to be somewhere in this back half
+---
+
+**Observed stop margin:**<br>
+Pr( stop )
+<p style="position: absolute; left: 50%; top: 5.5%;  z-index: 2; font-size: 100%;">
+  Pr( min. ) Pr( anti-min. stop )
+  <br> &emsp;+ Pr( min. ) Pr( always stop )
+  <br> &emsp;&ensp;&emsp; + [ 1 - Pr( min. ) ] Pr( always stop )
+</p>
+<img src="./resources/images/3d_stopmargin.png" style="position: absolute; left: -5%; top: 20%; height: 80%; z-index: ;"/>
+
+???
+- now we can start pulling in the traffic-sensor data
+- we know that 25% of cars are stopped, which narrows down the possibilities
+- we can backward induct: how does a stop occur?
+  - it could be that a minority driver met an anti-minority officer
+  - or, it could be that they met an always-stop officer
+  - or a white person met that always-stop officer
+- what this is saying is that, even though we can't directly see what's going on
+  out there on the highway, we can indirectly reason about it
+  - the unobserved reality has to be somewhere on this surface
+- the fact that only 25% of cars are stopped helps rule out a lot of options
+  - like, obviously it can't be that there 100% always-stops, because that
+    wouldn't add up
+---
+
+**Observed stop records:**<br>
+Pr( minority | stop )
+
+<p style="position: absolute; left: 47.5%; top: 5.5%;  z-index: 2; font-size: 100%;">
+  <u>&emsp;Pr( min. ) Pr( anti-min. stop OR always stop )&emsp;</u>
+  <br> [ Pr( min. ) Pr( anti-min. stop) + Pr( always stop ) ]
+</p>
+<img src="./resources/images/3d_stoprecords.png" style="position: absolute; left: -5%; top: 20%; height: 80%; z-index: ;"/>
+???
+- and we can do the same with our police stop records
+- we know that 75% of stopped cars had minority drivers
+- again, backward inducting: what does that tell us about the possible states of
+  the world?
+- it says the unobserved world has to be somewhere on **this** surface, too
+- for example it can't be that every driver is white, because that would
+  contradict the fact that we have all these minority stops
+---
+
+**Remaining range of possible agent behavior:**<br>
+<img src="./resources/images/3d_feasible.png" style="position: absolute; left: -5%; top: 20%; height: 80%; z-index: ;"/>
+???
+- so now, combining traffic sensors and police records, we've narrowed down the
+  possibilities
+- and after triangulating all of this information, we can ask:
+  - given what we know, and what we've been able to rule out
+  - among all the possible worlds that remain
+- what's the best-case scenario for agent behavior? 
+  - is it possible that they're not discriminating?
+  - or can we rule race-neutral behavior with this incomplete information?
+---
+
+**External benchmarking:**<br>
+<!-- External reference for Pr( minority ) -->
+<p style="position: absolute; left: 60%; top: 5.5%;  z-index: 2; font-size: 100%;">
+  &alpha;&ensp;&le;&ensp;Pr( min. )&ensp;&le;&ensp;&beta;<br>
+</p>
+<img src="./resources/images/3d_benchmark.png" style="position: absolute; left: -5%; top: 20%; height: 80%; z-index: ;"/>
+
+???
+- and we can bring in even more information
+- we have mobile-phone data that says, when you look at gas stations along the
+  highway
+- say, 40% of customers are minorities
+  - of course that doesn't mean that exactly 40% of police encounters are with
+    minorities
+  - but it's unlikely that police are seeing less than 20% minorities, or more
+    than 60%
+  - in other words, the unobserved world has to be somewhere in this range
+
+---
+
+class: gray
+
+.large[<br><br>**Proposition 1** (informal)<br>
+Any discrete causal graph can be reparameterized in terms of a finite number of generalized principal strata w.l.o.g. for the full joint distr. of potential outcomes.]
+<br>
+
+???
+- we have a bunch of theoretical results that, at the end of the day, prove this is possible for any discrete system
+- for any monitoring question you want to ask
+- any theory or assumptions you can bring to bear
+- and any dataset or datasets you might have, no matter how incomplete they may be
+- you can engage in this kind of reasoning
+
+--
+.large[**Proposition 2** (informal)<br>
+The probability of any factual or counterfactual event is a polynomial in variables that represent generalized principal strata sizes.]
+<br>
+
+--
+.large[**Corollary 1** (informal)<br>
+Any elementary arithmetic functional of the joint distr. of potential outcomes can be reparameterized as a polynomial fraction in strata sizes. Any polynomial fraction can be transformed into a system of polynomials in an expanded variable space.]
+<br>
+
+--
+.large[**Theorem 1** (informal)<br>
+Minimization and maximization of a polynomialized estimand subject to polynomialized constraints representing empirical evidence (and optional modeling assumptions) produces sharp causal bounds.
+]
+
+--
+<div class="summary" style="position: absolute; top:0%; height: 87.5%;">
+<br><br>
+<h1 style="font-size: 190%; color: black">Any agent monitoring task<br>in a discrete system can be<br>reformulated in terms of<br>equivalent computational<br>optimization problems</h1>
+</div>
+
+---
+
+<br><br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**MINIMIZE/MAXIMIZE**
+<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;agent behavior
+
+.footnote[
+<table style="left: 5%; width: 95%; color: black; font-size: 20px" >
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Guilherme Duarte, Noam Finkelstein, Dean Knox, Jonathan Mummolo, and Ilya Shpitser. 2023. "An automated approach to causal inference in discrete settings." <i>Journal of the American Statistical Association</i>.</td>
+  </tr>
+</table>
+]
+
+???
+- what's the best and worst-case scenario for agent behavior
+  - out of all the possible worlds
+  - that are consistent with the theory and data we have
+- what's more, we show how you can use computational methods to automate it
+
+--
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**OVER**
+<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;possible states of the world
+
+--
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**SUBJECT TO**
+<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;theory
+<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;assumptions
+<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;available data
+<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;probability axioms
+
+
+---
+<img src="./resources/images/intro_dag_full.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+---
+<img id="slideleft" src="./resources/images/klm_base_02.png" style="position: absolute; left: 2.5%; top: 20%; width: 100%; z-index: ;"/>
+
+???
+- so, for example, revisiting that previous analysis of stop data
+
+---
+
+class: code, small, middle
+
+.highlight_alt[from] autobound.DAG .highlight_alt[import] DAG <br>
+.highlight_alt[from] autobound.causalProblem .highlight_alt[import] causalProblem
+<br><br><br>
+.darkgray[\# define causal structure]<br>
+model = DAG() <br>
+model.from_structure(<br>
+&emsp;.highlight['D -> Y, D -> M, M -> Y, U -> Y, U -> M'],&nbsp;&nbsp;.darkgray[\# main variables]<br>
+&emsp;unob = .highlight['U']&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.darkgray[\# disturbances]<br>
+)
+<br>problem = causalProblem(model)
+<br><br><br>
+.darkgray[\# estimand: ATE | M=1, average total effect among stopped]
+<br>problem.set_estimand(
+<br>&nbsp;&nbsp;problem.query(.highlight['Y(D=1)=1']) - problem.query(.highlight['Y(D=0)=1']),
+<br>&nbsp;&nbsp;cond = problem.query(.highlight['M=1'])
+<br>)
+<br><br><br>
+.darkgray[\# probability axiom constraints]<br>
+problem.add_prob_constraints()
+<br><br><br>
+.darkgray[\# empirical constraints (only observed conditional on M == 1)]<br>
+problem.load_data(.highlight['data_klm.csv'], cond = problem.query(.highlight['M=1']))
+
+???
+- now, we can use some pretty amazing software that my student Guilherme put
+  together
+- just write down the problem:
+  - here's the system we're studying
+  - tell it the quantity of interest that we want to monitor
+  - give it the data
+
+---
+
+class: code, small, middle
+
+.darkgray[\# assumption 1: all force is reported]
+<br>problem.add_constraint(
+<br>&nbsp;&nbsp;problem.query(.highlight['Y(M=0)=1]'), .highlight['=='], 0
+<br>)
+
+.darkgray[\# assumption 2: no anti-white discrimination in stops]
+<br>problem.add_constraint(
+<br>&nbsp;&nbsp;problem.query(.highlight['M(D=0)=1 & M(D=1)=0']), .highlight['=='], 0
+<br>)
+
+.darkgray[\# assumption 3: discretionary stops require less force]
+<br>.highlight_alt[for] d .highlight_alt[in] [0, 1]:
+<br>&nbsp;&nbsp;.highlight_alt[for] m .highlight_alt[in] [0, 1]:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;problem.add_constraint(
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;problem.query(.highlight['Y(D=%s,M=%s)'] % (d, m),
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cond = .highlight['M(d=0)=1 & M(d=1)=1'])
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) -
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;problem.query(.highlight['Y(D=%s,M=%s)'] % (d, m),
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cond = .highlight['M(d=0)=0 & M(d=1)=1'])
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.highlight['>=']
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0
+<br>&nbsp;&nbsp;&nbsp;&nbsp;)
+
+<!-- .darkgray[\# asm 4: ignorability of race (already encoded in dag)] -->
+
+<br>
+.darkgray[\# compute bounds on agent behavior]<br>
+bounds = problem.optimize() 
+
+???
+- here are the assumptions that we'd like to use
+
+---
+
+
+<img src="./resources/videos/trajectory_00.jpg" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+---
+<video class="media" style="position: absolute; width: 100%; left: 0%; top: 0%" preload="auto" onclick="this.play();">
+  <source src="./resources/videos/trajectory.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+???
+- and the machine starts reasoning about possible scenarios
+- first ruling out anti-white bias in force
+- then ruling out extreme values of anti-minority bias
+- it settles on a range of possibilities around 11-13 percent
+
+
+---
+<img src="./resources/images/klm_relax_0.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+???
+- and boom, within ten seconds, it gets the same answer that took me ten weeks to derive
+
+---
+<img src="./resources/images/klm_relax_1.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+???
+- but now that we have an algorith to help, we can extend the original analysis
+- for example, some critics pushed back on the assumption that force might be
+  used less in discretionary stops
+- it's impractical to re-derive the results, but now there's an algorithm to
+  help with the deduction, all it takes is another 10 seconds
+
+---
+<img src="./resources/images/klm_relax_2.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+???
+- and we immediately see that no, this doesn't drive the results
+- substantively, we would still draw the same conclusion (in terms of the
+  direction of discrimination) without it
+---
+<img src="./resources/images/klm_relax_3.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+???
+- then we can do the same for the assumption that there are no anti-white stops
+- for example, Gelman et al speculated that officers might stop white civilians
+  who look out of place in black neighborhoods, on suspicion they were there to
+  buy drugs
+- it turns out this is quite consequential
+- but we don't really believe there is rampant anti-white stopping in New York
+---
+<img src="./resources/images/klm_relax_4.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+???
+- it's hard to imagine that more than 5% of white stops are discriminatory
+- and if we incorporate that information, we can see the results are actually
+  quite robust
+---
+
+# Automating oversight
+
+- Computational solution to an oversight bottleneck
+  - Reduces 10 weeks of derivation to 10 secs. of computation
+  - Flexibly adapts to different assumptions, data environments
+
+???
+- the real advantage is that this can handle different agencies with completely
+  different data environments
+- we just got a big grant to take this idea and scale it up into a
+  general-purpose diagnostic for traffic discrimination
+- that can take in whatever data you have available:
+  - shift assignments, traffic sensors, cellphone-tracking data
+  - no matter what you have, just throw it in the soup and let the algorithm
+    make sense of it
+- we've collected a ton of this data for seven of the nation's largest
+  agencies and are getting it all ready for analysis
+- and the goal is to let us use one unifying method for all of them, rather than
+  doing ad-hoc analyses one agency at a time
+
+--
+- Ongoing applications to traffic-stop discrimination
+.footnote[
+<table style="left: 5%; width: 95%; color: black; font-size: 20px" >
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Guilherme Duarte, Haosen Ge, Jacob Kaplan, Dean Knox, Gregory Lanzalotto, Rachel Mariman, and Jonathan Mummolo. 2023. "Statistical methodology for measuring racial bias in police traffic enforcement with incomplete information." Working paper.</td>
+  </tr>
+</table>
+]
+
+--
+  - Rosters; 
+--
+patrol maps; 
+--
+shift assignments;  
+--
+dispatch logs; 
+--
+stop, arrest & force forms; 
+--
+traffic sensors; 
+--
+mobile-location data
+
+--
+  - Chicago, IL; Dallas & Houston, TX; Orange County, CA; <br>Miami, Miami-Dade County & Palm Beach County, FL
+
+--
+- **Goal:** a general solution to police oversight
+  - Eliminate need for ad-hoc, agency-specific analyses
+  - Study same questions across agencies to allow comparison
+
+---
+
+class: center, middle, inverse
+
+# Other ongoing work
+
+???
+- alright, so before we wrap up, I'll take just a few minutes to introduce a few
+  projects that I'm pretty excited about
+
+---
+
+# Other ongoing work
+
+???
+1. having now worked on a number of doj investigations, something that stands
+   out is the amount of qualitative review that lawyers do
+  - in terms of case review, watching bodycam video, and so on
+  - there's just no replacement for getting your hands dirty in the raw data
+  - what we realized was that there were huge inefficiencies in the process
+  - and that we could use an extension the quantitative analysis I just
+    presented to help with case selection for the qualitative analysis
+  - to efficiently target cases that can narrow down (in that investigation)
+    possible agent behavior toward mentally ill people
+  <!-- - if you're worried about officers misrepresenting civilian behavior,
+  then we --> <!-- should be specifically hunting down those "resisting arrest"
+  and "suspicious --> <!-- behavior" cases and studying those -->
+1. the second project looks at bodycam video from a different angle
+   - these videos are interesting because they're such a waste of
+     resources. agencies pay insane amounts of money to store terabytes of
+     footage, but police chiefs tell us hardly anyone watches it because
+     it's too much work
+   - we're using computer-vision and speech-analysis to summarize videos so a
+     sergeant can get an automatic weekly update that they can skim
+
+--
+1. Efficient allocation of monitoring resources
+  - Verifying agent-reported data with bodycam review is costly
+
+--
+  - Techniques for efficiently allocating principal's data-collection
+    resources (identify videos that help narrow bounds fastest)
+--
+1. Computational methods for early intervention
+  - Computer-vision & speech analysis of bodycam videos
+
+---
+
+<video class="media" style="position: absolute; width: 100%; left: 0%; top: 0%" preload="auto" onclick="this.play();">
+  <source src="./resources/videos/bwc.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+???
+- we want them to be able to quickly get a sense of the background
+- this encounter here is a guy with bipolar disorder
+- we want to automatically identify actions that are potentially concerning,
+  like when an officer gets his hands ready
+- skip through parts where nothing is happening
+- and really zoom in on the problematic areas
+- like where the civilian has an episode 
+- he rushes the officer, but you can see he's got his hands down at his side the
+  whole time, and he stops short a foot or two away
+- and officers react pretty harshly, perhaps more than they need to, with three
+  cops pinning the civilian down
+- that's the kind of encounter we want to flag automatically so sergeants can
+  take a look
+---
+
+# Other ongoing work
+
+1. Efficient allocation of monitoring resources
+  - Verifying agent-reported data with bodycam review is costly
+  - Techniques for efficiently allocating principal's data-collection
+    resources (identify videos that help narrow bounds fastest)
+1. Computational methods for early intervention
+  - Computer-vision & speech analysis of bodycam videos
+1. Descriptive representation in police bureaucracies
+  - Largest public registry of officers, 99 of top 100 agencies
+
+???
+- a third project is looking at this idea of descriptive representation
+  - that you can get better performance from a bureaucracy by staffing it with
+    people who are like the customers and can understand them
+  - we've collected what's now the largest registry of officers nationwide,
+    covering more than a third of local law enforcement and 99 of the 100 largest
+    agencies
+  - we quantify how much local police diverge from local residents on race,
+    gender, age, income, political orientation
+  - and show why that matters in terms of enforcement decisions
+- and a fourth project I mentioned briefly at the start
+  - looking at how civilian oversight is structured nationwide
+  - getting incredibly detailed process data on how misconduct is investigated
+    and how officers almost never get serious discipline for it
+  - we find showing this data to local residents makes them trust police less
+    and want to cooperate less
+  - but you can counteract that somewhat with greater transparency
+  - walking residents through the process in detail (here's what officers are
+    accused of, here's what was done to investigate, here's the evidence, etc)
+
+--
+1. Management of police misconduct investigations
+  - National census of oversight organizations
+
+--
+  - Process data on findings & discipline (Chicago, NYC, Phila.)
+
+--
+  - Weak transparency undermines civilian trust & willingness<br> to cooperate, but strong transparency improves it
+
+<!-- --- -->
+
+<!-- <img src="./resources/images/niss_iof.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/> -->
+
+---
+
+class: center, middle, inverse
+
+# For more information:
+<br><u>dcknox.com</u><br><br>
+<u>policingresearch.org</u>
+
+
+<!-- THE END -->
+
+    </textarea>
+
+    <script src="js/remark-latest.min.js"></script>
+    <!-- <script type="text/javascript" async -->
+    <!--   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> -->
+    <!--   // load MathJax -->
+    <!--   MathJax.Hub.Config({ -->
+    <!--       tex2jax: { -->
+    <!--       skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'], -->
+    <!--       inlineMath: [['$','$'], ['\\(','\\)']] -->
+    <!--       }, -->
+    <!--       "HTML-CSS": { -->
+    <!--       availableFonts: "TeX", -->
+    <!--       preferredFont: "Latin-Modern", -->
+    <!--       webfont: "Latin-Modern" -->
+    <!--       }, -->
+    <!--   }); -->
+    <!--   MathJax.Hub.Queue(function() { -->
+    <!--       $(MathJax.Hub.getAllJax()).map(function(index, elem) { -->
+    <!--           return(elem.SourceElement()); -->
+    <!--       }).parent().addClass('has-jax'); -->
+    <!--   }); -->
+    <!--   MathJax.Hub.Configured(); -->
+    <!-- </script> -->
+
+    <script>
+      // configure remark.js
+      var slideshow = remark.create({
+      countIncrementalSlides: false,
+      navigation: {scroll: false},
+      slideNumberFormat: ''
+      });
+    </script>
+
+      <script>
+
+        var videos = document.getElementsByClassName("media");
+        function prepareCheckScroll(){
+          window.setTimeout("checkScroll()", 1000);
+        }
+        function checkScroll() {
+
+					for(var i = 0; i < videos.length; i++) {
+						var video = videos[i];
+						var x = video.offsetLeft, y = video.offsetTop, w = video.offsetWidth, h = video.offsetHeight, r = x + w, //right
+						b = y + h, //bottom
+						visibleX, visibleY, visible;
+						visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+						visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+						visible = visibleX * visibleY / (w * h);
+
+						if (visible > .5) {
+							video.play();
+						} else {
+							video.currentTime = 0;
+							video.pause();
+						}
+					}
+				}
+
+				window.addEventListener('keydown', prepareCheckScroll, false);
+				window.addEventListener('keyup', prepareCheckScroll, false);
+      </script>
+
+      <script>
+        var months = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+        var today = new Date();
+        var dateElements = document.getElementsByClassName('today');
+        [].forEach.call(dateElements, function(dateElement){
+        dateElement.innerHTML = today.getDate() + " " + months[today.getMonth()] + " " + today.getFullYear();
+        })
+      </script>
+
+  </body>
+</html>
