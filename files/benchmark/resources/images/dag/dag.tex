@@ -1,0 +1,440 @@
+\documentclass[multi=page]{standalone}
+
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{bm}
+\setul{2pt}{.5pt}
+
+\usepackage{mathspec}  % use xelatex to compile
+%% \setallmainfonts{Raleway}
+\setallmainfonts{Roboto Light}
+
+\definecolor{darkred}{HTML}{A51C30}
+
+\renewcommand{\bf}{}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+
+\newcommand{\invisiblesection}[1]{%
+  \par\refstepcounter{section}% Increase section counter
+  \sectionmark{#1}% Add section mark (header)
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}% Add section to ToC
+  % Add more content here, if needed.
+}
+
+
+\tikzset{
+  align=center,
+  node distance = 4cm and 1cm,
+  shorten <=.5ex , shorten >=.5ex,
+  minimum width=4em, minimum height=3ex,
+  font=\large,
+  on grid,
+  x = 4cm,
+  y = 2cm
+}
+
+\begin{document}
+
+
+\invisiblesection{basic setup}
+\begin{page}
+  basic setup
+\end{page}
+
+
+\begin{page}
+  \begin{tikzpicture}
+    \node[gray] (U) at (-.7, 1.6) {$U$};
+    \node (X) at (.7, 1.6) {place, time, etc.};
+    \node (R) at ( 0, 1) {driver race};
+    \node[gray] (D) at ( 0, 0) {\begin{tabular}{c}dangerous\\driving\end{tabular}};
+    %% \node (C) at (-1, 0) {\begin{tabular}{c}crashes,\\cameras\end{tabular}};
+    %% \node (S) at (1,0) {\begin{tabular}{c}officer\\stop\end{tabular}};
+    \path (U) edge [->, dashed, gray](X);
+    \path (U) edge [->, dashed, gray](R);
+    \path (U) edge [->, dashed, gray](D);
+    %% \path (X) edge [->, bend right=20](C);
+    %% \path (X) edge [->](D);
+    %% \path (X) edge [->](S);
+    %% \path (R) edge [->](S);
+    %% \path (D) edge [->](S);
+    %% \path (D) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    \node[gray] (U) at (-.7, 1.6) {$U$};
+    \node (X) at (.7, 1.6) {place, time, etc.};
+    \node (R) at ( 0, 1) {driver race};
+    \node[gray] (D) at ( 0, 0) {\begin{tabular}{c}dangerous\\driving\end{tabular}};
+    %% \node (C) at (-1, 0) {\begin{tabular}{c}crashes,\\cameras\end{tabular}};
+    %% \node (S) at (1,0) {\begin{tabular}{c}officer\\stop\end{tabular}};
+    \path (U) edge [->, dashed, gray](X);
+    \path (U) edge [->, dashed, gray](R);
+    \path (U) edge [->, dashed, gray](D);
+    %% \path (X) edge [->, bend right=20](C);
+    \path (X) edge [->](D);
+    %% \path (X) edge [->](S);
+    %% \path (R) edge [->](S);
+    %% \path (D) edge [->](S);
+    %% \path (D) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    \node[gray] (U) at (-.7, 1.6) {$U$};
+    \node (X) at (.7, 1.6) {place, time, etc.};
+    \node (R) at ( 0, 1) {driver race};
+    \node[gray] (D) at ( 0, 0) {\begin{tabular}{c}dangerous\\driving\end{tabular}};
+    %% \node (C) at (-1, 0) {\begin{tabular}{c}crashes,\\cameras\end{tabular}};
+    \node (S) at (1,0) {\begin{tabular}{c}officer\\stop\end{tabular}};
+    \path (U) edge [->, dashed, gray](X);
+    \path (U) edge [->, dashed, gray](R);
+    \path (U) edge [->, dashed, gray](D);
+    %% \path (X) edge [->, bend right=20](C);
+    \path (X) edge [->](D);
+    \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](S);
+    %% \path (D) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    \node[gray] (U) at (-.7, 1.6) {$U$};
+    \node (X) at (.7, 1.6) {place, time, etc.};
+    \node (R) at ( 0, 1) {driver race};
+    \node[gray] (D) at ( 0, 0) {\begin{tabular}{c}dangerous\\driving\end{tabular}};
+    \node (C) at (-1, 0) {\begin{tabular}{c}crashes,\\cameras\end{tabular}};
+    \node (S) at (1,0) {\begin{tabular}{c}officer\\stop\end{tabular}};
+    \path (U) edge [->, dashed, gray](X);
+    \path (U) edge [->, dashed, gray](R);
+    \path (U) edge [->, dashed, gray](D);
+    \path (X) edge [->, bend right=20](C);
+    \path (X) edge [->](D);
+    \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](S);
+    \path (D) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    \node[gray] (U) at (-.7, 1.6) {$U$};
+    \node (X) at (.7, 1.6) {place, time, etc.};
+    \node (R) at ( 0, 1) {driver race};
+    \node[gray] (D) at ( 0, 0) {\begin{tabular}{c}dangerous\\driving\end{tabular}};
+    \node[draw] (C) at (-1, 0) {\begin{tabular}{c}crashes,\\cameras\end{tabular}= 1\hspace{1ex}};
+    \node (S) at (1,0) {\begin{tabular}{c}officer\\stop\end{tabular}};
+    \path (U) edge [->, dashed, gray](X);
+    \path (U) edge [->, dashed, gray](R);
+    \path (U) edge [->, dashed, gray](D);
+    \path (X) edge [->, bend right=20](C);
+    \path (X) edge [->](D);
+    \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](S);
+    \path (D) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    \node[gray] (U) at (-.7, 1.6) {$U$};
+    \node (X) at (.7, 1.6) {place, time, etc.};
+    \node (R) at ( 0, 1) {driver race};
+    \node[gray] (D) at ( 0, 0) {\begin{tabular}{c}dangerous\\driving\end{tabular}};
+    \node (C) at (-1, 0) {\begin{tabular}{c}crashes,\\cameras\end{tabular}};
+    \node[draw] (S) at (1,0) {\begin{tabular}{c}officer\\stop\end{tabular}= 1\hspace{1ex}};
+    \path (U) edge [->, dashed, gray](X);
+    \path (U) edge [->, dashed, gray](R);
+    \path (U) edge [->, dashed, gray](D);
+    \path (X) edge [->, bend right=20](C);
+    \path (X) edge [->](D);
+    \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](S);
+    \path (D) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    \node[gray] (U) at (-.7, 1.6) {$U$};
+    \node (X) at (.7, 1.6) {$X$};
+    \node (R) at ( 0, 1) {$R$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (D) at ( 0, 0) {$D$};
+    \node (C) at (-1, 0) {$C$};
+    \node (S) at (1,0) {$S$};
+    \path (U) edge [->, dashed, gray](X);
+    \path (U) edge [->, dashed, gray](R);
+    \path (U) edge [->, dashed, gray](D);
+    \path (X) edge [->, bend right=20](C);
+    \path (X) edge [->](D);
+    \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](S);
+    \path (D) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    \node[gray] (U) at (-.7, 1.6) {$U$};
+    \node[draw, minimum size=3em] (X) at (.7, 1.6) {$X$};
+    \node (R) at ( 0, 1) {$R$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (D) at ( 0, 0) {$D$};
+    \node (C) at (-1, 0) {$C$};
+    \node (S) at (1,0) {$S$};
+    \path (U) edge [->, dashed, gray](X);
+    \path (U) edge [->, dashed, gray](R);
+    \path (U) edge [->, dashed, gray](D);
+    \path (X) edge [->, bend right=20](C);
+    \path (X) edge [->](D);
+    \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](S);
+    \path (D) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    \node[gray] (U) at (-.7, 1.6) {$U$};
+    \node[draw, minimum size=3em] (X) at (.7, 1.6) {$X$};
+    \node (R) at ( 0, 1) {$R$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (D) at ( 0, 0) {$D$};
+    \node[draw, minimum size=3em] (C) at (-1, 0) {$C=1$};
+    \node (S) at (1,0) {$S$};
+    \path (U) edge [->, dashed, gray](X);
+    \path (U) edge [->, dashed, gray](R);
+    \path (U) edge [->, dashed, gray](D);
+    \path (X) edge [->, bend right=20](C);
+    \path (X) edge [->](D);
+    \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](S);
+    \path (D) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    \node[gray] (U) at (-.7, 1.6) {$U$};
+    \node[draw, minimum size=3em] (X) at (.7, 1.6) {$X$};
+    \node (R) at ( 0, 1) {$R$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (D) at ( 0, 0) {$D$};
+    \node (C) at (-1, 0) {$C$};
+    \node[draw, minimum size=3em] (S) at (1,0) {$S=1$};
+    \path (U) edge [->, dashed, gray](X);
+    \path (U) edge [->, dashed, gray](R);
+    \path (U) edge [->, dashed, gray](D);
+    \path (X) edge [->, bend right=20](C);
+    \path (X) edge [->](D);
+    \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](S);
+    \path (D) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    %% \node[gray] (U) at (-.7, 1.6) {$U$};
+    %% \node[draw, minimum size=3em] (X) at (.7, 1.6) {$X$};
+    \node (R) at ( 0, 1.6) {$R$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (D) at ( 0, 0) {$D$};
+    \node (C) at (-1, 0) {$C$};
+    \node (S) at (1,0) {$S$};
+    %% \path (U) edge [->, dashed, gray](X);
+    %% \path (U) edge [->, dashed, gray](R);
+    %% \path (U) edge [->, dashed, gray](D);
+    \path (R) edge [<->, dashed, gray, bend right = 45] (D);
+    %% \path (X) edge [->, bend right=20](C);
+    %% \path (X) edge [->](D);
+    %% \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](S);
+    \path (D) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\invisiblesection{substitution}
+\begin{page}
+   substitution
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    %% \node[gray] (U) at (-.7, 1.6) {$U$};
+    %% \node[draw, minimum size=3em] (X) at (.7, 1.6) {$X$};
+    \node (R) at ( 0, 1.6) {$R$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (D) at ( 0, 0) {$D$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (D2) at ( 0, -1.6) {$D'$};
+    \node (C) at (-1, 0) {$C$};
+    \node (S) at (1,0) {$S$};
+    %% \path (U) edge [->, dashed, gray](X);
+    %% \path (U) edge [->, dashed, gray](R);
+    %% \path (U) edge [->, dashed, gray](D);
+    \path (R) edge [<->, dashed, gray, bend right = 45] (D);
+    %% \path (X) edge [->, bend right=20](C);
+    %% \path (X) edge [->](D);
+    %% \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](S);
+    \path (S) edge [->](D2);
+    \path (D) edge [->](D2);
+    \path (D2) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    %% \node[gray] (U) at (-.7, 1.6) {$U$};
+    %% \node[draw, minimum size=3em] (X) at (.7, 1.6) {$X$};
+    \node (R) at ( 0, 1.6) {$R$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (D) at ( 0, 0) {$D$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (D2) at ( 0, -1.6) {$D'$};
+    \node (C) at (-1, 0) {$C$};
+    \node (S) at (1,0) {$S$};
+    %% \path (U) edge [->, dashed, gray](X);
+    %% \path (U) edge [->, dashed, gray](R);
+    %% \path (U) edge [->, dashed, gray](D);
+    \path (R) edge [<->, dashed, gray, bend right = 45] (D);
+    %% \path (X) edge [->, bend right=20](C);
+    %% \path (X) edge [->](D);
+    %% \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](C);
+    \path (D) edge [->](D2);
+    \path (D2) edge [->](S);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    %% \node[gray] (U) at (-.7, 1.6) {$U$};
+    %% \node[draw, minimum size=3em] (X) at (.7, 1.6) {$X$};
+    \node (R) at ( 0, 1.6) {$R$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (D) at ( 0, 0) {$D$};
+    \node (C) at (-1, 0) {$C$};
+    \node (O) at (-1, -1.6) {$O$};
+    \node (S) at (1,0) {$S$};
+    %% \path (U) edge [->, dashed, gray](X);
+    %% \path (U) edge [->, dashed, gray](R);
+    %% \path (U) edge [->, dashed, gray](D);
+    \path (R) edge [<->, dashed, gray, bend right = 45] (D);
+    %% \path (X) edge [->, bend right=20](C);
+    %% \path (X) edge [->](D);
+    %% \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](C);
+    \path (D) edge [->](S);
+    \path (S) edge [->, bend left=45](C);
+    \path (O) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    %% \node[gray] (U) at (-.7, 1.6) {$U$};
+    %% \node[draw, minimum size=3em] (X) at (.7, 1.6) {$X$};
+    \node (R) at ( 0, 1.6) {$R$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (D) at ( 0, 0) {$D$};
+    \node (C) at (-1, 0) {$C$};
+    \node (O) at (-1, -1.6) {$O=0$};
+    \node (S) at (1,0) {$S$};
+    %% \path (U) edge [->, dashed, gray](X);
+    %% \path (U) edge [->, dashed, gray](R);
+    %% \path (U) edge [->, dashed, gray](D);
+    \path (R) edge [<->, dashed, gray, bend right = 45] (D);
+    %% \path (X) edge [->, bend right=20](C);
+    %% \path (X) edge [->](D);
+    %% \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](C);
+    \path (D) edge [->](S);
+    \path (S) edge [->, bend left=45](C);
+    \path (O) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    %% \node[gray] (U) at (-.7, 1.6) {$U$};
+    %% \node[draw, minimum size=3em] (X) at (.7, 1.6) {$X$};
+    \node (R) at ( 0, 1.6) {$R$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (D) at ( 0, 0) {$D$};
+    \node (C) at (-1, 0) {$C$};
+    \node (O) at (-1, -1.6) {$O=1$};
+    \node (S) at (1,0) {$S$};
+    %% \path (U) edge [->, dashed, gray](X);
+    %% \path (U) edge [->, dashed, gray](R);
+    %% \path (U) edge [->, dashed, gray](D);
+    \path (R) edge [<->, dashed, gray, bend right = 45] (D);
+    %% \path (X) edge [->, bend right=20](C);
+    %% \path (X) edge [->](D);
+    %% \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](C);
+    \path (D) edge [->](S);
+    %% \path (S) edge [->, bend left=45](C);
+    \path (O) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+
+% ==============================================================================
+
+\invisiblesection{surnames}
+\begin{page}
+   surnames
+\end{page}
+
+\begin{page}
+  \begin{tikzpicture}
+    %% \node[gray] (U) at (-.7, 1.6) {$U$};
+    %% \node[draw, minimum size=3em] (X) at (.7, 1.6) {$X$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (R) at ( 0, 1.6) {$R$};
+    \node[draw, circle, minimum size=3em, gray, dashed] (D) at ( 0, 0) {$D$};
+    \node (C) at (-1, 0) {$C$};
+    \node (S) at (1,0) {$S$};
+    \node (L) at (-1, 1.6) {$L$};
+    %% \path (U) edge [->, dashed, gray](X);
+    %% \path (U) edge [->, dashed, gray](R);
+    %% \path (U) edge [->, dashed, gray](D);
+    \path (R) edge [<->, dashed, gray, bend right = 45] (D);
+    \path (R) edge [->] (L);
+    %% \path (X) edge [->, bend right=20](C);
+    %% \path (X) edge [->](D);
+    %% \path (X) edge [->](S);
+    \path (R) edge [->](S);
+    \path (D) edge [->](S);
+    \path (D) edge [->](C);
+    \path[use as bounding box] (-1.5, -2.5) rectangle (1.5, 2.5);
+ \end{tikzpicture}
+\end{page}
+
+\end{document}

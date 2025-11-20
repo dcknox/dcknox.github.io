@@ -1,0 +1,85 @@
+library(ggplot2)
+library(data.table)
+
+# style ========================================================================
+
+red <- '#A51C30'
+lightred <- '#E16273'
+blue <- '#4E84C4'
+darkblue <- '#0C2C5C'
+lightblue <- '#4C6C9C'
+
+
+
+# plot =========================================================================
+
+n_speed_minority <- 500
+n_speed_white <- 500
+
+rr <- 3
+p_stop_white <- .2
+p_stop_minority <- p_stop_white * rr
+
+n_stop_minority <- p_stop_minority * n_speed_minority
+n_stop_white <- p_stop_white * n_speed_white
+
+n_camera_minority <- n_speed_minority - n_stop_minority
+n_camera_white <- n_speed_white - n_stop_white
+
+(n_stop_minority / n_camera_minority) /
+  (n_stop_white / n_camera_white)
+
+or <-
+  (p_stop_white * rr / (1 - p_stop_white * rr)) /
+  (p_stop_white / (1 - p_stop_white))
+
+
+results <- data.table(expand.grid(
+  p_stop_white = seq(0, .5, .01),
+  rr = 2^seq(-1, 1, .01)
+))
+results[,
+        or := (
+          (p_stop_white * rr / (1 - p_stop_white * rr)) /
+            (p_stop_white / (1 - p_stop_white))
+        )]
+
+ggplot(results[p_stop_white == .33],
+       aes(x = rr,
+           y = or,
+           group = p_stop_white
+           )
+       ) +
+  geom_abline(intercept = 0, slope = 1, linetype = 'dashed') +
+  geom_line() +
+  geom_point(x = 2, y = 4, color = lightred, size = 4) +
+  coord_fixed(ratio = .5,
+              xlim = c(.5, 2),
+              ylim = c(.25, 4)
+              ) +
+  theme_light(base_size = 24) +
+  theme(text = element_text(family = 'Raleway'),
+        panel.grid = element_blank()
+        ) +
+  scale_y_continuous(breaks = seq(.5, 4, .5)) +
+  xlab('\nActual risk ratio among dangerous drivers') +
+  ylab('\nEstimated risk ratio when ignoring substitution\n')
+
+ggplot(results[p_stop_white == .33],
+       aes(x = rr,
+           y = or,
+           group = p_stop_white
+           )
+       ) +
+  geom_abline(intercept = 0, slope = 1, linetype = 'dashed') +
+  geom_line() +
+  coord_fixed(ratio = .5,
+              xlim = c(.5, 2),
+              ylim = c(.25, 4)
+              ) +
+  theme_minimal(base_size = 24) +
+  theme(text = element_text(family = 'Raleway')) +
+  scale_y_continuous(breaks = seq(.5, 4, .5)) +
+  xlab('\nActual risk ratio among dangerous drivers') +
+  ylab('\nEstimated risk ratio when ignoring substitution\n')
+

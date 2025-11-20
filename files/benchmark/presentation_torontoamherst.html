@@ -1,0 +1,2135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Police Oversight & Reform</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+
+      /* latin */
+      @font-face {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 100;
+      src: url(./resources/fonts/Roboto/Roboto-Thin.ttf) format('truetype');
+      }
+      /* latin */
+      @font-face {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 300;
+      src: url(./resources/fonts/Roboto/Roboto-Light.ttf) format('truetype');
+      }
+      /* latin */
+      @font-face {
+      font-family: 'Roboto';
+      font-style: bold;
+      font-weight: 700;
+      src: url(./resources/fonts/Roboto/Roboto-Bold.ttf) format('truetype');
+      }
+
+      /* latin */
+      @font-face {
+      font-family: 'Raleway', 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      src: url(./resources/fonts/Raleway/Raleway-Regular.ttf) format('truetype');
+      }
+	  
+      /* latin */
+      @font-face {
+      font-family: 'Raleway', 'Roboto';
+      font-style: bold;
+      font-weight: 700;
+      src: url(./resources/fonts/Raleway/Raleway-SemiBold.ttf) format('truetype');
+      }
+
+      /* latin */
+      @font-face {
+      font-family: 'Great Vibes';
+      font-style: normal;
+      font-weight: 300;
+      src: url(./resources/fonts/Great_Vibes/GreatVibes-Regular.ttf) format('truetype');
+      }
+
+
+      h1 {
+      font-family: 'Raleway', 'Roboto';
+      font-weight: 600;
+      color: #A51C30;
+      }
+
+      h2 {
+      font-family: 'Raleway', 'Roboto';
+      font-weight: 400;
+      color: #A51C30;
+      }
+
+      p {
+      font-family: 'Roboto';
+      font-weight: 300;
+      sans-serif;
+      }
+
+      body {
+      font-family: 'Roboto';
+      font-weight: 300;
+      sans-serif;
+      }
+
+      .footnote {
+      position: absolute;
+      bottom: 1.5%;
+      left: 10%;
+      text-align: left;
+      width: 50;
+	  font-size: 20px;
+      z-index: 3;
+      }
+
+      b, strong {
+      font-family: 'Roboto';
+      font-weight: 700;
+      sans-serif;
+      }
+
+      table, th, tr, td {
+      border-style:none;
+      <!-- font-size: 100%; -->
+      }
+
+      tr.underline td{
+      border-bottom: 1px solid black;
+      }
+      
+      tr.start td{
+      border-top: double black;
+      }
+
+      tr.end td{
+      border-bottom: double;
+      }
+
+      td {
+      padding-bottom: 1ex;
+      vertical-align: top;
+      }
+
+      .footnote td {
+      padding-bottom: 0ex;
+      vertical-align: top;
+      }
+
+      .functiondef td {
+      vertical-align: middle;
+      padding-bottom: 0ex;
+      line-height: 1
+      }
+
+      sup {
+      vertical-align: top; 
+      font-size: 0.5em;
+      top: -.5ex;
+      }
+
+      ul, ol {
+      padding-top: 0ex;
+      }
+
+      li {
+      padding-bottom: 1ex;
+      }
+
+      .remark-slide-content {
+      height: 100%;
+      background-size: cover;
+      }
+
+      .newspaper {
+      background: #D0D0D0;
+      }
+
+      .black {
+      background: black;
+      }
+
+      .inverse {
+      background: #A51C30;
+      color: #FFFFFF;
+      }
+
+      .remark-slide-content h1 {
+      font-size: 275%;
+      }
+
+      .remark-slide-content h2 {
+      font-size: 200%;
+      }
+
+      .remark-slide-content p {
+      font-size: 30px;
+      }
+
+      .remark-slide-content li {
+      font-size: 30px;
+      padding-bottom: 1.5ex;
+      }
+
+      .remark-slide-content li li {
+      font-size: 25px;
+      padding-bottom: 0ex;
+      }
+      
+      .remark-slide-content li:last-child{
+      padding-bottom: 0ex;
+      }
+
+      .inverse h1, .inverse h2 {
+      color: #f3f3f3;
+      line-height: 0.8em;
+      }
+
+      .small {
+      font-size: 90%;
+      }
+
+      .tiny {
+      font-size: 60%;
+      }
+      
+      .large {
+      font-size: 120%;
+      }
+
+      .highlight {
+      color: #A51C30;
+      }
+
+      .highlight_alt {
+      color: #4E84C4;
+      }
+
+      a {
+      color: #4E84C4;
+      }
+
+      .lightgray {
+      color: lightgray;
+      }
+
+      .gray {
+      color: #A1A1A1;
+      }
+
+      .darkgray {
+      color: dimgray;
+      }
+
+      .code p {
+          font-family: 'Roboto Mono', monospace;
+          font-size: 110%;
+	  margin-left: 50px;
+      }
+
+      .stroke {
+	  /* -webkit-text-stroke: 2px white; /\* Width and color of the stroke *\/ */
+	  text-shadow:
+	      -2px -2px 0 white, /* Top left shadow, adjust values for position and color */
+	      2px -2px 0 white, /* Top right shadow */
+	      -2px  2px 0 white, /* Bottom left shadow */
+	      2px  2px 0 white; /* Bottom right shadow */
+      }
+
+      table.center td {
+      text-align: center;
+      }
+            
+      .overlay {
+      background-color: white;
+      background-color: rgba(255,255,255,0.75);
+      font-size: 150%;
+      width: auto;
+      position: absolute;
+      padding: .25em;
+      border-radius: .25em;
+      }
+
+      .overlay-container {
+	  position: relative;
+      }
+      .overlay-container::before {
+	  content: "";
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background-color: white;
+	  background-color: rgba(255,255,255,0.75);
+	  pointer-events: none; /* Allows clicks to pass through the overlay to the content below */
+      }
+      .overlay-text {
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	  color: black; /* Text color */
+	  font-size: 24px; /* Text size */
+	  font-weight: bold; /* Text weight */
+      }
+
+      .summary {
+      background-color: white;
+      background-color: rgba(255, 255, 255, 0.6);
+      font-size: 35px;
+      display: table;
+      text-align: center;
+      vertical-align: middle;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      }
+
+      .box {
+	  border: 1px solid black;
+	  width: 100%;
+	  padding: 1em
+      }
+
+      .box p {
+	  padding: 0;
+	  padding-top: .5em;
+	  margin: 0;
+      }
+
+      .box p:first-child {
+	  padding: 0;
+      }
+
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      .shrink_img {
+	  transform: scale(.3);
+	  transform-origin: center; 
+      }
+
+      @keyframes slideup {
+        0% {
+        }
+        100% {
+          transform: translate3d(0px, -118.5px, 0px);
+        }
+      }
+      img#slideup {
+      animation: slideup 1s forwards;
+      }
+
+      @keyframes slideleft {
+        0% {
+        }
+        100% {
+          transform: translate3d(-100px, 0px, 0px);
+        }
+      }
+      img#slideleft {
+      animation: slideleft 1s forwards;
+      }
+
+      img#slidleft {
+	    transform: translate3d(-100px, 0px, 0px);
+	  }
+
+      @keyframes slidedownright {
+        0% {
+        }
+        100% {
+          transform: translate3d(100px, 25px, 0px);
+        }
+      }
+      img#slidedownright {
+      animation: slidedownright 1s forwards;
+      }
+
+      @keyframes slidedownzoom {
+        0% {
+        }
+        100% {
+          transform: translate(0%, -50%) scale(1.2);
+        }
+      }
+      img#slidedownzoom {
+      animation: slidedownzoom 1s forwards;
+      }
+
+      @keyframes slidedownshrink {
+        0% {
+        }
+        100% {
+          transform: translate(-2%, 25%) scale(.9);
+        }
+      }
+      img#slidedownshrink {
+      animation: slidedownshrink 1s forwards;
+      }
+	  
+	  img#sliddownshrunk {
+	    transform: translate(-2%, 25%) scale(.9);
+	  }
+
+      .stretch {
+      transform: scale(1, 2.25)
+      }
+
+      
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+<h1 style="font-size: 250%; text-align: left; margin-bottom: 20px">Monitoring Racial Bias in Police<br>Traffic Enforcement with Noisy Proxies of Driver Behavior</h1>
+<!-- <img src="./resources/images/tx_dps.png" style="position: absolute; right: -5%; bottom: 0%; width: 60%; z-index: 1"/> -->
+<br><br><br><br><br><br><br>
+<!-- <span class="today large" style="margin-bottom: 20px; z-index: 2; position: fixed"></span> -->
+<br><br><br>
+<span class="large" style="margin-bottom: 20px; z-index: 2; position: fixed">
+  Kai Cooper &nbsp; .small.highlight[**Penn**]<br>
+  Gregory Lanzalotto &nbsp; .small.highlight[**Penn**]<br>
+  Haosen Ge &nbsp; .small.highlight[**Penn**]<br>
+  Jacob Kaplan &nbsp; .small.highlight[**Princeton**]<br>
+  Dean Knox &nbsp; .small.highlight[**Penn**]<br>
+  Jonathan Mummolo &nbsp; .small.highlight[**Princeton**]
+</span>
+
+
+???
+- Thanks, xxx. Glad to be here.
+- I'm going to be talking about the oversight and reform of police agencies
+- and the statistical challenges posed by police records, which are a extremely
+  problematic data source that show us only a fragment of all the information
+  we'd like to see
+- I'll show that we can still use this data to draw defensible conclusions about
+ important social-scientific questions, if we're careful to think not just about
+ what they show, but about all the thinks they *don't* show all the stuff that's
+ distorted or omitted
+- and to do this, I'll provide some computational algorithms that can help us
+  with this reasoning
+- by letting us do partial identification with incomplete data
+
+---
+
+# Police oversight: a review
+
+--
+- Among the most ubiquitous public organizations
+  - Over 18k local law-enforcement agencies across US
+  - Police contact >20% of Americans each year .tiny[(BJS, '22)]
+
+--
+- Vast discretion in enforcement of law .tiny[(Wilson '68, Goldstein, '77)]
+  - "Street level bureaucrats" making real-time policy .tiny[(Lipsky '80)]
+
+--
+  - Elected principals cannot directly observe behavior of agents,
+    hard to tell if civil-rights/public-safety interests are advanced
+
+---
+
+class: newspaper
+<img src="./resources/images/headlines/nyt_doj_memphis_alpha.png" style="position: absolute; left: 10%; top: 15%; width: 80%; z-index: ;"/>
+
+---
+
+# Police oversight: a review
+
+- Among the most ubiquitous public organizations
+  - Over 18k local law-enforcement agencies across US
+  - Police contact >20% of Americans each year .tiny[(BJS, '22)]
+- Vast discretion in enforcement of law .tiny[(Wilson '68, Goldstein, '77)]
+  - "Street level bureaucrats" making real-time policy .tiny[(Lipsky '80)]
+  - Elected principals cannot directly observe behavior of agents,
+    hard to tell if civil-rights/public-safety interests are advanced
+- Main alignment mech. is "investigate and sanction"
+  - Involves labor-intensive, deep-dive review of agency practices
+
+--
+  - But DOJ can examine only a handful of agencies at best
+  - Litigation by NGOs is costly, can take years to go to trial
+
+---
+
+# Monitoring with open data
+
+- Police data increasingly available .tiny[(Vera Institute, '23)]
+- "Benchmark analysis" offers avenue for monitoring
+  - **Retrospective:** assess if past policy reforms worked
+  - **Prospective:** reduce principal-agent info. gap, <br>allow reward/punishment of alignment/deviation
+
+--
+- But lack of causal foundation &rightarrow; statistical challenges  &rightarrow; wildly contradictory findings .tiny[(Ridgeway '11)]
+
+.footnote[
+<table style="left: 5%; width: 95%; font-size: 20px">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Ba, Knox, Mummolo & Rivera. 2021. "The role of officer race and gender in police-civilian interactions in Chicago." <i>Science</i>.</td>
+  </tr>
+  <tr>
+    <td align="center"><strong style="">[2]</strong></td>
+    <td>Knox, Lowe & Mummolo. 2020. "Administrative records mask racially biased policing." <i>American Political Science Review</i>.</td>
+  </tr>
+  <tr>
+    <td align="center"><strong style="">[3]</strong></td>
+    <td>Knox & Mummolo. 2020. "Toward a general causal framework for the study of racial bias in policing." <i>Journal of Political Institutions and Political Economy</i>.</td>
+  </tr>
+  <tr>
+    <td align="center"><strong style="">[4]</strong></td>
+    <td>Knox & Mummolo. 2020. "Making inferences about racial disparities in police violence." <i>Proceedings of the National Academy of Sciences</i>.</td>
+  </tr>
+</table>
+]
+
+---
+<img src="./resources/images/RatcliffeHyland2025_PoliceStopsNaiveDenominators_1.png" style="position: absolute; left: 5%; top: 25%; width: 90%; z-index: ;"/>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+.small[**Source:** Ratcliffe & Hyland ('25), Fig. 2]
+
+--
+<div class="summary" style="left: 0%; top: 0%; height: 100%; width: 100%; text-align: center; vertical-align: middle">
+<br><br><br><br><br><br>
+$$\frac{\text{# black stops}}{\text{# white stops}} \phantom{\Bigg/ \frac{\text{# black residents}}{\text{# white residents}}}$$
+</div>
+
+---
+
+<img src="./resources/images/RatcliffeHyland2025_PoliceStopsNaiveDenominators_1.png" style="position: absolute; left: 5%; top: 25%; width: 90%; z-index: ;"/>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+.small[**Source:** Ratcliffe & Hyland ('25), Fig. 2]
+
+<div class="summary" style="left: 0%; top: 0%; height: 100%; width: 100%; text-align: center; vertical-align: middle">
+<br><br><br><br><br><br>
+$$\frac{\text{# black stops}}{\text{# white stops}} \Bigg/ \frac{\text{# black residents}}{\text{# white residents}}$$
+</div>
+
+---
+<img src="./resources/images/RatcliffeHyland2025_PoliceStopsNaiveDenominators_2.png" style="position: absolute; left: 5%; top: 25%; width: 90%; z-index: ;"/>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+.small[**Source:** Ratcliffe & Hyland ('25), Fig. 2]
+---
+<img src="./resources/images/RatcliffeHyland2025_PoliceStopsNaiveDenominators_3.png" style="position: absolute; left: 5%; top: 25%; width: 90%; z-index: ;"/>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+.small[**Source:** Ratcliffe & Hyland ('25), Fig. 2]
+---
+<img src="./resources/images/RatcliffeHyland2025_PoliceStopsNaiveDenominators_4.png" style="position: absolute; left: 5%; top: 25%; width: 90%; z-index: ;"/>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+.small[**Source:** Ratcliffe & Hyland ('25), Fig. 2]
+---
+<img src="./resources/images/RatcliffeHyland2025_PoliceStopsNaiveDenominators_5.png" style="position: absolute; left: 5%; top: 25%; width: 90%; z-index: ;"/>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+.small[**Source:** Ratcliffe & Hyland ('25), Fig. 2]
+---
+
+# Questions in benchmarking
+
+--
+- What is the **unit of analysis**?
+
+--
+- What is the **graphical causal structure** of the DGP?
+
+--
+- What additional **functional restrictions** are needed<br> to encode what we know about police/civ. behavior?
+
+--
+- What is the **estimand**?
+
+--
+- Notable exceptions .tiny[(Walker '01, Grogger & Ridgeway '06, Ridgeway '09, Ridgeway & MacDonald '10)]
+
+---
+
+# In this talk
+
+- New framework for traffic enforcement benchmarks
+  - Formalize implicit causal estimand targeted by past work
+  - Clarify implicit asms. under which estimand is recovered
+
+.footnote[
+<table style="left: 5%; width: 95%; font-size: 20px">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Knox. 2021. "Revealing racial bias: Causal inference can make
+sense of imperfect policing data." <i>Science</i>.</td>
+  </tr>
+</table>
+]
+
+---
+
+# In this talk
+
+- New framework for traffic enforcement benchmarks
+  - Formalize implicit causal estimand targeted by past work
+  - Clarify implicit asms. under which estimand is recovered
+- Core framework applies to many common datasets
+  - Municipal automated camera citations
+  - State DOT traffic collision reports
+  - Police sobriety checkpoints
+
+.footnote[
+<table style="left: 5%; width: 95%; font-size: 20px">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Knox. 2021. "Revealing racial bias: Causal inference can make
+sense of imperfect policing data." <i>Science</i>.</td>
+  </tr>
+</table>
+]
+
+--
+- Requires tailoring for data challenges in each context
+
+--
+- Illustrate with data from anonymous PD & Texas HP
+
+---
+
+class: middle, inverse
+
+<h1 style="position: absolute; left: 10%; top: 25%; line-height: 1.5">1.</h1>
+<h1 style="position: absolute; left: 20%; top: 25%; line-height: 1.5">
+  A causal framework for<br>
+  benchmark analysis in<br>
+  traffic enforcement
+</h1>
+
+---
+<img src="./resources/images/dag/setup_01.png" style="position: absolute; left: 0%; top: 10%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/dag/setup_02.png" style="position: absolute; left: 0%; top: 10%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/dag/setup_03.png" style="position: absolute; left: 0%; top: 10%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/dag/setup_04.png" style="position: absolute; left: 0%; top: 10%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/dag/setup_05.png" style="position: absolute; left: 0%; top: 10%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/dag/setup_06.png" style="position: absolute; left: 0%; top: 10%; width: 100%; z-index: ;"/>
+---
+
+# Notation
+
+- $X$:&thinsp; fine-grained spatiotemporal blocks
+
+--
+- $R \in \lbrace r\_0, r\_1 \rbrace$:&thinsp; civilian <u>r</u>ace (white, minority)
+
+--
+- $D \in \lbrace d\_0, d\_1 \rbrace$: latent <u>d</u>angerous driving behavior
+
+--
+- $C \in \lbrace c\_0, c\_1 \rbrace$:&thinsp; proxy (<u>c</u>amera, <u>c</u>rash, <u>c</u>heckpoint)
+
+--
+- $S \in \lbrace s\_0, s\_1 \rbrace$:&thinsp; officer action (traffic <u>s</u>top, <u>s</u>itation)
+
+
+---
+<img src="./resources/images/dag/setup_07.png" style="position: absolute; left: 0%; top: 10%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/dag/setup_08.png" style="position: absolute; left: 0%; top: 10%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/dag/setup_09.png" style="position: absolute; left: 0%; top: 10%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/dag/setup_10.png" style="position: absolute; left: 0%; top: 10%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/dag/setup_11.png" style="position: absolute; left: 0%; top: 10%; width: 100%; z-index: ;"/>
+
+---
+
+# Estimands in benchmarking
+
+- **High-level goal:** 
+  - "Equal protection" of law for "similarly situated" individuals,
+
+--
+    <br>$\mathbb{E}[S(r_0) | X=x, D=d] = \mathbb{E}[S(r_1) | X=x, D=d]$
+--
+- Common considerations:
+
+--
+  - Estimand should remain interpretable when outcome is rare
+
+--
+  - Focus on violator subgroup with $D=d_1$ to avoid dilution
+
+.footnote[
+<table style="left: 5%; width: 95%; font-size: 20px">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Knox & Mummolo. 2025. "New data fill longstanding gaps in the study of policing." <i>Science</i>.</td>
+  </tr>
+</table>
+]
+
+--
+
+<p style="font-size: 120%; font-weight: 100; border: 1px solid black; width: 85%; margin-left: 3em; padding-left: 1em">"Among drivers who speed near school-zone speeding cameras, Black drivers are 90% more likely to be cited or arrested by PhxPD officers, compared to white drivers." .tiny[(DOJ, '24)]</p>
+
+---
+
+# Estimands in benchmarking
+
+- **High-level goal:** 
+  - "Equal protection" of law for "similarly situated" individuals,
+    <br>$\mathbb{E}[S(r_0) | X=x, D=d] = \mathbb{E}[S(r_1) | X=x, D=d]$
+- Common considerations:
+  - Estimand should remain interpretable when outcome is rare
+  - Focus on violator subgroup with $D=d_1$ to avoid dilution
+.footnote[
+<table style="left: 5%; width: 95%; font-size: 20px">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Knox & Mummolo. 2025. "New data fill longstanding gaps in the study of policing." <i>Science</i>.</td>
+  </tr>
+</table>
+]
+
+--
+  - If in litigation, showing harm specifically to $R=r_1$ subgroup
+
+---
+
+# Estimands in benchmarking
+
+- **High-level goal:** 
+  - "Equal protection" of law for "similarly situated" individuals,
+    <br>$\mathbb{E}[S(r_0) | X=x, D=d] = \mathbb{E}[S(r_1) | X=x, D=d]$
+- Common considerations:
+  - Estimand should remain interpretable when outcome is rare
+  - Focus on violator subgroup with $D=d_1$ to avoid dilution
+  - If in litigation, showing harm specifically to $R=r_1$ subgroup
+
+<table style="font-size: 30px; margin-left: 1em; margin-top: -1ex">
+<col style="width: 12em">
+<col style="width: 10em">
+<tr>
+<td>
+$$
+\frac{
+{\color{white}\sum_x \ } \mathbb{E}[S(r_1) | x, d_1] \ {\color{white} w_x}
+}{
+{\color{white}\sum_x \ } \mathbb{E}[S(r_0) | x, d_1] \ {\color{white} w_x}
+}{\color{white},}
+$$
+</td>
+<td style="vertical-align: middle">
+$$
+\color{white} w_x = p(x | d_1)
+$$
+</td>
+</tr>
+</table>
+
+
+.footnote[
+<table style="left: 5%; width: 95%; font-size: 20px">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Knox & Mummolo. 2025. "New data fill longstanding gaps in the study of policing." <i>Science</i>.</td>
+  </tr>
+</table>
+]
+
+---
+
+# Estimands in benchmarking
+
+- **High-level goal:** 
+  - "Equal protection" of law for "similarly situated" individuals,
+    <br>$\mathbb{E}[S(r_0) | X=x, D=d] = \mathbb{E}[S(r_1) | X=x, D=d]$
+- Common considerations:
+  - Estimand should remain interpretable when outcome is rare
+  - Focus on violator subgroup with $D=d_1$ to avoid dilution
+  - If in litigation, showing harm specifically to $R=r_1$ subgroup
+
+<table style="font-size: 30px; margin-left: 1em; margin-top: -1ex">
+<col style="width: 12em">
+<col style="width: 10em">
+<tr>
+<td>
+$$
+\frac{
+\sum_x \ \mathbb{E}[S(r_1) | x, d_1] \ w_x
+}{
+\sum_x \ \mathbb{E}[S(r_0) | x, d_1] \ w_x
+},
+$$
+</td>
+<td style="vertical-align: middle">
+$$
+\color{#A51C30} w_x = \Pr(x | d_1)
+$$
+</td>
+</tr>
+</table>
+
+
+.footnote[
+<table style="left: 5%; width: 95%; font-size: 20px">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Knox & Mummolo. 2025. "New data fill longstanding gaps in the study of policing." <i>Science</i>.</td>
+  </tr>
+</table>
+]
+
+---
+
+# Estimands in benchmarking
+
+- **High-level goal:** 
+  - "Equal protection" of law for "similarly situated" individuals,
+    <br>$\mathbb{E}[S(r_0) | X=x, D=d] = \mathbb{E}[S(r_1) | X=x, D=d]$
+- Common considerations:
+  - Estimand should remain interpretable when outcome is rare
+  - Focus on violator subgroup with $D=d_1$ to avoid dilution
+  - If in litigation, showing harm specifically to $R=r_1$ subgroup
+
+<table style="font-size: 30px; margin-left: 1em; margin-top: -1ex">
+<col style="width: 12em">
+<col style="width: 10em">
+<tr>
+<td>
+$$
+\frac{
+\sum_x \ \mathbb{E}[S(r_1) | x, d_1] \ w_x
+}{
+\sum_x \ \mathbb{E}[S(r_0) | x, d_1] \ w_x
+},
+$$
+</td>
+<td style="vertical-align: middle">
+$$
+\color{#A51C30} w_x = \Pr(x | d_1, r_1)
+$$
+</td>
+</tr>
+</table>
+
+
+.footnote[
+<table style="left: 5%; width: 95%; font-size: 20px">
+<col style="width: 5%">
+<col style="width: 90%">
+  <tr>
+    <td align="center"><strong style="">[1]</strong></td>
+    <td>Knox & Mummolo. 2025. "New data fill longstanding gaps in the study of policing." <i>Science</i>.</td>
+  </tr>
+</table>
+]
+
+---
+
+class: inverse
+
+<h1 style="position: absolute; left: 10%; top: 25%; line-height: 1.5">2.</h1>
+<h1 style="position: absolute; left: 20%; top: 25%; line-height: 1.5">
+  Implicit assumptions<br>
+  in the current practice<br>
+  of benchmark analysis
+</h1>
+
+---
+
+# The standard estimator
+
+- When does the odds ratio recover a causal risk ratio?
+$$\small \frac{\text{# minority stops}}{\text{# white stops}} \Bigg/ \frac{\text{# minority in benchmark}}{\text{# white in benchmark}}$$
+
+---
+
+# The standard estimator
+
+- When does the odds ratio recover a causal risk ratio?
+$$\small \frac{\Pr(r_1 | s_1)}{\Pr(r_0 | s_1)} \Bigg/ \frac{\Pr(r_1 | c_1)}{\Pr(r_0 | c_1)}$$
+
+
+---
+
+<br><br>
+<div class="box">
+<p style="margin: 0px; font-size: 150%;"><b>Assumption 1.</b> ("Police don't lie.")</p>
+<p>Police precision, $\mathrm{Pr}(d_1 | s_1)$, equals one.</p>
+</div>
+
+---
+
+<br><br>
+<div class="box">
+<p style="margin: 0px; font-size: 150%;"><b>Assumption 1.</b> ("Police don't lie.")</p>
+<p>Police precision, $\mathrm{Pr}(d_1 | s_1)$, equals one.</p>
+</div>
+<br><br><br><br>
+<div class="box">
+<p style="margin: 0px; font-size: 150%;"><b>Assumption 2.</b> ("Cameras don't lie.")</p>
+<p>Proxy precision, $\mathrm{Pr}(d_1 | c_1)$, equals one.</p>
+</div>
+
+---
+
+# The standard estimator
+
+- When does the odds ratio recover a causal risk ratio?
+  - Within $x$, under **Asms. 1–2** (officers & cameras don't lie)
+
+--
+
+$$\begin{aligned}
+\small OR^x 
+&= \frac{
+	    \Pr(r_1 | s_1, x)
+	}{
+		\Pr(r_0 | s_1, x)
+	} \Bigg/ \frac{
+		\Pr(r_1 | c_1, x)
+	}{
+		\Pr(r_0 | c_1, x)
+	} \\\\[2ex]
+&\ {\color{white}=} \ \color{white}\frac{
+	    \mathbb{E}\big[ \ \mathbf{1}(R=r_1) S \mid d_1, x \ \big] \big/ \Pr(r_1 | d_1, x)
+	}{
+		\mathbb{E}\big[ \ \mathbf{1}(R=r_0) S \mid d_1, x \ \big] \big/ \Pr(r_0 | d_1, x)
+	} \\\\[2ex]
+&\color{white}=	\color{white} RR^{d_1,x}
+\end{aligned}$$
+
+---
+
+# The standard estimator
+
+- When does the odds ratio recover a causal risk ratio?
+  - Within $x$, under **Asms. 1–2** (officers & cameras don't lie)
+
+$$\begin{aligned}
+\small OR^x 
+&\ {\color{black}=} \ \color{black}\frac{
+	    \Pr(r_1 | s_1, d_1, x)
+	}{
+		\Pr(r_0 | s_1, d_1, x)
+	} \Bigg/ \frac{
+		\Pr(r_1 | {\color{#A51C30}c_1}, d_1, x)
+	}{
+		\Pr(r_0 | {\color{#A51C30}c_1}, d_1, x)
+	} \\\\[2ex]
+&\ {\color{white}=} \ \color{white}\frac{
+	    \mathbb{E}\big[ \ \mathbf{1}(R=r_1) S \mid d_1, x \ \big] \big/ \Pr(r_1 | d_1, x)
+	}{
+		\mathbb{E}\big[ \ \mathbf{1}(R=r_0) S \mid d_1, x \ \big] \big/ \Pr(r_0 | d_1, x)
+	} \\\\[2ex]
+&\color{white}=	\color{white} RR^{d_1,x}
+\end{aligned}$$
+
+---
+
+# The standard estimator
+
+- When does the odds ratio recover a causal risk ratio?
+  - Within $x$, under **Asms. 1–2** (officers & cameras don't lie)
+
+$$\begin{aligned}
+\small OR^x 
+&\ {\color{black}=} \ \color{black}\frac{
+	    \Pr(r_1 | s_1, d_1, x)
+	}{
+		\Pr(r_0 | s_1, d_1, x)
+	} \Bigg/ \frac{
+		\Pr(r_1 | d_1, x)
+	}{
+		\Pr(r_0 | d_1, x)
+	} \\\\[2ex]
+&\ {\color{white}=} \ \color{white}\frac{
+	    \mathbb{E}\big[ \ \mathbf{1}(R=r_1) S \mid d_1, x \ \big] \big/ \Pr(r_1 | d_1, x)
+	}{
+		\mathbb{E}\big[ \ \mathbf{1}(R=r_0) S \mid d_1, x \ \big] \big/ \Pr(r_0 | d_1, x)
+	} \\\\[2ex]
+&\color{white}=	\color{white} RR^{d_1,x}
+\end{aligned}$$
+
+---
+
+# The standard estimator
+
+- When does the odds ratio recover a causal risk ratio?
+  - Within $x$, under **Asms. 1–2** (officers & cameras don't lie)
+
+$$\begin{aligned}
+\small OR^x 
+&\ {\color{black}=} \ \color{black}\frac{
+	    \Pr(r_1 | s_1, d_1, x)
+	}{
+		\Pr(r_0 | s_1, d_1, x)
+	} \Bigg/ \frac{
+		\Pr(r_1 | d_1, x)
+	}{
+		\Pr(r_0 | d_1, x)
+	} \\\\[2ex]
+&\ {\color{black}=} \ \color{black}\frac{
+	    \mathbb{E}\big[ \ \mathbf{1}(R=r_1) S \mid d_1, x \ \big] \big/ \Pr(r_1 | d_1, x)
+	}{
+		\mathbb{E}\big[ \ \mathbf{1}(R=r_0) S \mid d_1, x \ \big] \big/ \Pr(r_0 | d_1, x)
+	} \\\\[2ex]
+&\color{white}=	\color{white} RR^{d_1,x}
+\end{aligned}$$
+
+---
+
+# The standard estimator
+
+- When does the odds ratio recover a causal risk ratio?
+  - Within $x$, under **Asms. 1–2** (officers & cameras don't lie)
+
+$$\begin{aligned}
+\small OR^x 
+&\ {\color{black}=} \ \color{black}\frac{
+	    \Pr(r_1 | s_1, d_1, x)
+	}{
+		\Pr(r_0 | s_1, d_1, x)
+	} \Bigg/ \frac{
+		\Pr(r_1 | d_1, x)
+	}{
+		\Pr(r_0 | d_1, x)
+	} \\\\[2ex]
+&\ {\color{black}=} \ \color{black}\frac{
+	    \mathbb{E}\big[ \ \mathbf{1}(R=r_1) S \mid d_1, x \ \big] \big/ \Pr(r_1 | d_1, x)
+	}{
+		\mathbb{E}\big[ \ \mathbf{1}(R=r_0) S \mid d_1, x \ \big] \big/ \Pr(r_0 | d_1, x)
+	} \\\\[2ex]
+&\color{black}=	\color{black} RR^{d_1,x}
+\end{aligned}$$
+
+---
+
+<br><br>
+<div class="box">
+<p style="margin: 0px; font-size: 150%;"><b>Assumption 3.</b> ("Uniform policing intensity by race.")</p>
+<p>Police recall by race, $\mathrm{Pr}(s_1 | x, r, d_1)$, is constant in $x$.</p>
+</div>
+
+--
+<br><br><br><br>
+<div class="box">
+<p style="margin: 0px; font-size: 150%;"><b>Assumption 4.</b> ("Uniform camera effectiveness.")</p>
+<p>Proxy recall, $\mathrm{Pr}(c_1 | x, d_1)$, is constant in $x$.</p>
+</div>
+
+---
+
+# The standard estimator
+
+- When does the odds ratio recover a causal risk ratio?
+  - Within $x$, under **Asms. 1–2** (officers & cameras don't lie)
+  - Globally, with further **Asms. 3–4** (police/camera uniformity)
+
+--
+- Even when local $RR^{d_1,x}$ is recovered, global $RR^{d_1}$ requires careful reweighting .tiny[(Huitfeldt Stensrud & Suzuki '17)]
+  - **Asms. 3–4** are a special case where this can be ignored
+
+--
+- Do these asms. make sense substantively?
+
+---
+
+class: newspaper
+<img src="./resources/images/headlines/cbs_officers.png" style="position: absolute; left: 10%; top: 35%; width: 80%; z-index: ;"/>
+
+---
+
+# The standard estimator
+
+- When does the odds ratio recover a causal risk ratio?
+  - Within $x$, under **Asms. 1–2** (officers & cameras don't lie)
+  - Globally, with further **Asms. 3–4** (police/camera uniformity)
+- Even when local $RR_x$ is recovered, global $RR^{d_1}$ requires careful reweighting .tiny[(Huitfeldt Stensrud & Suzuki '17)]
+  - **Asms. 3–4** are a special case where this can be ignored
+- Do these asms. make sense substantively?
+  - **Asm. 1:** officers don't lie
+--
+&emsp;.highlight[&#10008;]
+
+---
+
+class: newspaper
+<img src="./resources/images/headlines/chicagotribune_redlight.png" style="position: absolute; left: 10%; top: 30%; width: 80%; z-index: ;"/>
+
+---
+
+class: newspaper
+<img src="./resources/images/headlines/chicagotribune_speed.png" style="position: absolute; left: 10%; top: 30%; width: 80%; z-index: ;"/>
+
+---
+
+# The standard estimator
+
+- When does the odds ratio recover a causal risk ratio?
+  - Within $x$, under **Asms. 1–2** (officers & cameras don't lie)
+  - Globally, with further **Asms. 3–4** (police/camera uniformity)
+- Even when local $RR_x$ is recovered, global $RR^{d_1}$ requires careful reweighting .tiny[(Huitfeldt Stensrud & Suzuki '17)]
+  - **Asms. 3–4** are a special case where this can be ignored
+- Do these asms. make sense substantively?
+  - **Asm. 1:** officers don't lie &emsp;.highlight[&#10008;]
+  - **Asm. 2:** cameras don't lie
+--
+ &emsp;.highlight[&#10008;]
+
+--
+  - **Asm. 3:** uniform policing intensity by race
+--
+ &emsp;.highlight[&#10008;]
+
+--
+  - **Asm. 4:** uniform camera effectiveness
+
+--
+ &emsp;.highlight_alt[&#10004;] (?)
+
+---
+
+# The standard estimator
+
+- When does the odds ratio recover a causal risk ratio?
+  - Within $x$, under **Asms. 1–2** (officers & cameras don't lie)
+  - Globally, with further **Asms. 3–4** (police/camera uniformity)
+- Even when local $RR_x$ is recovered, global $RR^{d\_1}$ requires careful reweighting .tiny[(Huitfeldt Stensrud & Suzuki '17)]
+  - **Asms. 3–4** are a special case where this can be ignored
+- Do these asms. make sense substantively? **No.**
+  - **Asm. 1:** officers don't lie &emsp;.highlight[&#10008;]
+  - **Asm. 2:** cameras don't lie &emsp;.highlight[&#10008;]
+  - **Asm. 3:** uniform policing intensity by race &emsp;.highlight[&#10008;]
+  - **Asm. 4:** uniform camera effectiveness &emsp;.highlight_alt[&#10004;] (?)
+
+--
+- Unconditional OR is easy to use & intuitively appealing
+
+--
+but can give wildly inconsistent & misleading results
+
+---
+
+class: inverse
+
+<h1 style="position: absolute; left: 10%; top: 25%; line-height: 1.5">3.</h1>
+<h1 style="position: absolute; left: 20%; top: 25%; line-height: 1.5">
+  Benchmarks are a<br>
+  special case of negative<br>
+  control outcomes
+</h1>
+
+---
+
+# Benchmarks as NCOs
+
+- **Negative control:** outcome influenced by unobserved confounders, but not causally affected by treatment
+
+<img src="./resources/images/dag/setup_11.png" style="position: absolute; left: 15%; top: 24%; width: 70%; z-index: ;"/>
+
+--
+<br><br><br><br><br>
+- Effect restoration with noisily measured confounders
+<p style="margin-top: 0ex; margin-bottom: 0ex; line-height: .75">.tiny[(Greenland '05, Greenland & Lash '08, Tchetgen Tchetgen '13, Ogburn & VanderWeele '13, Kuroki & Pearl '14, Wang et al. '18, ...)]</p>
+
+--
+- But new challenges from selection on $c_1$ and $s_1$
+
+---
+
+<img src="./resources/images/dag/setup_11.png" style="position: absolute; left: 10%; top: -5%; width: 75%; z-index: ;"/>
+
+<br><br><br><br><br><br><br>
+
+--
+$$
+<!-- \scriptsize -->
+p(c,  r) 
+= \textstyle \sum_d\ p(c | d)\ p(d, r)
+$$
+
+--
+$$
+\scriptsize
+\left[\begin{array}{cc} 
+~p(c_0, r_0) & p(c_0, r_1)~ \\\\
+~{\color{#4E84C4}p(c_1, r_0)} & {\color{#4E84C4}p(c_1, r_1)}~
+\end{array}\right]
+=
+\left[\begin{array}{cc} 
+~p(c_0 | d_0) & p(c_0 | d_1)~ \\\\
+~p(c_1 | d_0) & p(c_1 | d_1)~
+\end{array}\right]
+\left[\begin{array}{cc} 
+~p(d_0, r_0) & p(d_0, r_1)~ \\\\
+~{\color{#A51C30}p(d_1, r_0)} & {\color{#A51C30}p(d_1, r_1)}~
+\end{array}\right]
+\\\\[2ex]
+$$
+
+--
+- **Without selection:** solve $P\_{dr} = P\_{c|d}^{-1}\ P\_{cr}$ .tiny[(Kuroki & Pearl '14)]
+
+---
+
+<img src="./resources/images/dag/setup_11.png" style="position: absolute; left: 10%; top: -5%; width: 75%; z-index: ;"/>
+
+<br><br><br><br><br><br><br>
+
+$$
+<!-- \scriptsize -->
+p(c,  r) 
+= \textstyle \sum_d\ p(c | d)\ p(d, r)
+$$
+
+$$
+\scriptsize
+\left[\begin{array}{cc} 
+~p(c_0, r_0) & p(c_0, r_1)~ \\\\
+~{\color{#4E84C4}p(c_1, r_0)} & {\color{#4E84C4}p(c_1, r_1)}~
+\end{array}\right]
+=
+\left[\begin{array}{cc} 
+~p(c_0 | d_0) & p(c_0 | d_1)~ \\\\
+~0 & p(c_1 | d_1)~
+\end{array}\right]
+\left[\begin{array}{cc} 
+~p(d_0, r_0) & p(d_0, r_1)~ \\\\
+~{\color{#4E84C4}p(d_1, r_0)} & {\color{#4E84C4}p(d_1, r_1)}~
+\end{array}\right]
+\\\\[2ex]
+$$
+
+- **Without selection:** solve $P\_{dr} = P\_{c|d}^{-1}\ P\_{cr}$ .tiny[(Kuroki & Pearl '14)]
+- **With selection, if Asm. 2 holds:**<br>&emsp;&emsp; $p(c_1 | d_0)=0$ &nbsp;&rightarrow;&nbsp; $p(c, r) \propto p(d, r)$
+
+
+
+---
+
+# Partial identification of $RR^{d_1}$
+
+1. We want $\Pr(r | {\color{#A51C30}d_1}, x)$, race in dangerous drivers,<br>
+
+--
+  but we have $\Pr(r | c_1, x)$, race in camera citations
+
+--
+  - Cameras largely correct, with precision $\theta_x = \Pr(d_1 | c_1, x)$
+
+--
+  - But proxy is contaminated by $(1 - \theta_x)$ share of safe drivers
+
+--
+1. We want $\Pr(r | s_1, {\color{#A51C30}d_1}, x)$, race in justifiable stops,<br>
+  but we have $\Pr(r | s_1, x)$, race in all stops
+
+--
+  - $RR^{d_1}$ excludes potential discrimination in false charges
+  <!-- (problematic, but not part of estimand as defined) -->
+
+--
+  - Stops largely justified, with precision $\eta_x = \Pr(d_1 | s_1, x)$
+  - But contaminated by $(1-\eta_x)$ share of false charges
+
+--
+1. We want $\Pr(x | d_1):$ distr. of dangerous driving, to aggregate local $RR^{d_1,x}$, but we have $\Pr(x | c_1)$
+
+--
+  - Partially achieved by **Asm. 4** (uniform camera effectiveness)
+  - But distorted by $(1 - \theta_x)$ share of camera false positives
+
+---
+
+<div class="box" style="position: absolute; left: 5%; top: 3%; width: 86%">
+<p style="margin: 0px; font-size: 125%;"><b>Proposition 1. (Simplified*)</b></p>
+<p style="margin: 0px; font-size: 125%;">Under Asm. 4 (uniform camera effectiveness) only, the risk ratio among dangerous drivers is bounded by</p>
+$$
+\frac{
+% lower bound numerator
+\sum_x\ N \ \mathbb{E}[ \mathbf{1}(s_1, x) ] \ 
+{\color{#A51C30}\big[ \Pr(r_1|s_1,x) + \eta_x - 1 \big]} \ 
+{\color{#4E84C4}\frac{\theta_x}{p(r_1|c,x)}}
+}{
+% lower bound denominator
+\sum_x\ N \ \mathbb{E}[ \mathbf{1}(s_1, x) ] \ 
+{\color{#A51C30}\Pr(r_0|s_1,x)} \ 
+{\color{#4E84C4}\frac{\theta_x}{p(r_0|c,x) + \theta_x - 1}}
+}
+$$
+$$
+\large
+\le \quad RR^{d_1} \quad \le
+$$
+$$
+\large
+\frac{
+% upper bound numerator
+\sum_x\ N \ \mathbb{E}[ \mathbf{1}(s_1, x) ] \ 
+{\color{#A51C30}\Pr(r_1|s_1,x)} \ 
+{\color{#4E84C4}\frac{\theta_x}{p(r_1|c,x) + \theta_x - 1}}
+}{
+% lower bound denominator
+\sum_x\ N \ \mathbb{E}[ \mathbf{1}(s_1, x) ] \ 
+{\color{#A51C30}\big[ \Pr(r_0|s_1,x) + \eta_x - 1 \big]} \ 
+{\color{#4E84C4}\frac{\theta_x}{p(r_0|c,x)}}
+},
+$$
+<p style="margin: 0px; font-size: 125%;">where $N \ \mathbb{E}[ \mathbf{1}(s_1, x) ]$ is the expected local count of police stops, $\theta_x = p(d_1 | c_1, x)$ is the local precision of camera tickets, and $\eta_x = p(d_1 | s_1, x)$ is the local precision of police stops in spatiotemporal block $x$.</p>
+<p style="margin: 0px; font-size: 125%;">
+* For $\small 1 - \theta_x < \min_r p(r | c, x)$ and $1 - \eta_x < \min_r p(r | s, x)$
+</p>
+</div>
+
+---
+
+# Intuition for Prop. 1
+
+- **Factually:** there are $m$ stops of race $r$ in place/time $x$
+
+--
+  - Suppose no false allegations (all stops of dangerous drivers)
+
+--
+  - Suppose $r$ comprises fraction $f$ of dangerous drivers in $x$
+
+--
+- **Counterfactually:** if all race $r$, we'd expect $m/ f$ stops 
+  - IPW recovers counterfactual counts $n \cdot \mathbb{E}[S(r) | x, d_1]$, where $n$ is vehicle-miles driven in $x$
+
+--
+- Can't get risk diff. $\small\mathbb{E}[S(r_1) | x, d_1] - \mathbb{E}[S(r_0) | x, d_1]$
+
+--
+,<br> but constant of proportionality cancels for risk ratio
+
+--
+- However, we don't know:
+  - Correct IPW to apply (camera data distorted by miscaptures)
+  - Correct # of justifiable stops (distorted by false allegations)
+
+---
+
+class: inverse
+
+<h1 style="position: absolute; left: 10%; top: 25%; line-height: 1.5">4.</h1>
+<h1 style="position: absolute; left: 20%; top: 25%; line-height: 1.5">
+  A complication:<br>
+  race is often unobserved<br>
+  and must be inferred
+</h1>
+
+---
+
+# Inferring race from names
+
+- Traffic-enforcement datasets often do not record race
+- But last name $L$ must be documented in citations<br>
+  and can be highly informative about race
+
+<img src="./resources/images/dag/surnames_01.png" style="position: absolute; left: 10%; top: 40%; width: 75%; z-index: ;"/>
+
+---
+
+# Inferring race from names
+
+- Widely used Bayesian techniques for inferring race
+<p style="margin-top: 0ex; margin-bottom: 0ex; line-height: .75">
+.tiny[(Fiscella & Fremont '06, Elliott et al. '08, Imai et al. '22)]</p>
+- **Standard approach:** impute $\Pr(r | \ell)$ from Census
+
+--
+
+<table class="data" style="font-size: 27px; font-weight: 100; position: absolute; left: 26%; top: 43%">
+<col style="width: 4em">
+<col style="width: 3em">
+<col style="width: 3em">
+<col style="width: 3em">
+<col style="width: 3em">
+<tr style="font-weight: 400">
+	<td></td>
+	<td>Black</td>
+    <td>Hisp.</td>
+    <td>Other</td>
+    <td>White</td>
+</tr>
+<tr>
+	<td style="font-weight: 400">Avalos</td>
+    <td>0.00</td>
+    <td class="highlight" style="font-weight: 700">0.96</td>
+    <td>0.00</td>
+	<td>0.04</td>
+</tr>
+<tr>
+	<td style="font-weight: 400">Booker</td>
+    <td class="highlight" style="font-weight: bold">0.65</td>
+    <td>0.02</td>
+    <td>0.04</td>
+	<td class="highlight" style="font-weight: bold">0.28</td>
+</tr>
+<tr>
+	<td>&ensp;&nbsp;&vellip;</td>
+</tr>
+<tr>
+	<td style="font-weight: 400">Yoder</td>
+    <td>0.00</td>
+    <td>0.01</td>
+    <td>0.01</td>
+	<td class="highlight" style="font-weight: bold">0.98</td>
+</tr>
+<tr>
+	<td style="font-weight: 400">Zhang</td>
+    <td>0.00</td>
+    <td>0.00</td>
+	<td class="highlight" style="font-weight: bold">0.99</td>
+    <td>0.01</td>
+</tr>
+</table>
+
+--
+<br><br><br><br><br><br><br><br><br><br><br><br>
+- Similar geographic approaches, e.g. $\small\Pr(r | \text{home ZIP})$
+  .tiny[(Illinois Traffic & Pedestrian Stop Study, '23)]
+
+<!-- .small[**Source:** U.S. Census Bureau. 2016. "Frequently occurring surnames in the 2010 Census."] -->
+
+
+---
+
+# Standard approach fails under differential selection
+
+- **The problem:** vulnerable to domain shift, <br>
+  &emsp;&emsp;&emsp;&emsp;&emsp;$\Pr(r | \ell) \ne \Pr(r | \ell, d_1)$
+
+--
+- Unconditionally,<br>
+    &emsp;$\small\Pr(R=\text{black} | L=\text{Booker}) \approx 2/3$<br>
+    &emsp;$\small\Pr(R=\text{white} | L=\text{Booker}) \approx 1/3$
+--
+- But if white drivers are twice as likely to speed,<br>
+    &emsp;$\small\Pr(R=\text{black} | L=\text{Booker}, d_1) \approx 1/2$<br>
+    &emsp;$\small\Pr(R=\text{white} | L=\text{Booker}, d_1) \approx 1/2$
+--
+- Requires correction for $\Pr(r|d)$, which is unknown
+
+---
+
+# Yet another proxy problem
+
+- Inverse problem **is** invariant to domain shift, <br>
+  &emsp;&emsp;&emsp;&emsp;&emsp;$\Pr(\ell | r) = \Pr(\ell | r, d_1)$
+
+<img src="./resources/images/dag/surnames_01.png" style="position: absolute; left: 10%; top: 30%; width: 75%; z-index: ;"/>
+
+---
+
+# Yet another proxy problem
+
+- Inverse problem **is** invariant to domain shift, <br>
+  &emsp;&emsp;&emsp;&emsp;&emsp;$\Pr(\ell | r) = \Pr(\ell | r, d_1)$
+- Suggests a solution related to McCartan et al. .tiny[('25)]
+
+--
+- **Intuition:** relative frequencies of "Booker" and "Yoder" are out of proportion in camera data (vs. Census)
+
+--
+  - "Booker" occurs ~33% more
+--
+, "Yoder" occurs ~100% more
+
+--
+  - What is underlying racial distr. that could explain this?<br>
+
+--
+&rightarrow; there are 100% more white speeders than black speeders
+
+--
+- Special case of 2-sample IV .tiny[(Angrist & Kreuger '92)]
+
+--
+- Also closely related to previous NCO methods
+
+---
+
+# Recovering race distribution
+
+- What we have:
+  - $\color{#4E84C4}P_{\ell|c_1} = [\ \Pr(\ell | c_1)\ ] :$ surname distr. in camera data
+  - $\color{#4E84C4}P_{\ell|r} = [\ \Pr(\ell | r)\ ] :$ surname distr. by race in Census
+
+--
+- What we want:
+  - $\color{#A51C30}P_{r|c\_1} = [\ \Pr(r | c\_1)\ ] :$ underlying racial distr. in camera data
+
+--
+<br><br>
+
+$$\begin{aligned}
+\small
+\color{#4E84C4}\Pr(\ell|c\_1) 
+&= \textstyle \sum\_r \color{#4E84C4}\Pr(\ell|r, \cancel{c\_1}) \color{#A51C30}\Pr(r | c\_1) 
+\\\\[1ex]
+\color{white}\underset{\scriptsize(\sim10\text{k} \times 1)}{P\_{\ell|c\_1}}
+&\color{white}= 
+\underset{\scriptsize(\sim10\text{k} \times 4)}{P\_{\ell|r}}\ 
+\underset{\scriptsize(4 \times 1)}{P\_{r|c\_1}}
+\end{aligned}$$
+
+---
+
+# Recovering race distribution
+
+- What we have:
+  - $\color{#4E84C4}P_{\ell|c_1} = [\ \Pr(\ell | c_1)\ ] :$ surname distr. in camera data
+  - $\color{#4E84C4}P_{\ell|r} = [\ \Pr(\ell | r)\ ] :$ surname distr. by race in Census
+- What we want:
+  - $\color{#A51C30}P_{r|c\_1} = [\ \Pr(r | c\_1)\ ] :$ underlying racial distr. in camera data
+<br><br>
+
+$$\begin{aligned}
+\small
+\color{#4E84C4}\Pr(\ell|c\_1) 
+&= \textstyle \sum\_r \color{#4E84C4}\Pr(\ell|r, \cancel{c\_1}) \color{#A51C30}\Pr(r | c\_1) 
+\\\\[1ex]
+\color{#4E84C4}\underset{\scriptsize(\sim10\text{k} \times 1)}{P\_{\ell|c\_1}}
+&= 
+\color{#4E84C4}\underset{\scriptsize(\sim10\text{k} \times 4)}{P\_{\ell|r}}\ 
+\color{#A51C30}\underset{\scriptsize(4 \times 1)}{P\_{r|c\_1}}
+\end{aligned}$$
+
+<!-- - **Spoiler:** estimator for $\Pr(r|c_1)$ that respects causal structure &rightarrow; $\widehat{RR}\,^{d_1} > 2$ for both black & Hispanic (vs. white); naive estimator &rightarrow; biased estimates of ${\sim}1.05$ -->
+
+---
+
+class: inverse
+
+<h1 style="position: absolute; left: 5%; top: 25%; line-height: 1.5">4.A.</h1>
+<h1 style="position: absolute; left: 20%; top: 25%; line-height: 1.5">
+  Application:<br>
+  anonymous agency<br>
+  redlight cameras & stops<br>
+</h1>
+
+---
+
+# Red-light camera data
+
+- Data from top-10 U.S. police jurisdiction
+  - ~100s of cameras
+  - ~1M camera-detected violations
+  - ~100k corresponding police stops
+
+--
+- $X$ represents spatiotemporal blocks ("QDSBs")
+  - Quarter and year (e.g. Jan.–Mar. 2020)
+  - Weekday vs. weekend
+  - Police work shift (8-hour periods)
+  - Police beat (~1 square mile)
+
+--
+- Subset to $X$ with &ge;100 camera-detected violations
+  - Retains 88% of camera violations, 68% of police stops
+
+---
+
+# Results
+
+- A generous interpretation of na&iuml;ve approach:
+
+--
+  - Reweight stop/camera data to match spatiotemporal distrs.
+
+--
+  - Predict $p(r|\ell)$ for each obs. in stop/camera data, aggregate
+
+--
+  - Suggests black/white $\small\widehat{OR}$ = 1.20, Hispanic/white $\small\widehat{OR}$ = 1.36
+
+--
+... but results are biased even under **Asms. 1–4**
+
+--
+- Proposed approach, accounting for causal structure:
+  - Estimate $\small\Pr(r|x, c_1)$ for each QDSB by proximal inference
+
+--
+  - IPW estimate of counterfactual counts $\small\propto \mathbb{E}[S(r)=1 \mid d_1]$
+
+--
+  - Under **Asms. 1, 2, 4:**<br>
+
+--
+    &emsp;– Black/white $\small\widehat{RR}~^{d_1}$ = 3.27 <br>
+--
+    &emsp;– Hispanic/white $\small\widehat{RR}~^{d_1}$ = 3.59<br>
+--
+    &emsp;– 95% CI of [2.88, 3.76] and [3.28, 3.88], respectively $\color{white}\small\widehat{RR}~^{d_1}$
+
+---
+<img src="./resources/images/redlight_bvw_sensitivity_01.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/redlight_bvw_sensitivity_02.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/redlight_bvw_sensitivity_03.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/redlight_bvw_sensitivity_04.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/redlight_bvw_sensitivity_05.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/redlight_hvw_sensitivity_01.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+
+---
+
+# "Out of place" theory
+
+- Traffic enforcement can be highly localized
+  - Precinct commanders often have discretion to set priorities
+  - Commuting patterns, road conditions, driving behavior vary
+
+--
+- Discriminatory enforcement can manifest many ways
+
+--
+  - **Deterrent:** target "out of place" minority drivers in white areas
+
+--
+  - **Pretext:** investigate minority drivers perceived as potentially involved in more serious crime
+--
+ (generally in minority areas)
+
+--
+- Suggest different patterns of effect heterogeneity
+
+---
+
+# Effect heterogeneity
+
+- Black/white $\small{RR}^{d_1}$ in police beats with...
+
+--
+  - Majority white residents: **<0.98**
+
+--
+  - Majority Hispanic residents: **>2.23**
+
+--
+  - Majority black residents: **>41.89 \***
+
+--
+- Hispanic/white $\small{RR}^{d_1}$ in police beats with...
+
+--
+  - Majority white residents: indistinguishable from 1
+
+--
+  - Majority black residents: **>3.65 \***
+
+--
+  - Majority Hispanic residents: **>31.42 \***
+
+
+--
+.small[All results based on 95% CI of bounds with $\small\theta_x=\eta_x=0.95$<br>]
+
+--
+.small[**\*** indicates robustness with $\small\theta_x=\eta_x=0.90$ as well]
+
+
+
+---
+
+class: inverse
+
+<h1 style="position: absolute; left: 10%; top: 25%; line-height: 1.5">5.</h1>
+<h1 style="position: absolute; left: 20%; top: 25%; line-height: 1.5">
+  Another complication:<br>
+  the act of observation<br>
+  can distort behavior
+</h1>
+
+---
+<img src="./resources/images/substitution/sketch_01.png" style="position: absolute; left: 0%; top: 40%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/sketch_02.png" style="position: absolute; left: 0%; top: 40%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/sketch_03.png" style="position: absolute; left: 0%; top: 40%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/sketch_04.png" style="position: absolute; left: 0%; top: 40%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/sketch_05.png" style="position: absolute; left: 0%; top: 40%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/sketch_06.png" style="position: absolute; left: 0%; top: 40%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/sketch_07.png" style="position: absolute; left: 0%; top: 40%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/sketch_08.png" style="position: absolute; left: 0%; top: 40%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/sketch_09.png" style="position: absolute; left: 0%; top: 40%; width: 100%; z-index: ;"/>
+
+---
+<img src="./resources/images/substitution/transform_01.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/transform_02.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/transform_03.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/transform_04.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/transform_05.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/transform_06.png" style="position: absolute; left: 0%; top: 0%; width: 100%; z-index: ;"/>
+
+
+---
+<img src="./resources/images/substitution/sketch_10.png" style="position: absolute; left: 0%; top: 40%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/sketch_11.png" style="position: absolute; left: 0%; top: 40%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/sketch_12.png" style="position: absolute; left: 0%; top: 40%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/substitution/sketch_13.png" style="position: absolute; left: 0%; top: 40%; width: 100%; z-index: ;"/>
+---
+<img src="./resources/images/dag/substitution_02.png" style="position: absolute; left: 0%; top: -5%; width: 100%; z-index: ;"/>
+
+---
+
+# Distorted benchmarks
+
+- When officers make stops before cameras can record:
+  - Officer stops can lead to differential camera attrition by race
+  - Camera-captured violations no longer a valid negative control
+
+--
+  - Leads to inflation of estimates, but no change in sign
+
+--
+- When cameras record before officers make stops<br>
+  or when officers are not present at all:
+  - No contamination of camera-based negative control
+
+--
+- Conservative adjustment:
+  - Suppose every officer stop eliminates one camera capture
+  - Assumes ignorable officer presence/position within $\small{X}$,<br>
+    no differential chastening of stopped drivers by race
+--
+- **Not addressed:** differential chastening of drivers, 
+--
+officers may distort driver behavior by mere presence
+
+---
+
+class: inverse
+
+<h1 style="position: absolute; left: 8%; top: 28%; line-height: 1.5">5.A.</h1>
+<h1 style="position: absolute; left: 23%; top: 28%; line-height: 1.5">
+  Application:<br>
+  anonymous agency<br>
+  speed cameras & stops
+</h1>
+
+---
+
+# Data and results
+
+- Data from top-10 U.S. police jurisdiction
+  - ~100s of cameras
+  - ~10M camera-detected violations
+  - ~10k corresponding police stops
+- $X$ represents spatiotemporal blocks ("QDSBs")
+  - Quarter and year (e.g. Jan.–Mar. 2020)
+  - Weekday vs. weekend
+  - Police work shift (8-hour periods)
+  - Police beat (~1 square mile)
+- Subset to $X$ with &ge;100 camera-detected violations
+  - Retains >99% of camera violations, 89% of police stops
+
+--
+- No evidence of discrimination
+
+---
+
+class: inverse
+
+<h1 style="position: absolute; left: 10%; top: 25%; line-height: 1.5">6.</h1>
+<h1 style="position: absolute; left: 20%; top: 25%; line-height: 1.5">
+  Yet another complication:<br>
+  "dangerous driving"<br>
+  may be non-binary
+</h1>
+
+---
+
+# Interpreting benchmark analyses with non-binary $D$
+
+- Let $\small\vec{D}$ be a high-dim. vector of driving behaviors
+  - Reckless speeding, unsafe lane change, etc.
+
+--
+- If $\small C(\vec{D})$ is binary, e.g. crash occurs or not
+  - Scalar $D' = f(\vec{D}, x) = \Pr(c_1 | \vec{D}, x)$ is sufficient reduction
+
+--
+  - Driving is "dangerous" to the extent that it likely causes crash
+
+--
+- Do benchmark analyses retain causal interpretability?
+
+---
+<img src="./resources/images/continuous_d/proportionality_01.png" style="position: absolute; left: 5%; top: 5%; width: 90%; z-index: ;"/>
+---
+<img src="./resources/images/continuous_d/proportionality_02.png" style="position: absolute; left: 5%; top: 5%; width: 90%; z-index: ;"/>
+---
+<img src="./resources/images/continuous_d/proportionality_03.png" style="position: absolute; left: 5%; top: 5%; width: 90%; z-index: ;"/>
+---
+<img src="./resources/images/continuous_d/proportionality_04.png" style="position: absolute; left: 5%; top: 5%; width: 90%; z-index: ;"/>
+
+---
+
+# Interpreting benchmark analyses with non-binary $D$
+
+- Definitionally, crash data selects with $\small\Pr(c_1|d') = d'$ 
+
+--
+- If police stops follow $\small\Pr(s_1|d', r_0) = \Pr(s_1|d', r_1) \propto d'$
+
+---
+<img src="./resources/images/continuous_d/proportionality_04.png" style="position: absolute; left: 5%; top: 5%; width: 90%; z-index: ;"/>
+---
+<img src="./resources/images/continuous_d/proportionality_05.png" style="position: absolute; left: 5%; top: 5%; width: 90%; z-index: ;"/>
+
+---
+
+# Interpreting benchmark analyses with non-binary $D$
+
+- Definitionally, crash data selects with $\small\Pr(c_1|d') = d'$ 
+- If police stops follow $\small\Pr(s_1|d', r_0) = \Pr(s_1|d', r_1) \propto d'$
+<br>&emsp;&emsp;$\small\implies \Pr(r|c_1) = \Pr(r|s_1)$
+
+--
+- Original procedure remains valid test of a causal null hypothesis that police stop mech. is $\propto$ proxy mech.
+
+--
+- Now suppose we find $\small\Pr(r|c_1) \ne \Pr(r|s_1)$
+
+---
+<img src="./resources/images/continuous_d/proportionality_06.png" style="position: absolute; left: 5%; top: 5%; width: 90%; z-index: ;"/>
+---
+<img src="./resources/images/continuous_d/proportionality_07.png" style="position: absolute; left: 5%; top: 5%; width: 90%; z-index: ;"/>
+
+
+---
+
+# Interpreting benchmark analyses with non-binary $D$
+
+- Definitionally, crash data selects with $\small\Pr(c_1|d') = d'$ 
+- If police stops follow $\small\Pr(s_1|d', r_0) = \Pr(s_1|d', r_1) \propto d'$
+<br>&emsp;&emsp;$\small\implies \Pr(r|c_1) = \Pr(r|s_1)$
+- Original procedure remains valid test of a causal null hypothesis that police stop mech. is $\propto$ proxy mech.
+- Now suppose we find $\small\Pr(r|c_1) \ne \Pr(r|s_1)$
+
+--
+  - Disparate treatment of the similarly situated .tiny[(Yick Wo v. Hopkins, 1886)]
+
+--
+  - Disparate impact of "race-neutral" policy .tiny[(Griggs v. Duke Power Co., 1971)]
+
+--
+- Inferences about disparate treatment can no longer be drawn without assuming linearity of stops in $D'$
+
+---
+
+class: inverse
+
+<h1 style="position: absolute; left: 10%; top: 20%; line-height: 1.5">6.A.</h1>
+<h1 style="position: absolute; left: 25%; top: 20%; line-height: 1.5">
+  Application:<br>
+  Texas Highway Patrol<br>
+  moving-violation<br>
+  stops & crashs
+</h1>
+
+---
+
+# Data
+
+- Analyzed 2021 data (2016–2025 in progress)
+  - 483k crashes from Texas Dept. of Transportation
+  - 1.5M stops from Texas Highway Patrol
+  - Date, time, location, civilian race, numerous additional details
+
+--
+- $X$ represents spatiotemporal blocks
+  - Month of year
+  - Weekday vs. weekend
+  - 4-hour periods
+  - Road segment (OpenStreetMap "way," ~1mi.)
+
+--
+- Filtering for analysis:
+  - Subset crashes to drivers determined to be at fault
+  - Subset stops to those with alleged moving violations
+  - Subset to $X$ with overlap in crashes & stops 
+
+---
+
+<img src="./resources/images/texas_crash_stop.png" style="position: absolute; left: 18%; top: 5%; width: 60%; z-index: ;"/>
+
+---
+
+# Results
+
+- Large geographic heterogeneity
+
+--
+- Black/white $\small{\widehat{RR}~^{d_1}}$
+  - Statewide: indistinguishable from 1
+
+--
+  - Austin metro: 1.54 .tiny[(p < 0.01)]
+  - Dallas metro: *n.s.*
+  - Houston metro: 1.55 .tiny[(p < 0.001)]
+  - San Antonio metro: *n.s.*
+
+--
+- Hispanic/white $\small{\widehat{RR}~^{d_1}}$
+  - Statewide: 1.26 .tiny[(p < 0.001)]
+  - Austin metro: indistinguishable from 1
+  - Dallas metro: 1.15 .tiny[(p < 0.05)]
+  - Houston metro: 1.35 .tiny[(p < 0.01)]
+  - San Antonio metro: 2.12  .tiny[(p < 0.001)]
+
+---
+
+# Conclusion
+
+- "Benchmarking" widely used in civil rights analysis
+  - But methodology has lacked firm causal foundation
+
+--
+  - Estimand and identifying assumptions unclear
+
+--
+  - Led to low-quality claims, highly inconsistent results
+
+--
+- Showed existing approach can in fact recover a<br> causal risk ratio 
+  under ideal conditions
+
+--
+ .tiny[(that likely do not hold)]
+
+--
+  - Recovers conditional risk ratio among violator subgroup...
+
+--
+  - ... when the proxy never makes false-positive "miscaptures"...
+
+--
+  - ... police officers never make false allegations...
+
+--
+  - ... and proxy/police act homogeneously in all places/times.
+
+---
+
+# Conclusion
+
+- Correction to handle heterogeneity in space/time
+  - Surprising connection to inverse propensity weights
+
+--
+- Bounds to handle false positives in proxy, police stops
+  - Surprising connection to doubly robust estimation
+
+--
+  - Bounds on weights to address proxy selection + errors
+  - Bounds on outcomes to address stop selection + errors
+
+--
+- Applications across variety of proxy data sources
+  - Red-light & speeding cameras, crashes, DUI checkpoints
+  - Requires careful consideration of context-appropriate asms.
+
+--
+- Reveal geographic patterns to guide reform efforts
+
+---
+
+class: inverse
+
+<table style="position: absolute; left: 10%; width: 80%; top: 22.5%; font-size: 150%">
+<col style="width: 50%">
+<col style="width: 50%">
+  <tr>
+    <td align="center"><strong style="">Kai Cooper</strong></td>
+    <td align="center"><strong style="">Gregory Lanzalotto</strong></td>
+  </tr>
+  <tr>
+    <td align="center">Penn</td>
+    <td align="center">Penn</td>
+  </tr>
+  <tr><td>&nbsp;</td></tr>
+  <tr>
+    <td align="center"><strong style="">Haosen Ge</strong></td>
+    <td align="center"><strong style="">Jacob Kaplan</strong></td>
+  </tr>
+  <tr>
+    <td align="center">Penn</td>
+    <td align="center">Princeton</td>
+  </tr>
+  <!-- <tr> -->
+  <!--   <td align="center">gjduarte@upenn.edu</td> -->
+  <!--   <td align="center">luke.keele@pennmedicine.upenn.edu</td> -->
+  <!-- </tr> -->
+  <tr><td>&nbsp;</td></tr>
+  <tr>
+    <td align="center"><strong style="">Dean Knox</strong></td>
+    <td align="center"><strong style="">Jonathan Mummolo</strong></td>
+  </tr>
+  <tr>
+    <td align="center">Penn</td>
+    <td align="center">Princeton</td>
+  </tr>
+  <!-- <tr> -->
+  <!--   <td align="center">dcknox@upenn.edu</td> -->
+  <!--   <td align="center">jmummolo@princeton.edu</td> -->
+  <!-- </tr> -->
+  <tr>
+</table>
+
+---
+
+<!-- THE END -->
+
+    </textarea>
+
+    <script src="js/remark-latest.min.js"></script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+	  tex2jax: {
+	      inlineMath: [['$','$'], ['\\(','\\)']], 
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] 
+	  },
+	  tex: {
+	      macros: {
+		  cA: "\\mathcal{A}",
+		  fB: "\\mathfrak{B}",
+		  fC: "\\mathfrak{C}",
+		  fD: "\\mathfrak{D}",
+	      }
+	  }
+      });
+
+    <!--Browser-specific hack for Safari tilde bug -->
+    <!--thanks to dpvc at https://github.com/mathjax/MathJax/issues/1737-->
+      if (MathJax.Hub.Browser.isSafari
+	  && parseInt(MathJax.Hub.Browser.webkit) >= 603
+	 ) {
+	  MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready", function () {
+	      var HTMLCSS = MathJax.OutputJax["HTML-CSS"];
+	      var MML = MathJax.ElementJax.mml;
+	      var toHTML = MML.mo.prototype.toHTML;
+	      MML.mo.Augment({
+		  toHTML: function (span) {
+		      span = toHTML.call(this,span);
+		      if (span.bbox.w === 0 && span.bbox.lw < 0 && span.firstChild) {
+			  span.style.marginLeft = HTMLCSS.Em(span.bbox.lw);
+		      }
+		      return span;
+		  }
+	      });
+	  });
+      }
+    </script>
+
+    <script>
+      MathJax = {
+	  tex: {
+	      inlineMath: [['$', '$'], ['\\(', '\\)']],
+	      macros: {
+		  cA: "{\\mathcal{A}}",
+		  fB: "{\\mathfrak{B}}",
+	      },
+	  },
+	  svg: {
+	      fontCache: 'global'
+	  }
+      };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+	    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+    <script>
+      // configure remark.js
+      var slideshow = remark.create({
+      countIncrementalSlides: false,
+      navigation: {scroll: false},
+      slideNumberFormat: ''
+      });
+    </script>
+
+      <script>
+
+        var videos = document.getElementsByClassName("media");
+        function prepareCheckScroll(){
+          window.setTimeout("checkScroll()", 1000);
+        }
+        function checkScroll() {
+
+					for(var i = 0; i < videos.length; i++) {
+						var video = videos[i];
+						var x = video.offsetLeft, y = video.offsetTop, w = video.offsetWidth, h = video.offsetHeight, r = x + w, //right
+						b = y + h, //bottom
+						visibleX, visibleY, visible;
+						visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+						visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+						visible = visibleX * visibleY / (w * h);
+
+						if (visible > .5) {
+							video.play();
+						} else {
+							video.currentTime = 0;
+							video.pause();
+						}
+					}
+				}
+
+				window.addEventListener('keydown', prepareCheckScroll, false);
+				window.addEventListener('keyup', prepareCheckScroll, false);
+      </script>
+
+      <script>
+        var months = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+        var today = new Date();
+        var dateElements = document.getElementsByClassName('today');
+        [].forEach.call(dateElements, function(dateElement){
+        dateElement.innerHTML = today.getDate() + " " + months[today.getMonth()] + " " + today.getFullYear();
+        })
+      </script>
+
+  </body>
+</html>
